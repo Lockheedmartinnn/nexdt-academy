@@ -1629,85 +1629,240 @@ All BIM equipment **must** comply with these rules:
       },
       {
         id: "module-5",
-        title: "IEA Form: Step-by-Step",
+        title: "Super Admin Console: User & Organization Management",
         lessons: [
           {
-            id: "iea-form-walkthrough",
-            title: "IEA Form Walkthrough",
-            duration: "20 min",
+            id: "admin-console-controls",
+            title: "What the Admin Console Controls",
+            duration: "10 min",
+            videoUrl: "https://www.youtube.com/watch?v=o5dktAxAuiE",
             content: `
-# IEA Form: Step-by-Step
+# What the Admin Console Controls
 
-## Site Information
+## Why Super Admin Is Dangerous if Misused
 
-Pre-populated fields:
-- **Site Name**: Automatically loaded
-- **Site ID**: System reference
-- **Tower Type**: Detected from site model
+The Super Admin Console controls:
+- Which **Head Customers exist**
+- Which users can **see, edit, and submit data**
+- How **Colo Apps are attributed and approved**
+- What data **persists or is destroyed**
 
-## Wind Parameters
+**A single incorrect action (especially deleting an Organization) can**:
+- Orphan equipment
+- Break Colo Apps
+- Require **manual engineering recovery**
 
-Critical for structural calculations:
-- **Wind Speed**: Regional design wind speed (km/h or mph)
-- **Exposure Category**: Terrain type (Urban, Suburban, Rural)
-- **Importance Factor**: Building code classification
+**This role should be tightly limited.**
 
-**Note**: These are typically pre-configured per site.
+## Source of Truth
 
-## Structure
+The NexDT Admin Console is the **source of truth** for:
+- Users
+- Organizations
+- Role assignments
+- Access boundaries
 
-Tower specifications:
-- **Tower Height**: Total height from base to top
-- **Tower Sections**: Number of structural segments
-- **Cross-Section Type**: Triangular, square, or custom
+Everything downstream (Sites Portal, BIM, Colo Apps, EME) relies on **correct Admin Console setup**.
 
-## Load Sources (Add / Remove)
+## What It Does Not Do
 
-### Adding Equipment
-1. Click **Add Load Source**
-2. Select equipment from dropdown
-3. Specify mounting elevation
-4. Enter equipment weight and wind load area (ESA)
+The console does **not**:
+- Validate engineering correctness
+- Recover deleted data automatically
+- Warn you before destructive actions
 
-### Removing Equipment
-1. Locate equipment in load sources list
-2. Click **Remove** icon
-3. Confirm deletion
-
-## Submit vs Calculate
-
-### Calculate
-- Runs IEA analysis
-- Returns Structure %, Footing %, Rotation
-- Results are preliminary
-
-### Submit
-- Finalizes and submits application
-- Locks the design for engineering review
-
-## Testing an IEA Form
-
-**Workflow**:
-1. Enter all required fields
-2. Add proposed equipment
-3. Click **Calculate**
-4. Review results
-5. If safe (< 100%), proceed to Submit
-6. If unsafe (≥ 100%), revise design
-
-## Field Explanations
-
-| Field | Purpose |
-|-------|---------|
-| **Site Information** | Identifies the site |
-| **Wind Parameters** | Environmental design loads |
-| **Structure** | Tower physical properties |
-| **Load Sources** | Equipment weights and wind loads |
+**The system assumes intentional, informed use.**
             `,
             keyTakeaways: [
-              "Complete all fields before calculating IEA",
-              "Calculate before Submit to validate design",
-              "If Structure % ≥ 100%, revise equipment selection"
+              "Admin Console defines ownership, access, and data persistence",
+              "Incorrect actions can orphan equipment and break Colo Apps",
+              "No automatic recovery for deleted data"
+            ],
+            warnings: [
+              "This is the highest-risk role in the platform"
+            ]
+          },
+          {
+            id: "organization-management",
+            title: "Organization Management (CRITICAL)",
+            duration: "15 min",
+            content: `
+# Organization Management (Critical Section)
+
+## What an Organization Really Is
+
+An **Organization** represents a **Head Customer** in NexDT.
+
+Organizations are used to:
+- Attribute **equipment ownership**
+- Restrict **Colo User visibility**
+- Bind **Colo Apps to the correct customer**
+- Drive **pre-As-Built and approval workflows**
+
+**Organizations are not cosmetic labels.**
+
+## ⚠️ CRITICAL WARNING — READ CAREFULLY
+
+**Never delete an active Organization if**:
+- Users have created equipment under it
+- Colo Apps reference it
+- Engineering work has occurred
+
+### If you delete an active Organization:
+- All associated **equipment is lost**
+- Colo Apps become **invalid**
+- Engineers must **manually reconstruct data**
+- There is **no automated rollback**
+
+**This is the highest-risk action in the platform.**
+            `,
+            keyTakeaways: [
+              "Organizations define Head Customer ownership",
+              "Deleting active organizations causes irreversible data loss",
+              "No automated recovery—manual engineering fix required"
+            ],
+            warnings: [
+              "NEVER delete an active Organization with equipment or Colo Apps"
+            ]
+          },
+          {
+            id: "creating-users",
+            title: "Creating a User (Role Design Matters)",
+            duration: "12 min",
+            content: `
+# Creating a User (Role Design Matters)
+
+## User Creation Is Governance
+
+Creating a user is not just "adding access" — it defines:
+- What **data they can see**
+- What **actions they can perform**
+- Which **customer they represent**
+- Which **workflows they can affect**
+
+Errors here lead to:
+- Unauthorized access
+- Incorrect Colo submissions
+- Compliance risk
+
+## Required Fields Explained
+
+### Email
+- Must be valid
+- Used for login + MFA
+- Cannot be shared casually
+
+### Name
+- Appears in logs and approvals
+- Should be descriptive and real
+
+### NexDT Role (Primary)
+Choose exactly one:
+- **User** → Standard platform access
+- **Engineer** → Can edit and approve Colo Apps
+- **Administrator** → Full Admin Console access
+
+*(Legacy equivalent: Support Admin)*
+
+### Home Organization
+Defines:
+- Default data scope
+- Primary ownership context
+
+### Secondary Roles (If Applicable)
+When assigning access to a specific Organization:
+- **Colocation User**: Can submit and manage Colo Apps (restricted to own Head Customer)
+- **Site Finder**: Read-only role (limited to site metadata)
+
+**A single user can have multiple affiliations.**
+            `,
+            keyTakeaways: [
+              "User creation defines access, permissions, and scope",
+              "Organization assignment controls equipment visibility",
+              "Secondary roles can be added per organization"
+            ]
+          },
+          {
+            id: "user-onboarding",
+            title: "End-User Onboarding Workflow",
+            duration: "10 min",
+            content: `
+# End-User Onboarding Workflow
+
+## Admin Action Triggers a Chain
+
+When you click **Save** on user creation:
+
+1. System sends a **Welcome Email**
+2. User must:
+   - Confirm account
+   - Set password
+   - Configure MFA
+3. Access is locked until onboarding is complete
+
+**Admins are responsible for educating users on this flow.**
+
+## End-User Steps (Must Be Followed Exactly)
+
+1. Open email: *"Welcome to SiteSee / NexDT"*
+2. Click **Confirm My Account**
+3. Create a **strong password**
+4. Set up **MFA**:
+   - Download Microsoft Authenticator
+   - Scan QR code
+   - Enter one-time code
+5. **Save recovery code securely**
+
+⚠️ **If MFA device is lost and recovery code is missing, Admin intervention is required.**
+            `,
+            keyTakeaways: [
+              "Users must confirm account, set password, and configure MFA",
+              "Access locked until onboarding completes",
+              "Recovery code is essential for MFA device loss"
+            ],
+            warnings: [
+              "Lost MFA + no recovery code requires Admin intervention"
+            ]
+          },
+          {
+            id: "admin-analytics",
+            title: "Admin Console Tools & Analytics",
+            duration: "8 min",
+            content: `
+# Admin Console Tools & Analytics
+
+## Visibility ≠ Surveillance
+
+The Admin Console provides visibility into:
+- **Login count**
+- **Last login date**
+- **Last IP address**
+
+### This data is for:
+- Security auditing
+- Support troubleshooting
+- Access validation
+
+### It should NOT be used for:
+- Performance monitoring
+- Behavioral tracking
+- Informal oversight
+
+**Admins must handle analytics professionally and minimally.**
+
+## User Creation Flow
+
+Understanding this flow allows Admins to:
+- Diagnose access issues
+- Resolve "I can't see my equipment" complaints
+- Prevent misconfigured users
+
+**Admins should always think in flows, not screens.**
+            `,
+            keyTakeaways: [
+              "Analytics for security auditing and troubleshooting only",
+              "Not for performance monitoring or behavioral tracking",
+              "Think in flows to diagnose access issues"
             ]
           }
         ],
@@ -1715,42 +1870,81 @@ Tower specifications:
           questions: [
             {
               id: "q1",
-              question: "What is the correct order of operations when using the IEA form?",
+              question: "Why is the Admin Console considered system-critical?",
               type: "single",
               options: [
-                { id: "a", text: "Submit → Calculate → Review" },
-                { id: "b", text: "Calculate → Review → Submit" },
-                { id: "c", text: "Review → Calculate → Submit" },
-                { id: "d", text: "Submit → Review → Calculate" }
+                { id: "a", text: "It controls UI layout" },
+                { id: "b", text: "It defines ownership, access, and data persistence" },
+                { id: "c", text: "It runs engineering tools" },
+                { id: "d", text: "It generates reports" }
               ],
               correctAnswer: "b",
-              explanation: "The correct order is: Calculate the IEA, Review the results, then Submit if the design is safe."
+              explanation: "The Admin Console defines ownership, access boundaries, and data persistence—everything downstream relies on correct setup."
             },
             {
               id: "q2",
-              question: "What is the purpose of the Wind Parameters section?",
+              question: "What happens if an active Organization is deleted?",
               type: "single",
               options: [
-                { id: "a", text: "To track weather forecasts" },
-                { id: "b", text: "To calculate environmental design loads on the tower" },
-                { id: "c", text: "To schedule site visits" },
-                { id: "d", text: "To generate reports" }
+                { id: "a", text: "Users lose access only" },
+                { id: "b", text: "Equipment and ownership data are lost" },
+                { id: "c", text: "Colo Apps auto-reassign" },
+                { id: "d", text: "The system blocks deletion" }
               ],
               correctAnswer: "b",
-              explanation: "Wind Parameters are used to calculate environmental design loads that affect structural capacity."
+              explanation: "Deleting an active Organization causes irreversible equipment and ownership data loss—no automated rollback exists."
             },
             {
               id: "q3",
-              question: "What is a common mistake when filling out the IEA form?",
+              question: "What determines which equipment a Colo User can edit?",
               type: "single",
               options: [
-                { id: "a", text: "Calculating results before submitting" },
-                { id: "b", text: "Submitting without calculating first" },
-                { id: "c", text: "Including wind parameters" },
-                { id: "d", text: "Entering site information" }
+                { id: "a", text: "Their email domain" },
+                { id: "b", text: "Their Organization assignment" },
+                { id: "c", text: "Their login frequency" },
+                { id: "d", text: "Their password strength" }
               ],
               correctAnswer: "b",
-              explanation: "A common mistake is submitting the form without calculating IEA results first to validate the design."
+              explanation: "Organization assignment determines which equipment a Colo User can see and edit."
+            },
+            {
+              id: "q4",
+              question: "What is the recovery code used for?",
+              type: "single",
+              options: [
+                { id: "a", text: "Password reset" },
+                { id: "b", text: "Regaining access if MFA device is lost" },
+                { id: "c", text: "Admin verification" },
+                { id: "d", text: "Organization switching" }
+              ],
+              correctAnswer: "b",
+              explanation: "The recovery code allows users to regain access if their MFA device is lost."
+            },
+            {
+              id: "q5",
+              question: "What is the correct use of login analytics?",
+              type: "single",
+              options: [
+                { id: "a", text: "Tracking productivity" },
+                { id: "b", text: "Security and troubleshooting" },
+                { id: "c", text: "Ranking users" },
+                { id: "d", text: "Activity enforcement" }
+              ],
+              correctAnswer: "b",
+              explanation: "Login analytics should be used professionally for security auditing and troubleshooting only."
+            },
+            {
+              id: "q6",
+              question: "An Admin deletes an Organization to 'clean things up,' unaware that equipment was created under it. What happens?",
+              type: "single",
+              options: [
+                { id: "a", text: "The system blocks deletion" },
+                { id: "b", text: "Equipment auto-moves to another org" },
+                { id: "c", text: "Equipment data is lost and must be manually repaired" },
+                { id: "d", text: "Nothing happens" }
+              ],
+              correctAnswer: "c",
+              explanation: "Equipment data is lost and requires manual engineering repair—this is the highest-risk action in the platform."
             }
           ]
         }
