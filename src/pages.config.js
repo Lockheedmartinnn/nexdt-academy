@@ -1,19 +1,19 @@
 import Academy from './pages/Academy';
-import Track from './pages/Track';
+import Certificate from './pages/Certificate';
+import FinalAssessment from './pages/FinalAssessment';
 import Lesson from './pages/Lesson';
 import Quiz from './pages/Quiz';
-import FinalAssessment from './pages/FinalAssessment';
-import Certificate from './pages/Certificate';
+import Track from './pages/Track';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
     "Academy": Academy,
-    "Track": Track,
+    "Certificate": Certificate,
+    "FinalAssessment": FinalAssessment,
     "Lesson": Lesson,
     "Quiz": Quiz,
-    "FinalAssessment": FinalAssessment,
-    "Certificate": Certificate,
+    "Track": Track,
 }
 
 export const pagesConfig = {

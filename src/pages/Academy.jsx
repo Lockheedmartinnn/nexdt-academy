@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from "@/api/base44Client";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
@@ -19,6 +19,8 @@ import CourseCard from "@/components/academy/CourseCard";
 import { tracks } from "@/components/academy/courseData";
 
 export default function Academy() {
+  const queryClient = useQueryClient();
+  
   const { data: user } = useQuery({
     queryKey: ['user'],
     queryFn: () => base44.auth.me(),
@@ -35,6 +37,57 @@ export default function Academy() {
   const totalModules = tracks.reduce((acc, t) => acc + (t.modules?.length || 0), 0);
   const completedModulesCount = progress.completed_modules?.length || 0;
   const overallProgress = totalModules > 0 ? (completedModulesCount / totalModules) * 100 : 0;
+
+  const skipEverythingMutation = useMutation({
+    mutationFn: async () => {
+      if (!user?.email || user.role !== 'admin') return;
+      
+      // Get all lessons and modules
+      const allLessons = [];
+      const allModules = [];
+      tracks.forEach(track => {
+        track.modules?.forEach(module => {
+          const moduleId = `${track.id}-${module.id}`;
+          allModules.push(moduleId);
+          module.lessons?.forEach(lesson => {
+            allLessons.push(`${track.id}-${module.id}-${lesson.id}`);
+          });
+        });
+      });
+
+      const certificateId = `NEXDT-${Date.now().toString(36).toUpperCase()}-ADMIN`;
+      
+      const data = {
+        track_id: 'nexdt-complete',
+        completed_lessons: allLessons,
+        completed_modules: allModules,
+        completed_tracks: tracks.map(t => t.id),
+        quiz_scores: {},
+        final_assessment_score: 100,
+        certificate_issued: true,
+        certificate_id: certificateId,
+        certificate_date: new Date().toISOString(),
+        points: 10000,
+        badges: [
+          { id: 'first_module', earned_date: new Date().toISOString() },
+          { id: 'perfect_quiz', earned_date: new Date().toISOString() },
+          { id: 'fast_learner', earned_date: new Date().toISOString() },
+          { id: 'perfect_assessment', earned_date: new Date().toISOString() },
+          { id: 'certified_user', earned_date: new Date().toISOString() },
+          { id: 'streak_master', earned_date: new Date().toISOString() }
+        ]
+      };
+
+      if (progress?.id) {
+        await base44.entities.CourseProgress.update(progress.id, data);
+      } else {
+        await base44.entities.CourseProgress.create(data);
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['progress'] });
+    }
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -71,6 +124,18 @@ export default function Academy() {
                   View Certificate
                 </Button>
               </Link>
+            )}
+            {user?.role === 'admin' && !progress.certificate_issued && (
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-amber-300/50 text-amber-300 hover:bg-amber-500/20 gap-2"
+                onClick={() => skipEverythingMutation.mutate()}
+                disabled={skipEverythingMutation.isPending}
+              >
+                <Trophy className="w-5 h-5" />
+                {skipEverythingMutation.isPending ? 'Completing...' : 'Admin: Skip to Certificate'}
+              </Button>
             )}
           </div>
 
