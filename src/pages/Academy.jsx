@@ -43,9 +43,9 @@ export default function Academy() {
         <div className="max-w-7xl mx-auto px-6 py-16">
           <div className="flex items-center gap-3 mb-4">
             <img 
-              src="https://www.sitesee.com.au/wp-content/uploads/2022/10/sitesee-logo.svg" 
+              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/253764dc9_image.png" 
               alt="SiteSee Logo" 
-              className="h-8 brightness-0 invert"
+              className="h-8"
             />
           </div>
           

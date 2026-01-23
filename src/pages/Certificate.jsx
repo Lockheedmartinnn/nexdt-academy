@@ -100,7 +100,7 @@ export default function Certificate() {
               {/* Logo & Header */}
               <div className="flex items-center justify-center gap-3 mb-8">
                 <img 
-                  src="https://www.sitesee.com.au/wp-content/uploads/2022/10/sitesee-logo.svg" 
+                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/253764dc9_image.png" 
                   alt="SiteSee Logo" 
                   className="h-10"
                 />

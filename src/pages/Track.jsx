@@ -93,9 +93,9 @@ export default function Track() {
               Back to Academy
             </Link>
             <img 
-              src="https://www.sitesee.com.au/wp-content/uploads/2022/10/sitesee-logo.svg" 
+              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/253764dc9_image.png" 
               alt="SiteSee Logo" 
-              className="h-6 brightness-0 invert"
+              className="h-6"
             />
           </div>
 
