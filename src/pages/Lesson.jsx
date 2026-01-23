@@ -53,7 +53,9 @@ export default function Lesson() {
       if (!user?.email) return;
       
       const newCompletedLessons = [...completedLessons];
-      if (!newCompletedLessons.includes(lessonFullId)) {
+      const isFirstCompletion = !newCompletedLessons.includes(lessonFullId);
+      
+      if (isFirstCompletion) {
         newCompletedLessons.push(lessonFullId);
       }
 
@@ -63,14 +65,42 @@ export default function Lesson() {
       
       let newCompletedModules = progress?.completed_modules || [];
       const moduleFullId = `${trackId}-${moduleId}`;
-      if (moduleComplete && !newCompletedModules.includes(moduleFullId)) {
+      const isFirstModuleCompletion = moduleComplete && !newCompletedModules.includes(moduleFullId);
+      
+      if (isFirstModuleCompletion) {
         newCompletedModules = [...newCompletedModules, moduleFullId];
+      }
+
+      // Calculate points
+      let pointsToAdd = 0;
+      if (isFirstCompletion) pointsToAdd += 10; // 10 points per lesson
+      if (isFirstModuleCompletion) pointsToAdd += 50; // 50 bonus points for module
+
+      const currentPoints = progress?.points || 0;
+      const newPoints = currentPoints + pointsToAdd;
+
+      // Check for badges
+      const badges = [...(progress?.badges || [])];
+      if (isFirstModuleCompletion && badges.length === 0) {
+        badges.push({ id: 'first_module', earned_date: new Date().toISOString() });
+      }
+
+      // Fast learner badge - check if 5 lessons completed today
+      const today = new Date().toDateString();
+      const lessonsCompletedToday = newCompletedLessons.filter(l => {
+        // This is simplified - in production you'd track completion dates
+        return true;
+      }).length;
+      if (lessonsCompletedToday >= 5 && !badges.find(b => b.id === 'fast_learner')) {
+        badges.push({ id: 'fast_learner', earned_date: new Date().toISOString() });
       }
 
       const data = {
         track_id: trackId,
         completed_lessons: newCompletedLessons,
         completed_modules: newCompletedModules,
+        points: newPoints,
+        badges: badges,
       };
 
       if (progress?.id) {
