@@ -26,89 +26,105 @@ export const tracks = [
     modules: [
       {
         id: "module-1",
-        title: "NexDT Overview & Concepts",
+        title: "NexDT Overview & Core Concepts",
         lessons: [
           {
-            id: "what-nexdt-is",
-            title: "What NexDT Is",
+            id: "what-is-nexdt",
+            title: "What is NexDT?",
             duration: "10 min",
             content: `
-# What NexDT Is
+# What is NexDT?
 
-NexDT is SiteSee's powerful digital twin platform designed for telecommunications infrastructure management. It enables you to:
+**NexDT** is SiteSee's engineering and validation portal used to review, assess, and approve tower configurations using 3D models, equipment data, and engineering calculations.
 
-- **Visualize** tower sites in immersive 3D environments
-- **Manage** equipment data and colocation applications
-- **Collaborate** across teams with role-based access
-- **Analyze** structural and EME (Electromagnetic Energy) impacts
+It enables users to:
 
-## Problems NexDT Solves
+- View **as-built 3D models**
+- Manage **applications and equipment**
+- Run **engineering assessments** (IEA and EME)
+- Validate whether a tower remains within **safe load-bearing and compliance limits**
 
-1. **Site Visit Reduction**: Review and validate sites remotely with accurate 3D models
-2. **Colocation Efficiency**: Streamline equipment placement and approval workflows
-3. **Data Accuracy**: Maintain precise equipment inventory and specifications
-4. **Engineering Analysis**: Calculate structural loads and electromagnetic compliance
+NexDT is used **after capture** and **before approval**.
 
-## How It Fits Into SiteSee Workflows
+## Where NexDT Fits in the SiteSee Workflow
 
-NexDT is the central hub for:
-- **Pre-construction planning**: Design and validate colocation applications
-- **Engineering review**: Assess structural and EME impacts
-- **Data management**: Upload and maintain equipment records via CSV
-- **Compliance reporting**: Generate documentation for regulatory requirements
+A simplified workflow looks like this:
 
-## Platform Components
+1. A site is captured and processed into an **as-built model**
+2. The model and equipment data are loaded into **NexDT**
+3. Users review the site and manage **applications**
+4. Engineering tools (IEA / EME) are run
+5. Results are reviewed before approvals or changes are submitted
 
-- **Sites Portal**: Main interface for viewing and editing sites
-- **BIM Admin**: Manage your equipment library
-- **Admin Console**: User and organization management
-- **ColoApp Manager**: Review and approve colocation applications
+**NexDT acts as the engineering truth layer for SiteSee.**
+
+## Who Uses NexDT?
+
+NexDT is used by multiple types of users, including:
+
+- **Engineers** — responsible for reviewing data, approving as-builts, and validating safety
+- **Colocation (Colo) users** — manage equipment belonging to their organization
+- **Support and Admin users** — assist with reports, validation, and platform support
+
+Each user may see or edit different information, but all users work within the same core system.
+
+## What NexDT Does Not Do
+
+It's important to understand the boundaries of NexDT:
+
+- NexDT does **not** capture sites
+- NexDT does **not** replace certified structural engineering
+- NexDT does **not** design new towers
+
+NexDT provides **indicative assessments and validation**, not final engineering certification.
             `,
             keyTakeaways: [
-              "NexDT is a digital twin platform for telecom infrastructure",
-              "Reduces site visits and streamlines colocation workflows",
-              "Integrates with SiteSee's broader infrastructure management ecosystem"
+              "NexDT is used after capture and before approval",
+              "Acts as the engineering truth layer for SiteSee",
+              "Provides indicative assessments, not final certification"
             ]
           },
           {
-            id: "key-terminology",
-            title: "Key Terminology",
+            id: "key-concepts",
+            title: "Key Concepts You Must Understand",
             duration: "8 min",
             content: `
-# Key Terminology
+# Key Concepts You Must Understand
+
+Before using NexDT, it's important to understand these concepts:
 
 ## Applications
 
-A **Colocation Application** (or ColoApp) is a proposed change to site equipment. It can include:
-- Adding new equipment
-- Removing existing equipment
-- Replacing equipment (Rip and Replace)
+An **Application** represents a specific engineering or colocation workflow for a site.
 
-Applications move through states: **Draft → Submitted → Under Review → Approved/Rejected**
-
-## IEA (Indicative Engineering Assessment)
-
-IEA calculates the structural impact of proposed equipment changes:
-- **Structure %**: Tower structural capacity usage
-- **Footing %**: Foundation capacity usage
-- **Rotation**: Tower twist/torsion
-
-**Indicative** means preliminary—not a replacement for full engineering analysis.
-
-## EME (Electromagnetic Energy)
-
-EME analysis evaluates radio frequency exposure from antennas to ensure compliance with safety standards.
+Applications are used to:
+- Review equipment
+- Run assessments
+- Track changes and approvals
 
 ## Existing vs Proposed
 
-- **Existing**: Current equipment installed on site
-- **Proposed**: New or replacement equipment in a colocation application
-- **Existing + Proposed**: Combined load used for IEA calculations
+- **Existing** refers to equipment currently installed on the tower
+- **Proposed** refers to new or modified equipment being evaluated
+
+Engineering results can be viewed as:
+- **Existing only**
+- **Existing + Proposed**
+
+## IEA & EME
+
+### IEA (Indicative Engineering Assessment)
+Evaluates whether a tower remains within safe structural limits based on equipment configuration.
+
+### EME (Electromagnetic Energy)
+Evaluates electromagnetic exposure based on installed equipment.
+
+Both tools rely on **accurate equipment and as-built data**.
             `,
             keyTakeaways: [
-              "Applications track equipment changes through workflow states",
-              "IEA provides preliminary structural analysis",
-              "Existing + Proposed = combined load for engineering review"
+              "Applications track specific engineering/colocation workflows",
+              "Existing = current equipment, Proposed = new/modified equipment",
+              "IEA and EME depend on accurate data quality"
             ]
           }
         ],
@@ -119,39 +135,390 @@ EME analysis evaluates radio frequency exposure from antennas to ensure complian
               question: "What is the primary purpose of NexDT?",
               type: "single",
               options: [
-                { id: "a", text: "Social media platform" },
-                { id: "b", text: "Digital twin platform for telecom infrastructure" },
-                { id: "c", text: "Email management system" },
-                { id: "d", text: "Video streaming service" }
+                { id: "a", text: "Capturing drone imagery" },
+                { id: "b", text: "Designing new tower structures" },
+                { id: "c", text: "Engineering review and validation of tower configurations" },
+                { id: "d", text: "Managing pilot workflows" }
               ],
-              correctAnswer: "b",
-              explanation: "NexDT is SiteSee's digital twin platform specifically designed for telecommunications infrastructure management."
+              correctAnswer: "c",
+              explanation: "NexDT is used for engineering assessment and validation, not capture or design."
             },
             {
               id: "q2",
-              question: "What does IEA stand for?",
+              question: "When is NexDT typically used in the SiteSee workflow?",
               type: "single",
               options: [
-                { id: "a", text: "International Equipment Assessment" },
-                { id: "b", text: "Indicative Engineering Assessment" },
-                { id: "c", text: "Internal Energy Analysis" },
-                { id: "d", text: "Infrastructure Evaluation Audit" }
+                { id: "a", text: "Before site capture" },
+                { id: "b", text: "During drone flight" },
+                { id: "c", text: "After capture and before approval" },
+                { id: "d", text: "Only after final certification" }
               ],
-              correctAnswer: "b",
-              explanation: "IEA stands for Indicative Engineering Assessment—a preliminary structural analysis tool."
+              correctAnswer: "c",
+              explanation: "NexDT is used after capture and before approval to review and validate tower configurations."
             },
             {
               id: "q3",
-              question: "What does 'Existing + Proposed' represent in NexDT?",
+              question: "What does 'Existing + Proposed' represent?",
               type: "single",
               options: [
-                { id: "a", text: "Equipment to be deleted" },
-                { id: "b", text: "Combined load for engineering calculations" },
-                { id: "c", text: "User permissions" },
-                { id: "d", text: "Site location coordinates" }
+                { id: "a", text: "Historical data only" },
+                { id: "b", text: "Current equipment plus new or modified equipment" },
+                { id: "c", text: "Equipment from multiple organizations" },
+                { id: "d", text: "Equipment awaiting deletion" }
               ],
               correctAnswer: "b",
-              explanation: "'Existing + Proposed' represents the combined load of current and new equipment used for IEA calculations."
+              explanation: "Existing + Proposed represents current equipment combined with new or modified equipment for engineering calculations."
+            },
+            {
+              id: "q4",
+              question: "Which tools are run within NexDT?",
+              type: "single",
+              options: [
+                { id: "a", text: "Scanlink and Pilot App" },
+                { id: "b", text: "IEA and EME" },
+                { id: "c", text: "CAD and BIM render tools" },
+                { id: "d", text: "GPS validation tools" }
+              ],
+              correctAnswer: "b",
+              explanation: "IEA (Indicative Engineering Assessment) and EME (Electromagnetic Energy) are the core engineering tools in NexDT."
+            }
+          ]
+        }
+      },
+      {
+        id: "module-1-2",
+        title: "IEA & EME Fundamentals",
+        lessons: [
+          {
+            id: "iea-eme-overview",
+            title: "IEA & EME Core Tools",
+            duration: "12 min",
+            content: `
+# IEA & EME Fundamentals (NexDT Core Tools)
+
+## What Problem Are We Solving?
+
+Before using any engineering tool, it's critical to understand **what decision the tool supports**.
+
+### Two Core Tools in NexDT
+
+**IEA — Indicative Engineering Assessment**
+
+Evaluates **structural feasibility** of a tower based on:
+- Existing equipment
+- Proposed equipment
+- Wind and structural parameters
+
+**Key idea**: IEA answers *"Can the structure handle this?"*
+
+**EME — Electromagnetic Energy**
+
+Evaluates **RF exposure and compliance**, based on:
+- Antenna configuration
+- Equipment data
+- Regulatory limits
+
+**Key idea**: EME answers *"Is this RF-safe and compliant?"*
+
+## When IEA & EME Actually Work
+
+IEA and EME **depend entirely on data quality**.
+
+They require:
+- The site to be **As-Built**
+- Equipment present in the model
+- Correct catalogue and equipment metadata
+
+They will **not** produce meaningful results if these conditions are missing.
+
+⚠️ **Warning**: Running IEA or EME on incomplete data leads to misleading outputs.
+            `,
+            keyTakeaways: [
+              "IEA evaluates structural feasibility, EME evaluates RF compliance",
+              "Both tools require as-built sites with equipment present",
+              "Results are only meaningful with accurate data quality"
+            ],
+            warnings: [
+              "Running IEA or EME on incomplete data leads to misleading outputs"
+            ]
+          },
+          {
+            id: "iea-workflow",
+            title: "The IEA Workflow (End-to-End)",
+            duration: "15 min",
+            content: `
+# The IEA Workflow (End-to-End)
+
+Running an IEA follows a **deliberate sequence**:
+
+1. Open the site in NexDT
+2. Navigate to **IEA**
+3. Review **Site Information**
+4. Confirm **Wind Parameters**
+5. Review **Structure**
+6. Review **Load Sources**
+7. Choose analysis mode
+8. Submit and calculate
+
+**Important**: IEA outputs are deterministic — change inputs, results change.
+
+⚠️ **Common Misstep**: Running calculations before reviewing wind or load parameters.
+
+## Understanding the IEA Tabs
+
+### Site Information
+Contains:
+- Site metadata
+- Tower type
+- Structural baseline
+
+This data must be **accurate**, even if read-only.
+
+### Wind Parameters
+- Critical for structural modelling
+- **Defaults are not always correct**
+- Incorrect wind data can invalidate results
+
+### Structure
+Defines:
+- Tower geometry
+- Heights and segments
+
+Think of this as the **physical skeleton** of the site.
+
+### Load Sources
+This is the **most influential section**.
+
+Here you will see:
+- Existing equipment
+- Proposed equipment
+- Ability to toggle equipment on/off
+
+**Every toggle directly affects final calculations.**
+            `,
+            keyTakeaways: [
+              "Review wind parameters and load sources before calculating",
+              "Load Sources is the most influential section for IEA",
+              "Every equipment toggle affects final calculations"
+            ],
+            warnings: [
+              "Common mistake: Running calculations before reviewing wind or load parameters"
+            ]
+          },
+          {
+            id: "existing-vs-proposed",
+            title: "Existing vs Existing + Proposed",
+            duration: "10 min",
+            content: `
+# Existing vs Existing + Proposed (Critical Concept)
+
+## Existing
+- Evaluates the **current state** of the tower
+- Used as a baseline
+- Helpful for diagnosing existing constraints
+
+## Existing + Proposed
+- Evaluates impact of **new or modified equipment**
+- Used for **decision-making and approvals**
+
+**A site may pass Existing but fail Existing + Proposed — this is normal and expected.**
+
+## Interpreting IEA Results Correctly
+
+IEA results are:
+- **Indicative**
+- Used for early feasibility
+- **Not a replacement** for certified engineering
+
+### Correct response to a failure:
+1. Flag for further engineering review
+2. Investigate load sources and parameters
+3. Do **not** treat as final rejection automatically
+
+## Common Mistakes to Avoid
+
+- Running IEA before site is as-built
+- Assuming default wind values are correct
+- Forgetting to toggle proposed equipment
+- Treating indicative results as final approval
+
+**This module exists to prevent these mistakes.**
+            `,
+            keyTakeaways: [
+              "Existing = baseline, Existing + Proposed = decision-making",
+              "Sites may pass Existing but fail Existing + Proposed",
+              "IEA failures should trigger review, not automatic rejection"
+            ]
+          },
+          {
+            id: "eme-fundamentals",
+            title: "EME Fundamentals (High Level)",
+            duration: "8 min",
+            content: `
+# EME Fundamentals (High Level)
+
+## EME Overview
+
+EME:
+- Runs **on demand**
+- Requires equipment and catalogue data
+- Cannot generate meaningful outputs without proper inputs
+
+## Users Who Can Run EME
+
+- Engineer
+- Support Admin
+- Colo User
+
+*Note: Pilot users cannot run EME*
+
+## EME Analysis
+
+EME analysis is covered in more depth in later modules.
+
+Key understanding for now:
+- EME evaluates RF exposure and compliance
+- Requires accurate antenna configuration
+- Based on equipment data and regulatory limits
+            `,
+            keyTakeaways: [
+              "EME runs on demand and requires catalogue data",
+              "Engineers, Support Admins, and Colo Users can run EME",
+              "EME evaluates RF exposure and compliance"
+            ]
+          }
+        ],
+        quiz: {
+          questions: [
+            {
+              id: "q1",
+              question: "What is the primary purpose of IEA?",
+              type: "single",
+              options: [
+                { id: "a", text: "RF exposure compliance" },
+                { id: "b", text: "Structural feasibility assessment" },
+                { id: "c", text: "Image processing" },
+                { id: "d", text: "Pilot validation" }
+              ],
+              correctAnswer: "b",
+              explanation: "IEA (Indicative Engineering Assessment) evaluates structural feasibility of a tower based on equipment configuration."
+            },
+            {
+              id: "q2",
+              question: "EME primarily evaluates:",
+              type: "single",
+              options: [
+                { id: "a", text: "Wind loading" },
+                { id: "b", text: "Structural rotation" },
+                { id: "c", text: "RF exposure and compliance" },
+                { id: "d", text: "Equipment geometry" }
+              ],
+              correctAnswer: "c",
+              explanation: "EME (Electromagnetic Energy) evaluates RF exposure and compliance based on antenna configuration."
+            },
+            {
+              id: "q3",
+              question: "What must exist before IEA or EME can run meaningfully?",
+              type: "single",
+              options: [
+                { id: "a", text: "Pilot logs" },
+                { id: "b", text: "Empty site" },
+                { id: "c", text: "As-built site with equipment" },
+                { id: "d", text: "Approved ColoApp" }
+              ],
+              correctAnswer: "c",
+              explanation: "IEA and EME require an as-built site with equipment present and correct catalogue metadata to produce meaningful results."
+            },
+            {
+              id: "q4",
+              question: "Which tab most directly affects IEA outcomes?",
+              type: "single",
+              options: [
+                { id: "a", text: "Site Information" },
+                { id: "b", text: "Load Sources" },
+                { id: "c", text: "Reports" },
+                { id: "d", text: "Documents" }
+              ],
+              correctAnswer: "b",
+              explanation: "Load Sources is the most influential section, as every equipment toggle directly affects final calculations."
+            },
+            {
+              id: "q5",
+              question: "What happens when 'Proposed' equipment is toggled on?",
+              type: "single",
+              options: [
+                { id: "a", text: "UI changes only" },
+                { id: "b", text: "Structural calculations update" },
+                { id: "c", text: "Site metadata resets" },
+                { id: "d", text: "Wind parameters lock" }
+              ],
+              correctAnswer: "b",
+              explanation: "Toggling proposed equipment on/off directly updates the structural calculations in IEA."
+            },
+            {
+              id: "q6",
+              question: "A site passing Existing but failing Existing + Proposed means:",
+              type: "single",
+              options: [
+                { id: "a", text: "The system is incorrect" },
+                { id: "b", text: "Proposed equipment adds structural load" },
+                { id: "c", text: "Wind data is ignored" },
+                { id: "d", text: "EME must be run instead" }
+              ],
+              correctAnswer: "b",
+              explanation: "This is normal and expected — the proposed equipment adds structural load that exceeds safe limits."
+            },
+            {
+              id: "q7",
+              question: "Are IEA results final engineering approval?",
+              type: "single",
+              options: [
+                { id: "a", text: "Yes" },
+                { id: "b", text: "Only for small towers" },
+                { id: "c", text: "No, they are indicative" },
+                { id: "d", text: "Only if exported" }
+              ],
+              correctAnswer: "c",
+              explanation: "IEA results are indicative and used for early feasibility — not a replacement for certified engineering."
+            },
+            {
+              id: "q8",
+              question: "Which user role cannot run EME?",
+              type: "single",
+              options: [
+                { id: "a", text: "Engineer" },
+                { id: "b", text: "Support Admin" },
+                { id: "c", text: "Colo User" },
+                { id: "d", text: "Pilot" }
+              ],
+              correctAnswer: "d",
+              explanation: "Pilot users cannot run EME. Only Engineers, Support Admins, and Colo Users can run EME."
+            },
+            {
+              id: "q9",
+              question: "Which mistake most commonly invalidates IEA results?",
+              type: "single",
+              options: [
+                { id: "a", text: "Too many reports" },
+                { id: "b", text: "Running without equipment" },
+                { id: "c", text: "Forgetting documents" },
+                { id: "d", text: "Changing UI theme" }
+              ],
+              correctAnswer: "b",
+              explanation: "Running IEA without equipment present or on incomplete data leads to misleading, invalid outputs."
+            },
+            {
+              id: "q10",
+              question: "What is the correct mindset when using IEA?",
+              type: "single",
+              options: [
+                { id: "a", text: "Treat as final decision" },
+                { id: "b", text: "Ignore failures" },
+                { id: "c", text: "Use as decision guidance" },
+                { id: "d", text: "Only use for visuals" }
+              ],
+              correctAnswer: "c",
+              explanation: "IEA should be used as decision guidance for early feasibility, not as final engineering approval."
             }
           ]
         }
