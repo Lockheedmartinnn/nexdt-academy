@@ -116,10 +116,17 @@ export default function FinalAssessment() {
       {/* Header */}
       <div className="bg-slate-900 text-white">
         <div className="max-w-4xl mx-auto px-6 py-8">
-          <Link to={createPageUrl('Academy')} className="inline-flex items-center gap-2 text-white/70 hover:text-white mb-4 transition-colors">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Academy
-          </Link>
+          <div className="flex items-center justify-between mb-4">
+            <Link to={createPageUrl('Academy')} className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors">
+              <ArrowLeft className="w-4 h-4" />
+              Back to Academy
+            </Link>
+            <img 
+              src="https://www.sitesee.com.au/wp-content/uploads/2022/10/sitesee-logo.svg" 
+              alt="SiteSee Logo" 
+              className="h-6 brightness-0 invert"
+            />
+          </div>
 
           <div className="flex items-center gap-4 mb-4">
             <div className="p-3 bg-amber-500/20 rounded-xl">

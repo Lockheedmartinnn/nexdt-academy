@@ -87,10 +87,17 @@ export default function Track() {
       {/* Header */}
       <div className={`${track.color || 'bg-blue-600'} text-white`}>
         <div className="max-w-5xl mx-auto px-6 py-8">
-          <Link to={createPageUrl('Academy')} className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-6 transition-colors">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Academy
-          </Link>
+          <div className="flex items-center justify-between mb-6">
+            <Link to={createPageUrl('Academy')} className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors">
+              <ArrowLeft className="w-4 h-4" />
+              Back to Academy
+            </Link>
+            <img 
+              src="https://www.sitesee.com.au/wp-content/uploads/2022/10/sitesee-logo.svg" 
+              alt="SiteSee Logo" 
+              className="h-6 brightness-0 invert"
+            />
+          </div>
 
           <div className="flex items-start justify-between">
             <div>
