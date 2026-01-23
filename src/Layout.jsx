@@ -24,7 +24,7 @@ export default function Layout({ children, currentPageName }) {
                 alt="SiteSee Logo" 
                 className="h-6"
               />
-              <span className="font-semibold text-sm">NexDT Academy</span>
+              <span className="font-semibold text-sm">NextDT Academy</span>
             </Link>
           </div>
         </div>

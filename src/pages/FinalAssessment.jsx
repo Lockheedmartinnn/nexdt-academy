@@ -175,7 +175,7 @@ export default function FinalAssessment() {
                     </h2>
                     <p className={passed ? 'text-emerald-700' : 'text-red-700'}>
                       {passed 
-                        ? 'Congratulations! You are now a NexDT Certified User.'
+                        ? 'Congratulations! You are now a NextDT Certified User.'
                         : `You scored ${score}%. You need ${finalAssessment.passingScore}% to pass. Review the course material and try again.`
                       }
                     </p>

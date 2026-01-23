@@ -38,7 +38,7 @@ export default function Certificate() {
             <Award className="w-16 h-16 mx-auto text-slate-300 mb-4" />
             <h2 className="text-xl font-bold mb-2">No Certificate Yet</h2>
             <p className="text-slate-600 mb-6">
-              Complete all courses and pass the final assessment to earn your NexDT Certified User certificate.
+              Complete all courses and pass the final assessment to earn your NextDT Certified User certificate.
             </p>
             <Link to={createPageUrl('Academy')}>
               <Button>Continue Learning</Button>
@@ -105,7 +105,7 @@ export default function Certificate() {
                   className="h-10"
                 />
                 <div className="text-left">
-                  <h2 className="text-xl font-bold text-slate-900">NexDT Academy</h2>
+                  <h2 className="text-xl font-bold text-slate-900">NextDT Academy</h2>
                 </div>
               </div>
 
@@ -115,7 +115,7 @@ export default function Certificate() {
                   Certificate of Completion
                 </p>
                 <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
-                  NexDT Certified User
+                  NextDT Certified User
                 </h1>
               </div>
 
@@ -130,8 +130,8 @@ export default function Certificate() {
               {/* Description */}
               <div className="max-w-2xl mx-auto mb-10">
                 <p className="text-slate-600 leading-relaxed">
-                  has successfully completed the NexDT Academy certification program, 
-                  demonstrating comprehensive knowledge of the NexDT digital twin platform 
+                  has successfully completed the NextDT Academy certification program, 
+                  demonstrating comprehensive knowledge of the NextDT digital twin platform 
                   for telecommunications infrastructure management.
                 </p>
               </div>
@@ -157,7 +157,7 @@ export default function Certificate() {
                 <p className="text-sm text-slate-500 mb-4">Demonstrated Proficiency In:</p>
                 <div className="flex flex-wrap justify-center gap-3">
                   {[
-                    'NexDT Fundamentals',
+                    'NextDT Fundamentals',
                     'Colocation Workflows',
                     'Data & CSV Management',
                     'BIM Administration',
@@ -179,7 +179,7 @@ export default function Certificate() {
                 </div>
                 <div className="text-center">
                   <div className="w-40 border-b border-slate-300 mb-2" />
-                  <p className="text-sm text-slate-500">NexDT Academy</p>
+                  <p className="text-sm text-slate-500">NextDT Academy</p>
                 </div>
               </div>
             </div>

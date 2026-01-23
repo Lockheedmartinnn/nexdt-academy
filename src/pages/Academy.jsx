@@ -50,11 +50,11 @@ export default function Academy() {
           </div>
           
           <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-            NexDT Academy
+            NextDT Academy
           </h1>
           <p className="text-xl text-slate-300 max-w-2xl mb-8">
             Master the digital twin platform for telecommunications infrastructure. 
-            Complete all courses to earn your NexDT Certified User certificate.
+            Complete all courses to earn your NextDT Certified User certificate.
           </p>
 
           <div className="flex flex-wrap gap-4 mb-10">
@@ -157,10 +157,10 @@ export default function Academy() {
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="flex items-center justify-between text-sm text-slate-600">
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-slate-900">NexDT Academy</span>
+              <span className="font-semibold text-slate-900">NextDT Academy</span>
               <span>by SiteSee</span>
             </div>
-            <p>Official training for the NexDT digital twin platform</p>
+            <p>Official training for the NextDT digital twin platform</p>
           </div>
         </div>
       </div>

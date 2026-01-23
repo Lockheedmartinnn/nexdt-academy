@@ -17,8 +17,8 @@ import React from 'react';
 export const tracks = [
   {
     id: "nexdt-complete",
-    title: "SiteSee NexDT Academy",
-    description: "Train users to confidently use NexDT for engineering review, data validation, configuration, and reporting — using official SiteSee documentation and videos.",
+    title: "SiteSee NextDT Academy",
+    description: "Train users to confidently use NextDT for engineering review, data validation, configuration, and reporting — using official SiteSee documentation and videos.",
     duration: "6 hours",
     color: "bg-blue-600",
     bgColor: "bg-blue-50",
@@ -26,7 +26,7 @@ export const tracks = [
     modules: [
       {
         id: "module-1",
-        title: "NexDT Overview & Core Concepts",
+        title: "NextDT Overview & Core Concepts",
         lessons: [
           {
             id: "what-is-nexdt",
@@ -44,23 +44,23 @@ It enables users to:
 - Run **engineering assessments** (IEA and EME)
 - Validate whether a tower remains within **safe load-bearing and compliance limits**
 
-NexDT is used **after capture** and **before approval**.
+NextDT is used **after capture** and **before approval**.
 
-## Where NexDT Fits in the SiteSee Workflow
+## Where NextDT Fits in the SiteSee Workflow
 
 A simplified workflow looks like this:
 
 1. A site is captured and processed into an **as-built model**
-2. The model and equipment data are loaded into **NexDT**
+2. The model and equipment data are loaded into **NextDT**
 3. Users review the site and manage **applications**
 4. Engineering tools (IEA / EME) are run
 5. Results are reviewed before approvals or changes are submitted
 
-**NexDT acts as the engineering truth layer for SiteSee.**
+**NextDT acts as the engineering truth layer for SiteSee.**
 
-## Who Uses NexDT?
+## Who Uses NextDT?
 
-NexDT is used by multiple types of users, including:
+NextDT is used by multiple types of users, including:
 
 - **Engineers** — responsible for reviewing data, approving as-builts, and validating safety
 - **Colocation (Colo) users** — manage equipment belonging to their organization
@@ -68,18 +68,18 @@ NexDT is used by multiple types of users, including:
 
 Each user may see or edit different information, but all users work within the same core system.
 
-## What NexDT Does Not Do
+## What NextDT Does Not Do
 
-It's important to understand the boundaries of NexDT:
+It's important to understand the boundaries of NextDT:
 
-- NexDT does **not** capture sites
-- NexDT does **not** replace certified structural engineering
-- NexDT does **not** design new towers
+- NextDT does **not** capture sites
+- NextDT does **not** replace certified structural engineering
+- NextDT does **not** design new towers
 
-NexDT provides **indicative assessments and validation**, not final engineering certification.
+NextDT provides **indicative assessments and validation**, not final engineering certification.
             `,
             keyTakeaways: [
-              "NexDT is used after capture and before approval",
+              "NextDT is used after capture and before approval",
               "Acts as the engineering truth layer for SiteSee",
               "Provides indicative assessments, not final certification"
             ]
@@ -91,7 +91,7 @@ NexDT provides **indicative assessments and validation**, not final engineering 
             content: `
 # Key Concepts You Must Understand
 
-Before using NexDT, it's important to understand these concepts:
+Before using NextDT, it's important to understand these concepts:
 
 ## Applications
 
@@ -194,13 +194,13 @@ Both tools rely on **accurate equipment and as-built data**.
             title: "IEA & EME Core Tools",
             duration: "12 min",
             content: `
-# IEA & EME Fundamentals (NexDT Core Tools)
+# IEA & EME Fundamentals (NextDT Core Tools)
 
 ## What Problem Are We Solving?
 
 Before using any engineering tool, it's critical to understand **what decision the tool supports**.
 
-### Two Core Tools in NexDT
+### Two Core Tools in NextDT
 
 **IEA — Indicative Engineering Assessment**
 
@@ -2249,8 +2249,8 @@ NexDT provides measurement tools for validating equipment geometry:
   },
   {
     id: "fundamentals",
-    title: "NexDT Fundamentals",
-    description: "Master the core concepts of NexDT, including navigation, site management, and basic workflows essential for all users.",
+    title: "NextDT Fundamentals",
+    description: "Master the core concepts of NextDT, including navigation, site management, and basic workflows essential for all users.",
     duration: "45 min",
     color: "bg-blue-600",
     bgColor: "bg-blue-50",
@@ -2258,16 +2258,16 @@ NexDT provides measurement tools for validating equipment geometry:
     modules: [
       {
         id: "intro",
-        title: "Introduction to NexDT",
+        title: "Introduction to NextDT",
         lessons: [
           {
             id: "what-is-nexdt",
-            title: "What is NexDT?",
+            title: "What is NextDT?",
             duration: "5 min",
             content: `
-# What is NexDT?
+# What is NextDT?
 
-NexDT is SiteSee's powerful digital twin platform designed for telecommunications infrastructure management. It enables you to:
+NextDT is SiteSee's powerful digital twin platform designed for telecommunications infrastructure management. It enables you to:
 
 - **Visualize** tower sites in immersive 3D environments
 - **Manage** equipment data and colocation applications
@@ -2289,7 +2289,7 @@ NexDT is SiteSee's powerful digital twin platform designed for telecommunication
 - **ColoApp Manager**: Review and approve colocation applications
             `,
             keyTakeaways: [
-              "NexDT is a digital twin platform for telecom infrastructure",
+              "NextDT is a digital twin platform for telecom infrastructure",
               "Supports visualization, management, and collaboration",
               "Includes multiple components for different workflows"
             ]
@@ -2341,7 +2341,7 @@ Organizations (Head Customers) determine which equipment a Colo User can access.
           questions: [
             {
               id: "q1",
-              question: "What is the primary purpose of NexDT?",
+              question: "What is the primary purpose of NextDT?",
               type: "single",
               options: [
                 { id: "a", text: "Email management" },
@@ -2350,7 +2350,7 @@ Organizations (Head Customers) determine which equipment a Colo User can access.
                 { id: "d", text: "Video editing software" }
               ],
               correctAnswer: "b",
-              explanation: "NexDT is SiteSee's digital twin platform specifically designed for telecommunications infrastructure management."
+              explanation: "NextDT is SiteSee's digital twin platform specifically designed for telecommunications infrastructure management."
             },
             {
               id: "q2",
@@ -3275,13 +3275,13 @@ View user activity:
 ];
 
 export const finalAssessment = {
-  title: "NexDT Master Certification Assessment",
-  description: "Complete this comprehensive final assessment to earn your NexDT Certified User certificate. This assessment covers all modules and workflows.",
+  title: "NextDT Master Certification Assessment",
+  description: "Complete this comprehensive final assessment to earn your NextDT Certified User certificate. This assessment covers all modules and workflows.",
   passingScore: 80,
   questions: [
     {
       id: "fa1",
-      question: "What is the primary purpose of NexDT?",
+      question: "What is the primary purpose of NextDT?",
       type: "single",
       options: [
         { id: "a", text: "Capturing drone imagery" },
@@ -3290,11 +3290,11 @@ export const finalAssessment = {
         { id: "d", text: "Managing pilot workflows" }
       ],
       correctAnswer: "b",
-      explanation: "NexDT is SiteSee's engineering and validation portal used after capture and before approval."
+      explanation: "NextDT is SiteSee's engineering and validation portal used after capture and before approval."
     },
     {
       id: "fa2",
-      question: "When is NexDT typically used in the SiteSee workflow?",
+      question: "When is NextDT typically used in the SiteSee workflow?",
       type: "single",
       options: [
         { id: "a", text: "Before site capture" },
@@ -3303,7 +3303,7 @@ export const finalAssessment = {
         { id: "d", text: "Only after final certification" }
       ],
       correctAnswer: "c",
-      explanation: "NexDT acts as the engineering truth layer between capture and approval."
+      explanation: "NextDT acts as the engineering truth layer between capture and approval."
     },
     {
       id: "fa3",
