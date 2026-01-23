@@ -21,12 +21,38 @@ import VideoPlayer from "@/components/academy/VideoPlayer";
 import { tracks } from "@/components/academy/courseData";
 
 export default function Lesson() {
-  const urlParams = new URLSearchParams(window.location.search);
+  const [urlParams, setUrlParams] = useState(() => new URLSearchParams(window.location.search));
   const trackId = urlParams.get('track');
   const moduleId = urlParams.get('module');
   const lessonId = urlParams.get('lesson');
   
   const queryClient = useQueryClient();
+
+  // Update URL params when location changes
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setUrlParams(new URLSearchParams(window.location.search));
+    };
+    
+    window.addEventListener('popstate', handleLocationChange);
+    
+    // Listen to custom navigation events
+    const observer = new MutationObserver(handleLocationChange);
+    observer.observe(document.querySelector('title') || document.body, { 
+      childList: true, 
+      subtree: true 
+    });
+    
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      observer.disconnect();
+    };
+  }, []);
+
+  // Force update when URL search params change
+  useEffect(() => {
+    setUrlParams(new URLSearchParams(window.location.search));
+  }, [window.location.search]);
 
   const track = tracks.find(t => t.id === trackId);
   const module = track?.modules?.find(m => m.id === moduleId);
