@@ -9,7 +9,8 @@ import {
   Link as LinkIcon,
   Layers,
   BarChart3,
-  Search
+  Search,
+  GraduationCap
 } from "lucide-react";
 import React from 'react';
 
@@ -860,11 +861,18 @@ NexDT provides measurement tools for validating equipment geometry:
             }
           ]
         }
-      },
-      {
-        id: "module-1-legacy",
-        title: "Introduction to NexDT",
-        lessons: [
+      }
+    ]
+  },
+  {
+    id: "fundamentals",
+    title: "NexDT Fundamentals",
+    description: "Master the core concepts of NexDT, including navigation, site management, and basic workflows essential for all users.",
+    duration: "45 min",
+    color: "bg-blue-600",
+    bgColor: "bg-blue-50",
+    icon: <BookOpen className="w-6 h-6 text-blue-600" />,
+    modules: [
       {
         id: "intro",
         title: "Introduction to NexDT",
