@@ -525,52 +525,272 @@ Key understanding for now:
       },
       {
         id: "module-2",
-        title: "Navigating the NexDT Interface",
+        title: "Colo User Workflow: Rip & Replace",
         lessons: [
           {
-            id: "ui-overview",
-            title: "Interface Overview",
-            duration: "12 min",
+            id: "rip-replace-intro",
+            title: "What Is a Rip & Replace?",
+            duration: "5 min",
+            videoUrl: "https://www.youtube.com/watch?v=ZwtJNhz1aNc",
             content: `
-# Navigating the NexDT Interface
+# What Is a Rip & Replace?
 
-## Left-Hand Menu Structure
+A **Rip & Replace** operation involves:
 
-The left sidebar is your control center:
+- Removing existing equipment (e.g. 4G panels)
+- Installing new equipment (e.g. 5G antennas)
+- Assessing structural impact
+- Submitting the design for engineering approval
 
-### Main Sections
-1. **Applications Panel**: Switch between different coloapp views
-2. **Layer Toggles**: Show/hide equipment categories
-3. **IEA Calculator**: Access structural analysis tools
-4. **Equipment Browser**: Search and add BIM catalog items
+This workflow is performed by a **Colo User** and reviewed later by an **Engineer**.
 
-## Site Views & Camera Views
+**This module covers Colo User actions only.**
 
-### Predefined Views
-- **Default Scene**: Standard site overview
-- **Tower View**: Focus on tower structure
-- **Ground Equipment**: View shelters and ground-mounted assets
+Engineer review is covered in a separate module.
 
-### Camera Controls
-- **Orbit**: Click and drag to rotate around site
-- **Pan**: Right-click and drag to move view
-- **Zoom**: Scroll wheel to zoom in/out
+## Real-World Scenario
 
-## Reading UI Indicators Correctly
-
-### Status Icons
-- 🟢 **Green**: Saved, up-to-date
-- 🟡 **Yellow**: Processing, background task running
-- 🔴 **Red**: Error or requires attention
-
-### Progress Indicators
-- **Green progress bar**: Background processing—wait before proceeding
-- **Spinner**: Loading data or assets
+This module simulates a **real-world upgrade scenario** (e.g. 4G → 5G).
             `,
             keyTakeaways: [
-              "Left-hand menu provides access to all key functions",
-              "Wait for green progress bar to disappear before proceeding",
-              "Use predefined camera views for quick navigation"
+              "Rip & Replace removes old equipment and installs new equipment",
+              "Performed by Colo Users, reviewed by Engineers",
+              "Common scenario: 4G to 5G panel upgrades"
+            ]
+          },
+          {
+            id: "key-concepts-tools",
+            title: "Key Concepts & Tools",
+            duration: "8 min",
+            content: `
+# Key Concepts & Tools
+
+Before starting, you must understand these tools:
+
+## Colo User Permissions
+
+- You can **only view and modify equipment belonging to your Head Customer**
+- You **cannot create engineering approvals**
+
+## My Equipment Filter
+
+A visual filter that:
+- Highlights only your organization's equipment
+- Restricts editing to permitted assets
+- Prevents accidental interaction with competitor equipment
+
+**Always enable this filter before making changes.**
+
+## IEA (Indicative Engineering Assessment)
+
+Used to:
+- Compare **Existing vs Existing + Proposed**
+- Evaluate structural impact of your changes
+- Determine whether a design is viable before submission
+            `,
+            keyTakeaways: [
+              "Colo Users can only modify their organization's equipment",
+              "My Equipment Filter prevents editing restricted assets",
+              "IEA assesses structural impact before submission"
+            ],
+            warnings: [
+              "Always enable My Equipment Filter before making changes"
+            ]
+          },
+          {
+            id: "phase-1-setup",
+            title: "Phase 1: Application Setup",
+            duration: "6 min",
+            content: `
+# Phase 1: Application Setup
+
+## Step-by-Step
+
+1. Start from the **default scene** of the site
+2. Click **Create Application** (left menu)
+3. Enter a descriptive name
+   - Example: *"Rip and Replace – Site Name"*
+4. Click **Accept**
+
+## Initialization
+
+A **green progress bar** appears at the top of the screen.
+
+⚠️ **Do not proceed until the bar disappears.**
+
+Background tasks must complete first.
+            `,
+            keyTakeaways: [
+              "Start from the default scene",
+              "Wait for green progress bar to finish before proceeding",
+              "Background initialization must complete first"
+            ],
+            warnings: [
+              "Proceeding before initialization completes can corrupt the session"
+            ]
+          },
+          {
+            id: "phase-2-filter",
+            title: "Phase 2: Equipment Visibility (The Filter)",
+            duration: "5 min",
+            content: `
+# Phase 2: Equipment Visibility (The Filter)
+
+Before modifying anything:
+
+1. Toggle **My Equipment Filter ON**
+2. Verify that only your equipment is highlighted
+3. Confirm distinct colouring and full manufacturer details
+
+## Without the Filter
+
+- You may see limited data
+- You risk selecting restricted equipment
+
+💡 **Tip**: If you click equipment without the filter:
+- Manufacturer details may be hidden
+- Editing may be restricted
+            `,
+            keyTakeaways: [
+              "Enable My Equipment Filter before editing",
+              "Filter ensures you only edit permitted equipment",
+              "Without filter, manufacturer details may be hidden"
+            ]
+          },
+          {
+            id: "phase-3-rip",
+            title: "Phase 3: The 'Rip' (Removing Equipment)",
+            duration: "8 min",
+            content: `
+# Phase 3: The "Rip" (Removing Old Equipment)
+
+## Steps
+
+1. Enable the **Selector Tool** (arrow icon)
+2. Select the equipment to be removed (e.g. existing 4G panel)
+3. Click **Edit**
+4. When prompted, **Add Layer**
+   - Name example: *"Replace 5G Upgrade"*
+5. Click **Accept**
+6. Click **Delete Equipment** (trash icon)
+
+The selected equipment is now removed from the digital twin.
+
+⚠️ **Important**: Removing equipment does **not** finalize the change until submission.
+
+## Why Layers Matter
+
+Adding a layer is required to:
+- Track the change request
+- Organize modifications
+- Maintain change history
+            `,
+            keyTakeaways: [
+              "Use Selector Tool to select equipment",
+              "Adding a layer tracks the change request",
+              "Changes are not finalized until submission"
+            ]
+          },
+          {
+            id: "phase-4-replace",
+            title: "Phase 4: The 'Replace' (Installing Equipment)",
+            duration: "10 min",
+            content: `
+# Phase 4: The "Replace" (Installing New Equipment)
+
+## Steps
+
+1. Open **Proposed Equipment → BIM Catalog**
+2. Search by:
+   - Manufacturer (e.g. Ericsson)
+   - Model (e.g. AIR3227)
+3. Select the model and **add to scene**
+
+## Positioning & Alignment
+
+- Use **Translate Tools** to move equipment
+- Use **Orientation Tools** to set azimuth/bearing
+- Ensure no clashes with mounts or other antennas
+
+## Optional
+
+Rename the equipment for clarity
+- Example: *AIR3227-upgrade-5g*
+
+## Save Draft
+
+Click **Save Draft** to commit changes in the session.
+            `,
+            keyTakeaways: [
+              "Search BIM Catalog by manufacturer and model",
+              "Use Translate and Orientation tools for positioning",
+              "Save Draft commits changes in the session"
+            ]
+          },
+          {
+            id: "phase-5-iea",
+            title: "Phase 5: Engineering Assessment (IEA)",
+            duration: "6 min",
+            content: `
+# Phase 5: Engineering Assessment (IEA)
+
+1. Expand **IEA** in the left menu
+2. Click **Calculate**
+3. Review the results table:
+   - **Existing %**
+   - **Existing + Proposed %**
+
+Ensure the proposed design remains within acceptable limits.
+
+⚠️ **IEA is indicative only.**
+            `,
+            keyTakeaways: [
+              "Run IEA to assess structural impact",
+              "Review Existing vs Existing + Proposed percentages",
+              "IEA provides indicative assessment, not final approval"
+            ],
+            warnings: [
+              "IEA is indicative only—not a replacement for certified engineering"
+            ]
+          },
+          {
+            id: "phase-6-submission",
+            title: "Phase 6: Confirmation & Submission",
+            duration: "8 min",
+            content: `
+# Phase 6: Confirmation & Submission
+
+## Confirm Design
+
+1. Click **Confirm Design**
+2. You will be redirected to the **ColoApp Manager**
+3. Sign in if required
+
+## Review Application
+
+- Locate your application using **Application ID**
+- Review equipment transactions:
+  - Old equipment → **Remove**
+  - New equipment → **Add**
+
+## Submit
+
+1. Click **Submit**
+2. Confirm by clicking **Yes**
+3. Verify success message
+
+## Post-Submission Status
+
+After submission:
+- The application is **read-only**
+- You can view but **cannot edit**
+- The design moves to **Engineering Review**
+- You must wait for approval or feedback
+            `,
+            keyTakeaways: [
+              "Confirm Design redirects to ColoApp Manager",
+              "Review all transactions before submitting",
+              "After submission, application becomes read-only"
             ]
           }
         ],
@@ -578,29 +798,107 @@ The left sidebar is your control center:
           questions: [
             {
               id: "q1",
-              question: "Where would you go to switch between different colocation applications?",
+              question: "A Rip & Replace workflow is used to:",
               type: "single",
               options: [
-                { id: "a", text: "Top menu bar" },
-                { id: "b", text: "Applications panel in left-hand menu" },
-                { id: "c", text: "Right-click context menu" },
-                { id: "d", text: "Settings panel" }
+                { id: "a", text: "Capture sites" },
+                { id: "b", text: "Remove old equipment and install new equipment" },
+                { id: "c", text: "Run EME only" },
+                { id: "d", text: "Create BIM models" }
               ],
               correctAnswer: "b",
-              explanation: "The Applications panel in the left-hand menu allows you to switch between different coloapp views."
+              explanation: "Rip & Replace is used to remove old equipment and install new equipment, typically for upgrades like 4G to 5G."
             },
             {
               id: "q2",
-              question: "What does a green progress bar indicate?",
+              question: "Which filter restricts editing to your organization's equipment?",
               type: "single",
               options: [
-                { id: "a", text: "Error state" },
-                { id: "b", text: "Background processing—wait before proceeding" },
-                { id: "c", text: "Successfully completed" },
-                { id: "d", text: "User action required" }
+                { id: "a", text: "Site Filter" },
+                { id: "b", text: "My Equipment Filter" },
+                { id: "c", text: "Layer Filter" },
+                { id: "d", text: "Proposed Filter" }
               ],
               correctAnswer: "b",
-              explanation: "A green progress bar indicates background tasks are running. Wait until it disappears before proceeding."
+              explanation: "My Equipment Filter restricts visibility and editing to equipment belonging to your organization."
+            },
+            {
+              id: "q3",
+              question: "What must you wait for after creating an application?",
+              type: "single",
+              options: [
+                { id: "a", text: "IEA results" },
+                { id: "b", text: "Green progress bar to finish" },
+                { id: "c", text: "Engineer approval" },
+                { id: "d", text: "CSV upload" }
+              ],
+              correctAnswer: "b",
+              explanation: "You must wait for the green progress bar to finish, indicating background initialization tasks are complete."
+            },
+            {
+              id: "q4",
+              question: "Deleting equipment without adding a layer:",
+              type: "single",
+              options: [
+                { id: "a", text: "Is allowed" },
+                { id: "b", text: "Is not permitted" },
+                { id: "c", text: "Auto-submits" },
+                { id: "d", text: "Triggers IEA" }
+              ],
+              correctAnswer: "b",
+              explanation: "Adding a layer is required before deleting equipment to track the change request."
+            },
+            {
+              id: "q5",
+              question: "What should you do after installing new equipment?",
+              type: "single",
+              options: [
+                { id: "a", text: "Submit immediately" },
+                { id: "b", text: "Save Draft" },
+                { id: "c", text: "Run EME" },
+                { id: "d", text: "Exit viewer" }
+              ],
+              correctAnswer: "b",
+              explanation: "After installing new equipment, you should Save Draft to commit changes in the session."
+            },
+            {
+              id: "q6",
+              question: "What does IEA compare?",
+              type: "single",
+              options: [
+                { id: "a", text: "RF exposure" },
+                { id: "b", text: "Existing vs Existing + Proposed" },
+                { id: "c", text: "Pilot logs" },
+                { id: "d", text: "Equipment catalogues" }
+              ],
+              correctAnswer: "b",
+              explanation: "IEA compares Existing (current state) vs Existing + Proposed (with new equipment) to assess structural impact."
+            },
+            {
+              id: "q7",
+              question: "After submission, the application is:",
+              type: "single",
+              options: [
+                { id: "a", text: "Editable" },
+                { id: "b", text: "Read-only" },
+                { id: "c", text: "Archived" },
+                { id: "d", text: "Deleted" }
+              ],
+              correctAnswer: "b",
+              explanation: "After submission, the application becomes read-only and moves to Engineering Review."
+            },
+            {
+              id: "q8",
+              question: "Who reviews the workflow after submission?",
+              type: "single",
+              options: [
+                { id: "a", text: "Pilot" },
+                { id: "b", text: "Engineering team" },
+                { id: "c", text: "Colo User" },
+                { id: "d", text: "System automatically" }
+              ],
+              correctAnswer: "b",
+              explanation: "The Engineering team reviews the submitted workflow for approval."
             }
           ]
         }
