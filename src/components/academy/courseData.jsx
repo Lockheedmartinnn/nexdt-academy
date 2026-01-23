@@ -1235,70 +1235,286 @@ Once approved:
       },
       {
         id: "module-4",
-        title: "IEA (Indicative Engineering Assessment)",
+        title: "BIM Admin Tooling & Equipment Configuration",
         lessons: [
           {
-            id: "iea-overview",
-            title: "IEA Overview",
-            duration: "15 min",
+            id: "bim-overview",
+            title: "What the BIM Admin Tool Does",
+            duration: "10 min",
+            videoUrl: "https://www.youtube.com/watch?v=zShR12je8bQ",
             content: `
-# IEA (Indicative Engineering Assessment)
+# What the BIM Admin Tool Does (and Does Not Do)
 
-## What IEA Is and When It's Used
+## Why BIM Admin Matters
 
-IEA is a preliminary structural analysis tool that calculates the impact of equipment changes on tower capacity. Use it:
-- Before submitting a colocation application
-- To validate proposed equipment doesn't exceed safe limits
-- To compare current vs. proposed structural load
+BIM Admin tooling sits **upstream of almost everything**:
+- Colo Users place BIM equipment
+- Engineers approve designs based on BIM geometry
+- EME calculations rely on BIM metadata
+- Reports and exports reference BIM catalog entries
 
-**Important**: IEA is indicative only—it does not replace full engineering certification.
+**If BIM data is wrong**:
+- Models appear as "ghosts"
+- EME fails silently
+- Engineering decisions become unreliable
 
-## Existing vs Existing + Proposed
+**BIM Admin errors scale fast.**
 
-### Existing
-Shows current tower capacity usage based on installed equipment.
+## What BIM Admin Is Responsible For
 
-### Existing + Proposed
-Combines current equipment with your proposed changes to calculate total structural usage.
+The BIM Admin tool is responsible for:
+- Defining **equipment metadata**
+- Linking **3D geometry** to catalog entries
+- Enabling **search, placement, and analysis**
 
-## Key Metrics
+## What It Does Not Do
 
-### Structure %
-Percentage of tower's structural capacity in use.
-- **Safe**: < 100%
-- **At Risk**: ≥ 100%
+It does **not**:
+- Render 3D previews
+- Validate modelling correctness automatically
+- Fix geometry problems
 
-### Footing %
-Percentage of foundation capacity in use.
-- **Safe**: < 100%
-- **At Risk**: ≥ 100%
-
-### Rotation (degrees)
-Tower twist/torsion under load.
-
-## Calculate vs Edit Logic
-
-- **Calculate**: Run IEA analysis with current data
-- **Edit**: Manually adjust parameters (advanced users only)
-
-## Engineering Responsibility Boundaries
-
-✅ **IEA Can Help You**:
-- Validate designs before submission
-- Identify potential structural issues early
-
-❌ **IEA Cannot Replace**:
-- Full structural engineering analysis
-- Certified engineering reports
-- Professional engineer sign-off
+The tool assumes the Admin **understands 3D modelling fundamentals**.
             `,
             keyTakeaways: [
-              "IEA provides preliminary structural assessment",
-              "Structure % and Footing % must stay under 100%",
-              "IEA is indicative—not a substitute for certified engineering"
+              "BIM Admin controls metadata for all equipment",
+              "Errors propagate into modelling, EME, and approvals",
+              "No 3D preview—verification happens in Sites Portal"
+            ]
+          },
+          {
+            id: "creating-bim",
+            title: "Creating BIM Equipment (Metadata First)",
+            duration: "15 min",
+            content: `
+# Creating BIM Equipment (Metadata First)
+
+## Why Metadata Comes First
+
+Every BIM equipment item begins as **metadata, not geometry**.
+
+This metadata controls:
+- Searchability
+- EME configuration
+- Engineering classification
+- How equipment behaves in downstream tools
+
+**Incorrect metadata = unusable equipment.**
+
+## Required Fields Explained
+
+### Name
+A human-readable identifier. Used in search and logs.
+
+### Manufacturer & Model
+**This is critical.**
+- Must **exactly match** known catalog entries
+- Used for **EME configuration lookups**
+- **Case and spelling sensitive**
+
+### ESA (Effective Sail Area)
+- Required for **tower-mounted equipment**
+- Represents **wind loading**
+- Ground equipment **must be 0**
+
+### Type & Subtype
+These control:
+- Engineering categorization
+- Where equipment is allowed to be placed
+
+**Examples**:
+- Type: Tower → Subtype: Panel
+- Type: Ground → Subtype: Shelter
+
+### Shape & Dimensions
+Used for:
+- Collision logic
+- Visual scaling
+- Engineering plausibility
+
+### Tags
+Tags are **not cosmetic**.
+
+They power:
+- Search
+- Filtering
+- Catalog usability
+            `,
+            keyTakeaways: [
+              "Metadata defines searchability and EME configuration",
+              "Manufacturer & Model must match catalog exactly",
+              "ESA values required for tower equipment, 0 for ground"
+            ]
+          },
+          {
+            id: "asset-upload",
+            title: "Asset Management: Uploading Files (CRITICAL)",
+            duration: "12 min",
+            content: `
+# Asset Management: Uploading Files (Critical Section)
+
+## This Is Where Most Failures Happen
+
+After metadata creation, **visual assets must be uploaded**.
+
+Two assets are required:
+1. **GLB file** — the 3D geometry
+2. **Thumbnail** — UI preview image
+
+**Uploading files alone is not sufficient.**
+
+## ⚠️ Critical Step — Linking the Mesh Reference
+
+After uploading the GLB:
+
+You **must** explicitly link it via:
+- **Mesh Reference dropdown**
+- Select the uploaded GLB
+
+### If this step is skipped:
+- Equipment appears **invisible ("ghost")**
+- Geometry exists but is **not instantiated**
+- Engineers **cannot validate placement**
+
+**This is the single most common BIM Admin error.**
+            `,
+            keyTakeaways: [
+              "Two assets required: GLB file and thumbnail",
+              "MUST link Mesh Reference after uploading GLB",
+              "Skipping Mesh Reference causes ghost/invisible equipment"
             ],
             warnings: [
-              "IEA results are preliminary and do not replace full engineering analysis"
+              "Most common error: forgetting to link the Mesh Reference"
+            ]
+          },
+          {
+            id: "verification",
+            title: "Verification (Why the Admin Must Test)",
+            duration: "8 min",
+            content: `
+# Verification (Why the Admin Must Test)
+
+## No Preview ≠ No Responsibility
+
+The BIM Admin tool has **no 3D previewer**.
+
+Therefore:
+- Verification must happen in the **Sites Portal**
+- Equipment must be **added to a real scene**
+- Alignment, orientation, and scale must be **visually confirmed**
+
+## Admins Must Validate
+
+- **Orientation**
+- **Mounting realism**
+- **Scale accuracy**
+- **No inverted or rotated geometry**
+            `,
+            keyTakeaways: [
+              "BIM Admin has no 3D previewer",
+              "Verify equipment in Sites Portal by adding to scene",
+              "Check orientation, scale, and mounting realism"
+            ]
+          },
+          {
+            id: "eme-config",
+            title: "EME Configuration (Metadata Meets Physics)",
+            duration: "10 min",
+            content: `
+# EME Configuration (Metadata Meets Physics)
+
+## Why This Depends on Accuracy
+
+EME configuration is driven by:
+- **Manufacturer**
+- **Model**
+- **Catalog matching**
+
+## When Configured Correctly
+
+- Port frequencies **auto-populate**
+- Power ranges are **assigned**
+- EME becomes **usable immediately**
+
+## If Manufacturer / Model Mismatch
+
+- **No config is returned**
+- Equipment **cannot be evaluated**
+
+**This failure is silent but dangerous.**
+            `,
+            keyTakeaways: [
+              "EME config depends on exact Manufacturer/Model match",
+              "Correct match auto-populates port frequencies and power",
+              "Mismatch causes silent failure—no config returned"
+            ]
+          },
+          {
+            id: "deleting-equipment",
+            title: "Deleting BIM Equipment (Data Retention Rules)",
+            duration: "6 min",
+            content: `
+# Deleting BIM Equipment (Data Retention Rules)
+
+## Important Safety Rule
+
+Deleting BIM equipment:
+- **Removes it from future use**
+- Does **not** delete it from historical Colo Apps
+- **Preserves audit integrity**
+
+## What This Prevents
+
+- Breaking historical approvals
+- Corrupting reports
+- Invalidating past decisions
+
+**Deletion should be rare and intentional.**
+            `,
+            keyTakeaways: [
+              "Deletion removes from future use only",
+              "Historical data in existing applications is preserved",
+              "Protects audit integrity and past approvals"
+            ]
+          },
+          {
+            id: "cad-specs",
+            title: "BIM CAD Modelling Specification (Non-Negotiable)",
+            duration: "12 min",
+            content: `
+# BIM CAD Modelling Specification (Non-Negotiable)
+
+## Engineering Law
+
+All BIM equipment **must** comply with these rules:
+
+### Format
+- **GLTF 2.0 (.glb) only**
+
+### Origin
+- Centered at **axis-aligned bounding box center**
+
+### Rotation
+- **Up direction** → **+Z**
+- **Emitter face** → **+Y**
+
+### Scale
+- Units in **millimetres**
+- Required for accurate mounts and clearances
+
+## Violations Cause
+
+- Misalignment
+- Engineering misinterpretation
+- Invalid approvals
+            `,
+            keyTakeaways: [
+              "Format: GLTF 2.0 GLB only",
+              "Up direction: +Z, Emitter face: +Y",
+              "Scale: millimetres for accuracy"
+            ],
+            warnings: [
+              "Violating these specs causes misalignment and invalid approvals"
             ]
           }
         ],
@@ -1306,42 +1522,107 @@ Tower twist/torsion under load.
           questions: [
             {
               id: "q1",
-              question: "What does IEA calculate?",
+              question: "Why is BIM Admin tooling considered 'upstream critical'?",
               type: "single",
               options: [
-                { id: "a", text: "Equipment pricing" },
-                { id: "b", text: "Preliminary structural impact of equipment changes" },
-                { id: "c", text: "Network bandwidth" },
-                { id: "d", text: "User access permissions" }
+                { id: "a", text: "It affects UI layout" },
+                { id: "b", text: "Errors propagate into modelling, EME, and approvals" },
+                { id: "c", text: "It controls user permissions" },
+                { id: "d", text: "It runs reports" }
               ],
               correctAnswer: "b",
-              explanation: "IEA calculates the preliminary structural impact of proposed equipment changes on tower capacity."
+              explanation: "BIM Admin sits upstream—errors propagate into all downstream systems including modelling, EME, and approvals."
             },
             {
               id: "q2",
-              question: "What is considered a safe Structure % value?",
+              question: "Why must Manufacturer & Model be accurate?",
               type: "single",
               options: [
-                { id: "a", text: "> 100%" },
-                { id: "b", text: "= 100%" },
-                { id: "c", text: "< 100%" },
-                { id: "d", text: "Any value" }
+                { id: "a", text: "For display only" },
+                { id: "b", text: "To enable EME auto-configuration" },
+                { id: "c", text: "For thumbnails" },
+                { id: "d", text: "To unlock editing" }
               ],
-              correctAnswer: "c",
-              explanation: "A safe Structure % is less than 100%. Values at or above 100% indicate the tower capacity is exceeded."
+              correctAnswer: "b",
+              explanation: "Manufacturer & Model must match catalog exactly to enable EME auto-configuration and lookups."
             },
             {
               id: "q3",
-              question: "When is recalculation of IEA required?",
+              question: "What happens if the mesh reference is not linked?",
               type: "single",
               options: [
-                { id: "a", text: "Every hour" },
-                { id: "b", text: "After any equipment changes in the application" },
-                { id: "c", text: "Never" },
-                { id: "d", text: "Only on weekends" }
+                { id: "a", text: "Upload fails" },
+                { id: "b", text: "Equipment appears as an empty/ghost object" },
+                { id: "c", text: "EME fails only" },
+                { id: "d", text: "The item cannot be created" }
               ],
               correctAnswer: "b",
-              explanation: "IEA should be recalculated after any equipment changes to ensure structural analysis reflects current design."
+              explanation: "If mesh reference is not linked, equipment appears invisible or as a ghost—geometry exists but is not instantiated."
+            },
+            {
+              id: "q4",
+              question: "Where should BIM equipment be verified?",
+              type: "single",
+              options: [
+                { id: "a", text: "In the Admin tool" },
+                { id: "b", text: "In a real scene inside the Sites Portal" },
+                { id: "c", text: "In the EME tool" },
+                { id: "d", text: "In reports" }
+              ],
+              correctAnswer: "b",
+              explanation: "BIM Admin has no 3D previewer, so equipment must be verified in a real scene in the Sites Portal."
+            },
+            {
+              id: "q5",
+              question: "Why might 'Get Config' return nothing?",
+              type: "single",
+              options: [
+                { id: "a", text: "System error" },
+                { id: "b", text: "Manufacturer/Model mismatch" },
+                { id: "c", text: "File size too large" },
+                { id: "d", text: "Missing thumbnail" }
+              ],
+              correctAnswer: "b",
+              explanation: "Get Config returns nothing if Manufacturer/Model doesn't match a known catalog entry—this failure is silent but dangerous."
+            },
+            {
+              id: "q6",
+              question: "What happens to existing applications when BIM equipment is deleted?",
+              type: "single",
+              options: [
+                { id: "a", text: "They break" },
+                { id: "b", text: "Historical data is preserved" },
+                { id: "c", text: "Equipment disappears everywhere" },
+                { id: "d", text: "Engineering must reapprove" }
+              ],
+              correctAnswer: "b",
+              explanation: "Deleting BIM equipment removes it from future use but preserves historical data in existing applications."
+            },
+            {
+              id: "q7",
+              question: "What is the correct 'up' direction for BIM models?",
+              type: "single",
+              options: [
+                { id: "a", text: "+Y" },
+                { id: "b", text: "+Z" },
+                { id: "c", text: "+X" },
+                { id: "d", text: "Arbitrary" }
+              ],
+              correctAnswer: "b",
+              explanation: "The up direction must be +Z according to BIM CAD modelling specifications."
+            },
+            {
+              id: "q8",
+              question: "A BIM Admin uploads a GLB, forgets to link the mesh reference. What happens when equipment is added to a site?",
+              type: "single",
+              options: [
+                { id: "a", text: "EME fails only" },
+                { id: "b", text: "Equipment appears invisible or as a ghost" },
+                { id: "c", text: "Approval auto-blocks" },
+                { id: "d", text: "The model fixes itself" }
+              ],
+              correctAnswer: "b",
+              explanation: "Forgetting to link mesh reference causes equipment to appear invisible or as a ghost—the most common BIM Admin error."
             }
           ]
         }
