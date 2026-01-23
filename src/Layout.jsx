@@ -19,12 +19,13 @@ export default function Layout({ children, currentPageName }) {
               to={createPageUrl('Academy')} 
               className="flex items-center gap-2 text-slate-900 hover:text-blue-600 transition-colors"
             >
-              <div className="p-1.5 bg-blue-600 rounded-lg">
-                <GraduationCap className="w-4 h-4 text-white" />
-              </div>
+              <img 
+                src="https://www.sitesee.com.au/wp-content/uploads/2022/10/sitesee-logo.svg" 
+                alt="SiteSee Logo" 
+                className="h-6"
+              />
               <span className="font-semibold text-sm">NexDT Academy</span>
             </Link>
-            <span className="text-xs text-slate-500">by SiteSee</span>
           </div>
         </div>
       )}

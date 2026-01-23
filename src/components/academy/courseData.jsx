@@ -3275,77 +3275,259 @@ View user activity:
 ];
 
 export const finalAssessment = {
-  title: "NexDT Certification Assessment",
-  description: "Complete this final assessment to earn your NexDT Certified User certificate.",
+  title: "NexDT Master Certification Assessment",
+  description: "Complete this comprehensive final assessment to earn your NexDT Certified User certificate. This assessment covers all modules and workflows.",
   passingScore: 80,
   questions: [
     {
       id: "fa1",
-      question: "What is NexDT?",
+      question: "What is the primary purpose of NexDT?",
       type: "single",
       options: [
-        { id: "a", text: "A social media platform" },
-        { id: "b", text: "A digital twin platform for telecom infrastructure" },
-        { id: "c", text: "An email service" },
-        { id: "d", text: "A video conferencing tool" }
+        { id: "a", text: "Capturing drone imagery" },
+        { id: "b", text: "Engineering review and validation of tower configurations" },
+        { id: "c", text: "Designing new tower structures" },
+        { id: "d", text: "Managing pilot workflows" }
       ],
       correctAnswer: "b",
-      explanation: "NexDT is SiteSee's digital twin platform for telecommunications infrastructure management."
+      explanation: "NexDT is SiteSee's engineering and validation portal used after capture and before approval."
     },
     {
       id: "fa2",
-      question: "Which user role can approve colocation applications?",
+      question: "When is NexDT typically used in the SiteSee workflow?",
       type: "single",
       options: [
-        { id: "a", text: "Colo User" },
-        { id: "b", text: "Viewer" },
-        { id: "c", text: "Engineer" },
-        { id: "d", text: "Guest" }
+        { id: "a", text: "Before site capture" },
+        { id: "b", text: "During drone flight" },
+        { id: "c", text: "After capture and before approval" },
+        { id: "d", text: "Only after final certification" }
       ],
       correctAnswer: "c",
-      explanation: "Engineers have the authority to review, make edits, and approve or reject colocation applications."
+      explanation: "NexDT acts as the engineering truth layer between capture and approval."
     },
     {
       id: "fa3",
-      question: "What does the 'My Equipment Filter' show?",
+      question: "What is the primary purpose of IEA?",
       type: "single",
       options: [
-        { id: "a", text: "All equipment on all sites" },
-        { id: "b", text: "Only equipment belonging to your Head Customer" },
-        { id: "c", text: "Only decommissioned equipment" },
-        { id: "d", text: "Only new equipment" }
+        { id: "a", text: "RF exposure compliance" },
+        { id: "b", text: "Structural feasibility assessment" },
+        { id: "c", text: "Image processing" },
+        { id: "d", text: "Pilot validation" }
       ],
       correctAnswer: "b",
-      explanation: "The My Equipment Filter highlights only equipment belonging to your Head Customer, helping identify what you can modify."
+      explanation: "IEA (Indicative Engineering Assessment) evaluates structural feasibility of a tower based on equipment configuration."
     },
     {
       id: "fa4",
-      question: "What should you do after creating a new colocation application before making changes?",
+      question: "What must exist before IEA or EME can run meaningfully?",
       type: "single",
       options: [
-        { id: "a", text: "Log out immediately" },
-        { id: "b", text: "Wait for the green progress bar to disappear" },
-        { id: "c", text: "Delete all equipment" },
-        { id: "d", text: "Contact support" }
+        { id: "a", text: "Pilot logs" },
+        { id: "b", text: "Empty site" },
+        { id: "c", text: "As-built site with equipment" },
+        { id: "d", text: "Approved ColoApp" }
       ],
-      correctAnswer: "b",
-      explanation: "The green progress bar indicates background tasks are running. Wait for it to complete before proceeding."
+      correctAnswer: "c",
+      explanation: "IEA and EME require an as-built site with equipment present and correct catalogue metadata."
     },
     {
       id: "fa5",
-      question: "What happens when an Engineer saves changes on a submitted Colo App?",
+      question: "Which tab in IEA most directly affects outcomes?",
       type: "single",
       options: [
-        { id: "a", text: "Changes are discarded" },
-        { id: "b", text: "The Confirm Design workflow is automatically triggered" },
-        { id: "c", text: "The application is deleted" },
-        { id: "d", text: "Nothing happens" }
+        { id: "a", text: "Site Information" },
+        { id: "b", text: "Load Sources" },
+        { id: "c", text: "Reports" },
+        { id: "d", text: "Documents" }
       ],
       correctAnswer: "b",
-      explanation: "Saving changes on a submitted Colo App automatically triggers the Confirm Design Workflow."
+      explanation: "Load Sources is the most influential section—every equipment toggle directly affects final calculations."
     },
     {
       id: "fa6",
+      question: "A site passing Existing but failing Existing + Proposed means:",
+      type: "single",
+      options: [
+        { id: "a", text: "The system is incorrect" },
+        { id: "b", text: "Proposed equipment adds structural load" },
+        { id: "c", text: "Wind data is ignored" },
+        { id: "d", text: "EME must be run instead" }
+      ],
+      correctAnswer: "b",
+      explanation: "This is normal and expected—the proposed equipment adds structural load that exceeds safe limits."
+    },
+    {
+      id: "fa7",
+      question: "Which user role cannot run EME?",
+      type: "single",
+      options: [
+        { id: "a", text: "Engineer" },
+        { id: "b", text: "Support Admin" },
+        { id: "c", text: "Colo User" },
+        { id: "d", text: "Pilot" }
+      ],
+      correctAnswer: "d",
+      explanation: "Pilot users cannot run EME. Only Engineers, Support Admins, and Colo Users can run EME."
+    },
+    {
+      id: "fa8",
+      question: "What does the 'My Equipment Filter' do in a Rip & Replace workflow?",
+      type: "single",
+      options: [
+        { id: "a", text: "Speeds up rendering" },
+        { id: "b", text: "Restricts visibility and editing to your organization's equipment" },
+        { id: "c", text: "Activates Proposed mode" },
+        { id: "d", text: "Locks the application" }
+      ],
+      correctAnswer: "b",
+      explanation: "My Equipment Filter ensures you only edit permitted equipment belonging to your Head Customer."
+    },
+    {
+      id: "fa9",
+      question: "What must you wait for after creating a colocation application?",
+      type: "single",
+      options: [
+        { id: "a", text: "IEA results" },
+        { id: "b", text: "Green progress bar to finish" },
+        { id: "c", text: "Engineer approval" },
+        { id: "d", text: "CSV upload" }
+      ],
+      correctAnswer: "b",
+      explanation: "The green progress bar indicates background initialization tasks—proceeding early can corrupt the session."
+    },
+    {
+      id: "fa10",
+      question: "After submission, a colocation application is:",
+      type: "single",
+      options: [
+        { id: "a", text: "Editable by the submitter" },
+        { id: "b", text: "Read-only" },
+        { id: "c", text: "Archived" },
+        { id: "d", text: "Deleted" }
+      ],
+      correctAnswer: "b",
+      explanation: "After submission, the application becomes read-only and moves to Engineering Review."
+    },
+    {
+      id: "fa11",
+      question: "Why does NexDT lock the application after submission?",
+      type: "single",
+      options: [
+        { id: "a", text: "To improve performance" },
+        { id: "b", text: "To enforce a clear handover of responsibility" },
+        { id: "c", text: "To prevent accidental deletions" },
+        { id: "d", text: "To speed up approvals" }
+      ],
+      correctAnswer: "b",
+      explanation: "Locking enforces a clear handover of responsibility from Colo User to Engineering team."
+    },
+    {
+      id: "fa12",
+      question: "Why should Engineers inspect the default scene first?",
+      type: "single",
+      options: [
+        { id: "a", text: "To unlock editing" },
+        { id: "b", text: "To establish a mental baseline before reviewing changes" },
+        { id: "c", text: "To recalculate IEA" },
+        { id: "d", text: "To check user permissions" }
+      ],
+      correctAnswer: "b",
+      explanation: "Inspecting the default scene establishes a baseline to understand what changes are being proposed."
+    },
+    {
+      id: "fa13",
+      question: "Which issue would most likely require an engineering edit?",
+      type: "single",
+      options: [
+        { id: "a", text: "Slight colour differences" },
+        { id: "b", text: "Equipment intersecting a mount or structure" },
+        { id: "c", text: "Long application name" },
+        { id: "d", text: "Missing description text" }
+      ],
+      correctAnswer: "b",
+      explanation: "Equipment intersecting a mount or structure is a physical impossibility requiring correction."
+    },
+    {
+      id: "fa14",
+      question: "Why does NexDT force Confirm Design after engineering edits?",
+      type: "single",
+      options: [
+        { id: "a", text: "To slow engineers down" },
+        { id: "b", text: "To ensure intentional final approval of changes" },
+        { id: "c", text: "To re-run modelling" },
+        { id: "d", text: "To notify Colo Users" }
+      ],
+      correctAnswer: "b",
+      explanation: "The system enforces conscious decision-making to prevent accidental approvals."
+    },
+    {
+      id: "fa15",
+      question: "What is the most important thing to verify before approving a Colo App?",
+      type: "single",
+      options: [
+        { id: "a", text: "UI layout" },
+        { id: "b", text: "Transaction logs accurately reflect changes" },
+        { id: "c", text: "File sizes" },
+        { id: "d", text: "User roles" }
+      ],
+      correctAnswer: "b",
+      explanation: "Transaction logs become part of audit trails and represent real-world changes."
+    },
+    {
+      id: "fa16",
+      question: "Why is BIM Admin tooling considered 'upstream critical'?",
+      type: "single",
+      options: [
+        { id: "a", text: "It affects UI layout" },
+        { id: "b", text: "Errors propagate into modelling, EME, and approvals" },
+        { id: "c", text: "It controls user permissions" },
+        { id: "d", text: "It runs reports" }
+      ],
+      correctAnswer: "b",
+      explanation: "BIM Admin sits upstream—errors propagate into all downstream systems."
+    },
+    {
+      id: "fa17",
+      question: "Why must Manufacturer & Model fields be accurate in BIM?",
+      type: "single",
+      options: [
+        { id: "a", text: "For display only" },
+        { id: "b", text: "To enable EME auto-configuration" },
+        { id: "c", text: "For thumbnails" },
+        { id: "d", text: "To unlock editing" }
+      ],
+      correctAnswer: "b",
+      explanation: "Manufacturer & Model must match catalog exactly to enable EME auto-configuration and lookups."
+    },
+    {
+      id: "fa18",
+      question: "What happens if the mesh reference is not linked after uploading a GLB?",
+      type: "single",
+      options: [
+        { id: "a", text: "Upload fails" },
+        { id: "b", text: "Equipment appears as an empty/ghost object" },
+        { id: "c", text: "EME fails only" },
+        { id: "d", text: "The item cannot be created" }
+      ],
+      correctAnswer: "b",
+      explanation: "This is the single most common BIM Admin error—equipment becomes invisible."
+    },
+    {
+      id: "fa19",
+      question: "What is the correct 'up' direction for BIM equipment models?",
+      type: "single",
+      options: [
+        { id: "a", text: "+Y" },
+        { id: "b", text: "+Z" },
+        { id: "c", text: "+X" },
+        { id: "d", text: "Arbitrary" }
+      ],
+      correctAnswer: "b",
+      explanation: "The up direction must be +Z according to BIM CAD modelling specifications."
+    },
+    {
+      id: "fa20",
       question: "Which equipment type is NOT supported in CSV upload?",
       type: "single",
       options: [
@@ -3355,189 +3537,72 @@ export const finalAssessment = {
         { id: "d", text: "rru" }
       ],
       correctAnswer: "c",
-      explanation: "The 'tower' equipment type is not supported in CSV upload. Remove tower rows before uploading."
+      explanation: "The 'tower' equipment type is not supported—remove tower rows before uploading."
     },
     {
-      id: "fa7",
-      question: "What error code indicates a fatal Head Customer mismatch?",
+      id: "fa21",
+      question: "What does error code E2005 indicate?",
       type: "single",
       options: [
-        { id: "a", text: "E1001" },
-        { id: "b", text: "E2004" },
-        { id: "c", text: "E2005" },
-        { id: "d", text: "E1102" }
-      ],
-      correctAnswer: "c",
-      explanation: "E2005 is a FATAL error indicating mismatched Head Customer Name and ID."
-    },
-    {
-      id: "fa8",
-      question: "What is the required format for BIM 3D models?",
-      type: "single",
-      options: [
-        { id: "a", text: "OBJ" },
-        { id: "b", text: "GLTF 2.0 GLB" },
-        { id: "c", text: "FBX" },
-        { id: "d", text: "STL" }
+        { id: "a", text: "Missing file" },
+        { id: "b", text: "Mismatched Head Customer Name and ID" },
+        { id: "c", text: "Invalid file format" },
+        { id: "d", text: "Network error" }
       ],
       correctAnswer: "b",
-      explanation: "BIM models must be in GLTF 2.0 GLB format."
+      explanation: "E2005 is a FATAL error indicating Head Customer Name and ID inconsistency."
     },
     {
-      id: "fa9",
-      question: "What happens if you skip linking the Mesh Reference after uploading a GLB file?",
+      id: "fa22",
+      question: "Why is the Admin Console considered system-critical?",
       type: "single",
       options: [
-        { id: "a", text: "Equipment works normally" },
-        { id: "b", text: "Equipment appears as a ghost/empty object" },
-        { id: "c", text: "System crashes" },
-        { id: "d", text: "File is automatically linked" }
+        { id: "a", text: "It controls UI layout" },
+        { id: "b", text: "It defines ownership, access, and data persistence" },
+        { id: "c", text: "It runs engineering tools" },
+        { id: "d", text: "It generates reports" }
       ],
       correctAnswer: "b",
-      explanation: "Skipping Mesh Reference linking causes equipment to appear as an empty/ghost object."
+      explanation: "The Admin Console defines ownership, access boundaries, and data persistence for all downstream systems."
     },
     {
-      id: "fa10",
-      question: "How long do static authentication links remain valid?",
+      id: "fa23",
+      question: "What happens if an active Organization is deleted?",
       type: "single",
       options: [
-        { id: "a", text: "24 hours" },
-        { id: "b", text: "One week" },
-        { id: "c", text: "One year" },
-        { id: "d", text: "Forever" }
-      ],
-      correctAnswer: "c",
-      explanation: "Static authentication links expire after one year."
-    },
-    {
-      id: "fa11",
-      question: "Which axis should the 'up direction' be for BIM equipment models?",
-      type: "single",
-      options: [
-        { id: "a", text: "+X" },
-        { id: "b", text: "+Y" },
-        { id: "c", text: "+Z" },
-        { id: "d", text: "-Z" }
-      ],
-      correctAnswer: "c",
-      explanation: "BIM equipment models must have the up direction in +Z axis."
-    },
-    {
-      id: "fa12",
-      question: "For which type of equipment should ESA values be set?",
-      type: "single",
-      options: [
-        { id: "a", text: "Ground equipment only" },
-        { id: "b", text: "Tower-mounted equipment only" },
-        { id: "c", text: "All equipment" },
-        { id: "d", text: "No equipment" }
+        { id: "a", text: "Users lose access only" },
+        { id: "b", text: "Equipment and ownership data are lost" },
+        { id: "c", text: "Colo Apps auto-reassign" },
+        { id: "d", text: "The system blocks deletion" }
       ],
       correctAnswer: "b",
-      explanation: "ESA (Effective Sail Area) values should only be set for tower-mounted equipment."
+      explanation: "Deleting an active Organization causes irreversible equipment and ownership data loss—the highest-risk action in the platform."
     },
     {
-      id: "fa13",
-      question: "What does IEA stand for?",
+      id: "fa24",
+      question: "What determines which equipment a Colo User can edit?",
       type: "single",
       options: [
-        { id: "a", text: "International Equipment Assessment" },
-        { id: "b", text: "Indicative Engineering Assessment" },
-        { id: "c", text: "Internal Energy Analysis" },
-        { id: "d", text: "Infrastructure Evaluation Audit" }
+        { id: "a", text: "Their email domain" },
+        { id: "b", text: "Their Organization assignment" },
+        { id: "c", text: "Their login frequency" },
+        { id: "d", text: "Their password strength" }
       ],
       correctAnswer: "b",
-      explanation: "IEA stands for Indicative Engineering Assessment - a tool to calculate structural usage."
+      explanation: "Organization assignment determines which equipment a Colo User can see and edit."
     },
     {
-      id: "fa14",
-      question: "What validation result still allows you to apply CSV data?",
+      id: "fa25",
+      question: "What is the recovery code used for in MFA setup?",
       type: "single",
       options: [
-        { id: "a", text: "E1001 ERROR" },
-        { id: "b", text: "E2005 FATAL" },
-        { id: "c", text: "E2004 WARNING" },
-        { id: "d", text: "E1102 ERROR" }
-      ],
-      correctAnswer: "c",
-      explanation: "E2004 WARNING (Partial fill) allows you to proceed with the upload."
-    },
-    {
-      id: "fa15",
-      question: "What happens to historical data when you delete BIM equipment?",
-      type: "single",
-      options: [
-        { id: "a", text: "All data is deleted" },
-        { id: "b", text: "Historical data is preserved in existing applications" },
-        { id: "c", text: "Data is moved to archive" },
-        { id: "d", text: "Data is corrupted" }
+        { id: "a", text: "Password reset" },
+        { id: "b", text: "Regaining access if MFA device is lost" },
+        { id: "c", text: "Admin verification" },
+        { id: "d", text: "Organization switching" }
       ],
       correctAnswer: "b",
-      explanation: "Deleting BIM equipment removes it from future use but historical data in existing applications is preserved."
-    },
-    {
-      id: "fa16",
-      question: "What unit should BIM model scales use?",
-      type: "single",
-      options: [
-        { id: "a", text: "Centimeters" },
-        { id: "b", text: "Meters" },
-        { id: "c", text: "Millimeters" },
-        { id: "d", text: "Inches" }
-      ],
-      correctAnswer: "c",
-      explanation: "All BIM model scale units must be in millimeters (mm)."
-    },
-    {
-      id: "fa17",
-      question: "What must be consistent across all equipment in a CSV upload?",
-      type: "single",
-      options: [
-        { id: "a", text: "Equipment color" },
-        { id: "b", text: "Head Customer Name and ID" },
-        { id: "c", text: "Upload time" },
-        { id: "d", text: "File size" }
-      ],
-      correctAnswer: "b",
-      explanation: "Head Customer Name and ID must be consistent across all equipment records."
-    },
-    {
-      id: "fa18",
-      question: "Which axis should the emitter face point in BIM models?",
-      type: "single",
-      options: [
-        { id: "a", text: "+X" },
-        { id: "b", text: "+Y" },
-        { id: "c", text: "+Z" },
-        { id: "d", text: "-Y" }
-      ],
-      correctAnswer: "b",
-      explanation: "BIM equipment models must have the emitter face pointing in the +Y direction."
-    },
-    {
-      id: "fa19",
-      question: "What role is required to generate static authentication links?",
-      type: "single",
-      options: [
-        { id: "a", text: "Colo User" },
-        { id: "b", text: "Viewer" },
-        { id: "c", text: "Engineering account" },
-        { id: "d", text: "Any role" }
-      ],
-      correctAnswer: "c",
-      explanation: "Only Engineering accounts can generate static authentication links."
-    },
-    {
-      id: "fa20",
-      question: "What happens after a colocation application is submitted?",
-      type: "multiple",
-      options: [
-        { id: "a", text: "Application becomes read-only for the submitter" },
-        { id: "b", text: "Submitter can continue editing" },
-        { id: "c", text: "Application goes to Engineering for review" },
-        { id: "d", text: "Equipment is automatically installed" }
-      ],
-      correctAnswer: ["a", "c"],
-      explanation: "After submission, the application becomes read-only and goes to the Engineering team for review."
+      explanation: "The recovery code allows users to regain access if their MFA device is lost."
     }
   ]
 };

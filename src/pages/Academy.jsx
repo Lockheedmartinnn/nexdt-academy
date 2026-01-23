@@ -41,11 +41,12 @@ export default function Academy() {
       {/* Hero Section */}
       <div className="bg-slate-900 text-white">
         <div className="max-w-7xl mx-auto px-6 py-16">
-          <div className="flex items-center gap-3 text-blue-400 mb-4">
-            <div className="p-2 bg-blue-500/20 rounded-lg">
-              <GraduationCap className="w-6 h-6" />
-            </div>
-            <span className="font-medium tracking-wide text-sm uppercase">NexDT by SiteSee</span>
+          <div className="flex items-center gap-3 mb-4">
+            <img 
+              src="https://www.sitesee.com.au/wp-content/uploads/2022/10/sitesee-logo.svg" 
+              alt="SiteSee Logo" 
+              className="h-8 brightness-0 invert"
+            />
           </div>
           
           <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">

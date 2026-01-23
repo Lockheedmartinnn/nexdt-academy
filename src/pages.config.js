@@ -4,6 +4,7 @@ import Lesson from './pages/Lesson';
 import Quiz from './pages/Quiz';
 import FinalAssessment from './pages/FinalAssessment';
 import Certificate from './pages/Certificate';
+import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
@@ -18,4 +19,5 @@ export const PAGES = {
 export const pagesConfig = {
     mainPage: "Academy",
     Pages: PAGES,
+    Layout: __Layout,
 };
