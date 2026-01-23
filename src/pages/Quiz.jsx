@@ -168,11 +168,18 @@ export default function Quiz() {
               </div>
             </div>
 
-            {!submitted && (
-              <span className="text-sm text-slate-500">
-                {Object.keys(answers).length} of {quiz.questions.length} answered
-              </span>
-            )}
+            <div className="flex items-center gap-4">
+              <img 
+                src="https://www.sitesee.com.au/wp-content/uploads/2022/10/sitesee-logo.svg" 
+                alt="SiteSee Logo" 
+                className="h-5"
+              />
+              {!submitted && (
+                <span className="text-sm text-slate-500">
+                  {Object.keys(answers).length} of {quiz.questions.length} answered
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </div>

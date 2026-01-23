@@ -142,7 +142,13 @@ export default function Lesson() {
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
+              <img 
+                src="https://www.sitesee.com.au/wp-content/uploads/2022/10/sitesee-logo.svg" 
+                alt="SiteSee Logo" 
+                className="h-5"
+              />
+              <div className="flex items-center gap-3">
               <span className="text-sm text-slate-500">
                 {nav.currentIndex + 1} of {nav.total}
               </span>
@@ -157,6 +163,7 @@ export default function Lesson() {
                   {lesson.duration}
                 </Badge>
               )}
+              </div>
             </div>
           </div>
         </div>
