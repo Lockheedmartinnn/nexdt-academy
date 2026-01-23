@@ -6,20 +6,865 @@ import {
   CheckCircle,
   Wrench,
   FileSpreadsheet,
-  Link as LinkIcon
+  Link as LinkIcon,
+  Layers,
+  BarChart3,
+  Search
 } from "lucide-react";
 import React from 'react';
 
 export const tracks = [
   {
-    id: "fundamentals",
-    title: "NexDT Fundamentals",
-    description: "Master the core concepts of NexDT, including navigation, site management, and basic workflows essential for all users.",
-    duration: "45 min",
+    id: "nexdt-complete",
+    title: "SiteSee NexDT Academy",
+    description: "Train users to confidently use NexDT for engineering review, data validation, configuration, and reporting — using official SiteSee documentation and videos.",
+    duration: "6 hours",
     color: "bg-blue-600",
     bgColor: "bg-blue-50",
-    icon: <BookOpen className="w-6 h-6 text-blue-600" />,
+    icon: <GraduationCap className="w-6 h-6 text-blue-600" />,
     modules: [
+      {
+        id: "module-1",
+        title: "NexDT Overview & Concepts",
+        lessons: [
+          {
+            id: "what-nexdt-is",
+            title: "What NexDT Is",
+            duration: "10 min",
+            content: `
+# What NexDT Is
+
+NexDT is SiteSee's powerful digital twin platform designed for telecommunications infrastructure management. It enables you to:
+
+- **Visualize** tower sites in immersive 3D environments
+- **Manage** equipment data and colocation applications
+- **Collaborate** across teams with role-based access
+- **Analyze** structural and EME (Electromagnetic Energy) impacts
+
+## Problems NexDT Solves
+
+1. **Site Visit Reduction**: Review and validate sites remotely with accurate 3D models
+2. **Colocation Efficiency**: Streamline equipment placement and approval workflows
+3. **Data Accuracy**: Maintain precise equipment inventory and specifications
+4. **Engineering Analysis**: Calculate structural loads and electromagnetic compliance
+
+## How It Fits Into SiteSee Workflows
+
+NexDT is the central hub for:
+- **Pre-construction planning**: Design and validate colocation applications
+- **Engineering review**: Assess structural and EME impacts
+- **Data management**: Upload and maintain equipment records via CSV
+- **Compliance reporting**: Generate documentation for regulatory requirements
+
+## Platform Components
+
+- **Sites Portal**: Main interface for viewing and editing sites
+- **BIM Admin**: Manage your equipment library
+- **Admin Console**: User and organization management
+- **ColoApp Manager**: Review and approve colocation applications
+            `,
+            keyTakeaways: [
+              "NexDT is a digital twin platform for telecom infrastructure",
+              "Reduces site visits and streamlines colocation workflows",
+              "Integrates with SiteSee's broader infrastructure management ecosystem"
+            ]
+          },
+          {
+            id: "key-terminology",
+            title: "Key Terminology",
+            duration: "8 min",
+            content: `
+# Key Terminology
+
+## Applications
+
+A **Colocation Application** (or ColoApp) is a proposed change to site equipment. It can include:
+- Adding new equipment
+- Removing existing equipment
+- Replacing equipment (Rip and Replace)
+
+Applications move through states: **Draft → Submitted → Under Review → Approved/Rejected**
+
+## IEA (Indicative Engineering Assessment)
+
+IEA calculates the structural impact of proposed equipment changes:
+- **Structure %**: Tower structural capacity usage
+- **Footing %**: Foundation capacity usage
+- **Rotation**: Tower twist/torsion
+
+**Indicative** means preliminary—not a replacement for full engineering analysis.
+
+## EME (Electromagnetic Energy)
+
+EME analysis evaluates radio frequency exposure from antennas to ensure compliance with safety standards.
+
+## Existing vs Proposed
+
+- **Existing**: Current equipment installed on site
+- **Proposed**: New or replacement equipment in a colocation application
+- **Existing + Proposed**: Combined load used for IEA calculations
+            `,
+            keyTakeaways: [
+              "Applications track equipment changes through workflow states",
+              "IEA provides preliminary structural analysis",
+              "Existing + Proposed = combined load for engineering review"
+            ]
+          }
+        ],
+        quiz: {
+          questions: [
+            {
+              id: "q1",
+              question: "What is the primary purpose of NexDT?",
+              type: "single",
+              options: [
+                { id: "a", text: "Social media platform" },
+                { id: "b", text: "Digital twin platform for telecom infrastructure" },
+                { id: "c", text: "Email management system" },
+                { id: "d", text: "Video streaming service" }
+              ],
+              correctAnswer: "b",
+              explanation: "NexDT is SiteSee's digital twin platform specifically designed for telecommunications infrastructure management."
+            },
+            {
+              id: "q2",
+              question: "What does IEA stand for?",
+              type: "single",
+              options: [
+                { id: "a", text: "International Equipment Assessment" },
+                { id: "b", text: "Indicative Engineering Assessment" },
+                { id: "c", text: "Internal Energy Analysis" },
+                { id: "d", text: "Infrastructure Evaluation Audit" }
+              ],
+              correctAnswer: "b",
+              explanation: "IEA stands for Indicative Engineering Assessment—a preliminary structural analysis tool."
+            },
+            {
+              id: "q3",
+              question: "What does 'Existing + Proposed' represent in NexDT?",
+              type: "single",
+              options: [
+                { id: "a", text: "Equipment to be deleted" },
+                { id: "b", text: "Combined load for engineering calculations" },
+                { id: "c", text: "User permissions" },
+                { id: "d", text: "Site location coordinates" }
+              ],
+              correctAnswer: "b",
+              explanation: "'Existing + Proposed' represents the combined load of current and new equipment used for IEA calculations."
+            }
+          ]
+        }
+      },
+      {
+        id: "module-2",
+        title: "Navigating the NexDT Interface",
+        lessons: [
+          {
+            id: "ui-overview",
+            title: "Interface Overview",
+            duration: "12 min",
+            content: `
+# Navigating the NexDT Interface
+
+## Left-Hand Menu Structure
+
+The left sidebar is your control center:
+
+### Main Sections
+1. **Applications Panel**: Switch between different coloapp views
+2. **Layer Toggles**: Show/hide equipment categories
+3. **IEA Calculator**: Access structural analysis tools
+4. **Equipment Browser**: Search and add BIM catalog items
+
+## Site Views & Camera Views
+
+### Predefined Views
+- **Default Scene**: Standard site overview
+- **Tower View**: Focus on tower structure
+- **Ground Equipment**: View shelters and ground-mounted assets
+
+### Camera Controls
+- **Orbit**: Click and drag to rotate around site
+- **Pan**: Right-click and drag to move view
+- **Zoom**: Scroll wheel to zoom in/out
+
+## Reading UI Indicators Correctly
+
+### Status Icons
+- 🟢 **Green**: Saved, up-to-date
+- 🟡 **Yellow**: Processing, background task running
+- 🔴 **Red**: Error or requires attention
+
+### Progress Indicators
+- **Green progress bar**: Background processing—wait before proceeding
+- **Spinner**: Loading data or assets
+            `,
+            keyTakeaways: [
+              "Left-hand menu provides access to all key functions",
+              "Wait for green progress bar to disappear before proceeding",
+              "Use predefined camera views for quick navigation"
+            ]
+          }
+        ],
+        quiz: {
+          questions: [
+            {
+              id: "q1",
+              question: "Where would you go to switch between different colocation applications?",
+              type: "single",
+              options: [
+                { id: "a", text: "Top menu bar" },
+                { id: "b", text: "Applications panel in left-hand menu" },
+                { id: "c", text: "Right-click context menu" },
+                { id: "d", text: "Settings panel" }
+              ],
+              correctAnswer: "b",
+              explanation: "The Applications panel in the left-hand menu allows you to switch between different coloapp views."
+            },
+            {
+              id: "q2",
+              question: "What does a green progress bar indicate?",
+              type: "single",
+              options: [
+                { id: "a", text: "Error state" },
+                { id: "b", text: "Background processing—wait before proceeding" },
+                { id: "c", text: "Successfully completed" },
+                { id: "d", text: "User action required" }
+              ],
+              correctAnswer: "b",
+              explanation: "A green progress bar indicates background tasks are running. Wait until it disappears before proceeding."
+            }
+          ]
+        }
+      },
+      {
+        id: "module-3",
+        title: "Applications & Site Context",
+        lessons: [
+          {
+            id: "what-is-application",
+            title: "What an Application Is",
+            duration: "10 min",
+            content: `
+# Applications & Site Context
+
+## What an Application Is
+
+A **Colocation Application** represents a proposed set of changes to a site:
+- Add new equipment
+- Remove existing equipment
+- Modify equipment positions or configurations
+
+Each application is independent and can be reviewed separately.
+
+## Switching Applications
+
+1. Open the **Applications** panel in the left menu
+2. Select from available applications for the site
+3. The 3D view updates to show that application's proposed changes
+
+## Understanding Site Position, IDs, and Metadata
+
+### Site Information
+- **Site Name**: Unique identifier for the location
+- **Site ID**: System-generated reference number
+- **Application ID**: Unique ID for each colocation application
+- **Status**: Current workflow state (Draft, Submitted, Approved, etc.)
+
+### Metadata Fields
+- **Created By**: User who initiated the application
+- **Created Date**: Timestamp of application creation
+- **Last Modified**: Most recent edit timestamp
+
+## Application States
+
+| State | Description |
+|-------|-------------|
+| **Draft** | Work in progress, editable |
+| **Submitted** | Sent for review, read-only for submitter |
+| **Under Review** | Engineering team evaluating |
+| **Approved** | Accepted, changes applied to site |
+| **Rejected** | Declined, may be revised and resubmitted |
+            `,
+            keyTakeaways: [
+              "Applications track proposed equipment changes",
+              "Each application has a unique ID and status",
+              "Site metadata helps identify and track projects"
+            ]
+          }
+        ],
+        quiz: {
+          questions: [
+            {
+              id: "q1",
+              question: "What is a Colocation Application?",
+              type: "single",
+              options: [
+                { id: "a", text: "A user login credential" },
+                { id: "b", text: "A proposed set of changes to site equipment" },
+                { id: "c", text: "A 3D model file" },
+                { id: "d", text: "A CSV data export" }
+              ],
+              correctAnswer: "b",
+              explanation: "A Colocation Application represents a proposed set of changes to a site, such as adding or removing equipment."
+            },
+            {
+              id: "q2",
+              question: "Which application state indicates the engineering team is evaluating changes?",
+              type: "single",
+              options: [
+                { id: "a", text: "Draft" },
+                { id: "b", text: "Under Review" },
+                { id: "c", text: "Rejected" },
+                { id: "d", text: "Archived" }
+              ],
+              correctAnswer: "b",
+              explanation: "'Under Review' indicates the engineering team is actively evaluating the proposed changes."
+            }
+          ]
+        }
+      },
+      {
+        id: "module-4",
+        title: "IEA (Indicative Engineering Assessment)",
+        lessons: [
+          {
+            id: "iea-overview",
+            title: "IEA Overview",
+            duration: "15 min",
+            content: `
+# IEA (Indicative Engineering Assessment)
+
+## What IEA Is and When It's Used
+
+IEA is a preliminary structural analysis tool that calculates the impact of equipment changes on tower capacity. Use it:
+- Before submitting a colocation application
+- To validate proposed equipment doesn't exceed safe limits
+- To compare current vs. proposed structural load
+
+**Important**: IEA is indicative only—it does not replace full engineering certification.
+
+## Existing vs Existing + Proposed
+
+### Existing
+Shows current tower capacity usage based on installed equipment.
+
+### Existing + Proposed
+Combines current equipment with your proposed changes to calculate total structural usage.
+
+## Key Metrics
+
+### Structure %
+Percentage of tower's structural capacity in use.
+- **Safe**: < 100%
+- **At Risk**: ≥ 100%
+
+### Footing %
+Percentage of foundation capacity in use.
+- **Safe**: < 100%
+- **At Risk**: ≥ 100%
+
+### Rotation (degrees)
+Tower twist/torsion under load.
+
+## Calculate vs Edit Logic
+
+- **Calculate**: Run IEA analysis with current data
+- **Edit**: Manually adjust parameters (advanced users only)
+
+## Engineering Responsibility Boundaries
+
+✅ **IEA Can Help You**:
+- Validate designs before submission
+- Identify potential structural issues early
+
+❌ **IEA Cannot Replace**:
+- Full structural engineering analysis
+- Certified engineering reports
+- Professional engineer sign-off
+            `,
+            keyTakeaways: [
+              "IEA provides preliminary structural assessment",
+              "Structure % and Footing % must stay under 100%",
+              "IEA is indicative—not a substitute for certified engineering"
+            ],
+            warnings: [
+              "IEA results are preliminary and do not replace full engineering analysis"
+            ]
+          }
+        ],
+        quiz: {
+          questions: [
+            {
+              id: "q1",
+              question: "What does IEA calculate?",
+              type: "single",
+              options: [
+                { id: "a", text: "Equipment pricing" },
+                { id: "b", text: "Preliminary structural impact of equipment changes" },
+                { id: "c", text: "Network bandwidth" },
+                { id: "d", text: "User access permissions" }
+              ],
+              correctAnswer: "b",
+              explanation: "IEA calculates the preliminary structural impact of proposed equipment changes on tower capacity."
+            },
+            {
+              id: "q2",
+              question: "What is considered a safe Structure % value?",
+              type: "single",
+              options: [
+                { id: "a", text: "> 100%" },
+                { id: "b", text: "= 100%" },
+                { id: "c", text: "< 100%" },
+                { id: "d", text: "Any value" }
+              ],
+              correctAnswer: "c",
+              explanation: "A safe Structure % is less than 100%. Values at or above 100% indicate the tower capacity is exceeded."
+            },
+            {
+              id: "q3",
+              question: "When is recalculation of IEA required?",
+              type: "single",
+              options: [
+                { id: "a", text: "Every hour" },
+                { id: "b", text: "After any equipment changes in the application" },
+                { id: "c", text: "Never" },
+                { id: "d", text: "Only on weekends" }
+              ],
+              correctAnswer: "b",
+              explanation: "IEA should be recalculated after any equipment changes to ensure structural analysis reflects current design."
+            }
+          ]
+        }
+      },
+      {
+        id: "module-5",
+        title: "IEA Form: Step-by-Step",
+        lessons: [
+          {
+            id: "iea-form-walkthrough",
+            title: "IEA Form Walkthrough",
+            duration: "20 min",
+            content: `
+# IEA Form: Step-by-Step
+
+## Site Information
+
+Pre-populated fields:
+- **Site Name**: Automatically loaded
+- **Site ID**: System reference
+- **Tower Type**: Detected from site model
+
+## Wind Parameters
+
+Critical for structural calculations:
+- **Wind Speed**: Regional design wind speed (km/h or mph)
+- **Exposure Category**: Terrain type (Urban, Suburban, Rural)
+- **Importance Factor**: Building code classification
+
+**Note**: These are typically pre-configured per site.
+
+## Structure
+
+Tower specifications:
+- **Tower Height**: Total height from base to top
+- **Tower Sections**: Number of structural segments
+- **Cross-Section Type**: Triangular, square, or custom
+
+## Load Sources (Add / Remove)
+
+### Adding Equipment
+1. Click **Add Load Source**
+2. Select equipment from dropdown
+3. Specify mounting elevation
+4. Enter equipment weight and wind load area (ESA)
+
+### Removing Equipment
+1. Locate equipment in load sources list
+2. Click **Remove** icon
+3. Confirm deletion
+
+## Submit vs Calculate
+
+### Calculate
+- Runs IEA analysis
+- Returns Structure %, Footing %, Rotation
+- Results are preliminary
+
+### Submit
+- Finalizes and submits application
+- Locks the design for engineering review
+
+## Testing an IEA Form
+
+**Workflow**:
+1. Enter all required fields
+2. Add proposed equipment
+3. Click **Calculate**
+4. Review results
+5. If safe (< 100%), proceed to Submit
+6. If unsafe (≥ 100%), revise design
+
+## Field Explanations
+
+| Field | Purpose |
+|-------|---------|
+| **Site Information** | Identifies the site |
+| **Wind Parameters** | Environmental design loads |
+| **Structure** | Tower physical properties |
+| **Load Sources** | Equipment weights and wind loads |
+            `,
+            keyTakeaways: [
+              "Complete all fields before calculating IEA",
+              "Calculate before Submit to validate design",
+              "If Structure % ≥ 100%, revise equipment selection"
+            ]
+          }
+        ],
+        quiz: {
+          questions: [
+            {
+              id: "q1",
+              question: "What is the correct order of operations when using the IEA form?",
+              type: "single",
+              options: [
+                { id: "a", text: "Submit → Calculate → Review" },
+                { id: "b", text: "Calculate → Review → Submit" },
+                { id: "c", text: "Review → Calculate → Submit" },
+                { id: "d", text: "Submit → Review → Calculate" }
+              ],
+              correctAnswer: "b",
+              explanation: "The correct order is: Calculate the IEA, Review the results, then Submit if the design is safe."
+            },
+            {
+              id: "q2",
+              question: "What is the purpose of the Wind Parameters section?",
+              type: "single",
+              options: [
+                { id: "a", text: "To track weather forecasts" },
+                { id: "b", text: "To calculate environmental design loads on the tower" },
+                { id: "c", text: "To schedule site visits" },
+                { id: "d", text: "To generate reports" }
+              ],
+              correctAnswer: "b",
+              explanation: "Wind Parameters are used to calculate environmental design loads that affect structural capacity."
+            },
+            {
+              id: "q3",
+              question: "What is a common mistake when filling out the IEA form?",
+              type: "single",
+              options: [
+                { id: "a", text: "Calculating results before submitting" },
+                { id: "b", text: "Submitting without calculating first" },
+                { id: "c", text: "Including wind parameters" },
+                { id: "d", text: "Entering site information" }
+              ],
+              correctAnswer: "b",
+              explanation: "A common mistake is submitting the form without calculating IEA results first to validate the design."
+            }
+          ]
+        }
+      },
+      {
+        id: "module-6",
+        title: "Existing vs Proposed Equipment",
+        lessons: [
+          {
+            id: "equipment-layers",
+            title: "Equipment Layers",
+            duration: "12 min",
+            content: `
+# Existing vs Proposed Equipment
+
+## Existing Equipment Logic
+
+**Existing Equipment** represents current site conditions:
+- Already installed on the tower
+- Contributes to baseline structural load
+- Cannot be modified (only removed or replaced)
+
+### Viewing Existing Equipment
+1. Ensure **Existing Equipment** layer is toggled ON
+2. Use filters to show specific types (panels, dishes, etc.)
+
+## Proposed Equipment Layer Activation
+
+**Proposed Equipment** represents changes in your application:
+- New equipment to be added
+- Appears in a different visual layer
+
+### Activating Proposed Layer
+1. Toggle **Proposed Equipment** layer ON
+2. Equipment appears with distinct visual styling (e.g., green overlay)
+3. Both Existing and Proposed can be visible simultaneously
+
+## How NexDT Calculates Combined Load
+
+When you run IEA:
+- **Existing**: Baseline load
+- **Proposed**: Additional load from new equipment
+- **Removed**: Subtract load from deleted equipment
+
+**Formula**:
+Combined Load = Existing + Proposed - Removed
+
+## Visual Validation in 3D
+
+### Best Practices
+1. **Toggle layers** to compare before/after states
+2. **Rotate view** to check for collisions
+3. **Verify mounting points** are correct
+4. **Check clearances** between equipment
+
+### Visual Indicators
+- **Green**: Proposed equipment (to be added)
+- **Red**: Equipment to be removed
+- **White/Gray**: Existing equipment (unchanged)
+            `,
+            keyTakeaways: [
+              "Existing equipment = current site baseline",
+              "Proposed equipment = new additions in your application",
+              "Combined Load = Existing + Proposed - Removed"
+            ]
+          }
+        ],
+        quiz: {
+          questions: [
+            {
+              id: "q1",
+              question: "What does the Proposed Equipment layer show?",
+              type: "single",
+              options: [
+                { id: "a", text: "Currently installed equipment" },
+                { id: "b", text: "New equipment to be added in the application" },
+                { id: "c", text: "Deleted equipment" },
+                { id: "d", text: "BIM catalog library" }
+              ],
+              correctAnswer: "b",
+              explanation: "The Proposed Equipment layer shows new equipment that will be added as part of the colocation application."
+            },
+            {
+              id: "q2",
+              question: "How is combined load calculated for IEA?",
+              type: "single",
+              options: [
+                { id: "a", text: "Existing only" },
+                { id: "b", text: "Proposed only" },
+                { id: "c", text: "Existing + Proposed - Removed" },
+                { id: "d", text: "Proposed - Existing" }
+              ],
+              correctAnswer: "c",
+              explanation: "Combined load is calculated as: Existing + Proposed - Removed equipment."
+            }
+          ]
+        }
+      },
+      {
+        id: "module-7",
+        title: "CSV Uploads & Data Validation",
+        lessons: [
+          {
+            id: "csv-upload-overview",
+            title: "CSV Upload Overview",
+            duration: "15 min",
+            videoUrl: "https://www.youtube.com/watch?v=_7Ei5A3sYNQ",
+            content: `
+# CSV Uploads & Data Validation
+
+## Asbuilt CSV Purpose
+
+The **Asbuilt CSV Uploader** allows bulk data import for equipment records:
+- Upload equipment inventory
+- Align data with 3D site model
+- Maintain accurate equipment metadata
+
+## Upload Process
+
+1. **Download Template**: Get existing asbuilt_equipment.csv
+2. **Prepare Data**: Fill in equipment records
+3. **Upload File**: Drag and drop CSV into uploader
+4. **Validation**: System checks for errors
+5. **Review Report**: Address any validation errors
+6. **Apply Data**: Confirm and apply validated records
+
+## Validation Rules
+
+### Mandatory Fields
+- name, type, elevation, x, y, manufacturer, model-number, head customer, Head Customer ID
+
+### Data Types
+- Numeric fields must contain only numbers
+- Enums must match allowed values
+
+### Uniqueness
+- Equipment names must be unique within the site
+
+## Common Upload Errors
+
+### E1001: Invalid File Type
+- Ensure file is .csv format
+
+### E1102: Missing Column Headers
+- Copy exact headers from template
+
+### E1103: Invalid Data Type
+- Check numeric columns contain only numbers
+
+### E2001: Duplicate Names
+- Remove duplicate equipment names
+
+### E2005: Head Customer Mismatch (FATAL)
+- Head Customer Name and ID must be consistent
+
+## Fixing Failures
+
+1. **Review validation report**
+2. **Identify error codes**
+3. **Correct data in CSV**
+4. **Re-upload fixed file**
+            `,
+            keyTakeaways: [
+              "CSV uploads enable bulk equipment data import",
+              "Validation rules ensure data quality",
+              "E2005 (Head Customer mismatch) is a FATAL error"
+            ],
+            warnings: [
+              "Tower equipment type is NOT supported—remove tower rows before upload"
+            ]
+          }
+        ],
+        quiz: {
+          questions: [
+            {
+              id: "q1",
+              question: "Which equipment type is NOT supported in CSV uploads?",
+              type: "single",
+              options: [
+                { id: "a", text: "panel" },
+                { id: "b", text: "dish" },
+                { id: "c", text: "tower" },
+                { id: "d", text: "rru" }
+              ],
+              correctAnswer: "c",
+              explanation: "The 'tower' equipment type is NOT supported. Remove any tower rows from your CSV before uploading."
+            },
+            {
+              id: "q2",
+              question: "What does error code E2005 indicate?",
+              type: "single",
+              options: [
+                { id: "a", text: "Missing file" },
+                { id: "b", text: "Mismatched Head Customer Name and ID" },
+                { id: "c", text: "Invalid file format" },
+                { id: "d", text: "Network error" }
+              ],
+              correctAnswer: "b",
+              explanation: "E2005 is a FATAL error indicating that Head Customer Name and ID are not consistent across equipment records."
+            }
+          ]
+        }
+      },
+      {
+        id: "module-8",
+        title: "Reviewing Models & Measurements",
+        lessons: [
+          {
+            id: "measuring-assets",
+            title: "Measuring Assets",
+            duration: "12 min",
+            content: `
+# Reviewing Models & Measurements
+
+## Measuring Assets
+
+NexDT provides measurement tools for validating equipment geometry:
+
+### Distance Tool
+1. Select **Measure Distance**
+2. Click start point
+3. Click end point
+4. View measurement in meters/feet
+
+### Angle Tool
+1. Select **Measure Angle**
+2. Click three points to define angle
+3. View angle in degrees
+
+## Using Annotations
+
+**Annotations** are visual markers for documenting:
+- Equipment positions
+- Clearance measurements
+- Notes for engineering review
+
+### Creating Annotations
+1. Click **Add Annotation**
+2. Click location on 3D model
+3. Enter text description
+4. Save annotation
+
+## Validating Geometry
+
+### Verification Checklist
+- [ ] Equipment is correctly positioned
+- [ ] Mounting elevation matches spec
+- [ ] No collisions with existing equipment
+- [ ] Clearances meet requirements
+
+## Understanding Tolerances
+
+### Measurement Accuracy
+- **3D Model Accuracy**: ±5cm typical
+- **Annotation Precision**: Subject to user placement
+- **Equipment Alignment**: Verify with physical site data
+
+### When to Flag Discrepancies
+- Measurements differ by > 10cm from expected
+- Equipment appears misaligned in model
+- Structural elements don't match site photos
+            `,
+            keyTakeaways: [
+              "Use measurement tools to validate equipment placement",
+              "Annotations document key information for review",
+              "Verify measurements against physical site data"
+            ]
+          }
+        ],
+        quiz: {
+          questions: [
+            {
+              id: "q1",
+              question: "What is the primary purpose of the measurement tools?",
+              type: "single",
+              options: [
+                { id: "a", text: "To delete equipment" },
+                { id: "b", text: "To validate equipment geometry and placement" },
+                { id: "c", text: "To upload CSV files" },
+                { id: "d", text: "To change user roles" }
+              ],
+              correctAnswer: "b",
+              explanation: "Measurement tools are used to validate equipment geometry, positions, and clearances in the 3D model."
+            },
+            {
+              id: "q2",
+              question: "What is a typical accuracy tolerance for 3D model measurements?",
+              type: "single",
+              options: [
+                { id: "a", text: "±1mm" },
+                { id: "b", text: "±5cm" },
+                { id: "c", text: "±1m" },
+                { id: "d", text: "±10m" }
+              ],
+              correctAnswer: "b",
+              explanation: "3D model measurements typically have an accuracy of ±5cm."
+            }
+          ]
+        }
+      },
+      {
+        id: "module-1-legacy",
+        title: "Introduction to NexDT",
+        lessons: [
       {
         id: "intro",
         title: "Introduction to NexDT",
