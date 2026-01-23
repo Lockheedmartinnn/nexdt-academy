@@ -905,57 +905,235 @@ After submission:
       },
       {
         id: "module-3",
-        title: "Applications & Site Context",
+        title: "Engineer Review & Approval Workflow",
         lessons: [
           {
-            id: "what-is-application",
-            title: "What an Application Is",
+            id: "engineering-control",
+            title: "What Changes When Engineering Takes Control",
             duration: "10 min",
+            videoUrl: "https://www.youtube.com/watch?v=9xquCESbNW0",
             content: `
-# Applications & Site Context
+# What Changes When Engineering Takes Control
 
-## What an Application Is
+## Engineering Accountability
 
-A **Colocation Application** represents a proposed set of changes to a site:
-- Add new equipment
-- Remove existing equipment
-- Modify equipment positions or configurations
+When a Colo User submits a Colo App, NexDT transitions the application into an **engineering-controlled state**.
 
-Each application is independent and can be reviewed separately.
+At this point:
+- The Colo User **can no longer edit**
+- The proposal is treated as a **design candidate**
+- The Engineer is responsible for:
+  - Structural plausibility
+  - Modelling accuracy
+  - Consistency with SiteSee processing requirements
+  - Preventing downstream failures (IEA, EME, 3D reconstruction)
 
-## Switching Applications
+## What Approval Actually Means
 
-1. Open the **Applications** panel in the left menu
-2. Select from available applications for the site
-3. The 3D view updates to show that application's proposed changes
+Engineering approval does **not** mean "looks OK".
 
-## Understanding Site Position, IDs, and Metadata
+It means **"this design is safe, processable, and defensible."**
 
-### Site Information
-- **Site Name**: Unique identifier for the location
-- **Site ID**: System-generated reference number
-- **Application ID**: Unique ID for each colocation application
-- **Status**: Current workflow state (Draft, Submitted, Approved, etc.)
+## Two Distinct Phases
 
-### Metadata Fields
-- **Created By**: User who initiated the application
-- **Created Date**: Timestamp of application creation
-- **Last Modified**: Most recent edit timestamp
+The Colo App workflow has two distinct phases:
 
-## Application States
+1. **Proposal phase** (Colo User)
+2. **Validation & approval phase** (Engineer)
 
-| State | Description |
-|-------|-------------|
-| **Draft** | Work in progress, editable |
-| **Submitted** | Sent for review, read-only for submitter |
-| **Under Review** | Engineering team evaluating |
-| **Approved** | Accepted, changes applied to site |
-| **Rejected** | Declined, may be revised and resubmitted |
+Once an application is submitted:
+- The proposal is **frozen**
+- Ownership transfers to Engineering
+- The system assumes **engineering accountability**
+
+Nothing beyond this point is "suggestive" — it is **authoritative**.
             `,
             keyTakeaways: [
-              "Applications track proposed equipment changes",
-              "Each application has a unique ID and status",
-              "Site metadata helps identify and track projects"
+              "Submitted applications transfer ownership to Engineering",
+              "Approval means the design is safe, processable, and defensible",
+              "Engineers are responsible for structural and modelling accuracy"
+            ]
+          },
+          {
+            id: "locating-coloapp",
+            title: "Locating a Submitted Colo App Correctly",
+            duration: "8 min",
+            content: `
+# Locating a Submitted Colo App Correctly
+
+## Why This Matters
+
+Engineers must always **orient themselves before editing**.
+
+There are **two visual contexts** in NexDT:
+- **Default Scene** → the current as-built baseline
+- **Colo App Scene** → the proposed changes
+
+Failing to distinguish these can lead to:
+- Approving unintended changes
+- Missing removed equipment
+- Misinterpreting scope
+
+## Correct Review Sequence
+
+1. Search for the site
+2. Open the **default scene**
+3. Visually understand the baseline
+4. Switch to the **specific Colo App**
+5. Compare what has changed
+
+**This comparison step is where most engineering insight happens.**
+            `,
+            keyTakeaways: [
+              "Always review default scene first to establish baseline",
+              "Default Scene vs Colo App Scene are different contexts",
+              "Comparison reveals the actual changes being proposed"
+            ]
+          },
+          {
+            id: "visual-audit",
+            title: "Visual Engineering Audit",
+            duration: "12 min",
+            content: `
+# Visual Engineering Audit (What Engineers Look For)
+
+## A visual audit is not cosmetic.
+
+Engineers should actively look for:
+- Missing panels or mounts
+- Incorrect antenna orientation (azimuth)
+- Physical clashes between equipment
+- Equipment floating, intersecting, or misaligned
+- Inconsistent spacing or unrealistic mounting positions
+
+## The Critical Question
+
+Ask yourself:
+
+**"Would this configuration make sense on a real structure?"**
+
+If the answer is unclear — the design needs correction.
+            `,
+            keyTakeaways: [
+              "Visual audit checks physical plausibility",
+              "Look for clashes, misalignment, and floating equipment",
+              "Design must make sense on a real structure"
+            ]
+          },
+          {
+            id: "engineering-edits",
+            title: "Engineering Edits (Override Workflow)",
+            duration: "10 min",
+            content: `
+# Engineering Edits (Override Workflow Explained)
+
+## Authority & Responsibility
+
+Engineers are **allowed to edit submitted applications**.
+
+This is intentional.
+
+**Why?**
+- Colo Users propose **intent**
+- Engineers enforce **feasibility**
+
+## Common Engineering Edits
+
+- Adding missing equipment
+- Correcting placement or orientation
+- Aligning models with SiteSee processing constraints
+
+These edits are **authoritative, not collaborative**.
+
+## How Overrides Work
+
+1. Engineer enters **Edit Mode**
+2. Modifies the submitted application directly
+3. Changes are tracked automatically
+4. **No new application is created**
+
+This ensures:
+- Single source of truth
+- Clear accountability
+- Clean transaction logs
+            `,
+            keyTakeaways: [
+              "Engineers can edit submitted applications directly",
+              "Common edits: adding equipment, correcting placement",
+              "No new application created—maintains single source of truth"
+            ]
+          },
+          {
+            id: "confirm-design-trigger",
+            title: "The 'Confirm Design' Trigger",
+            duration: "8 min",
+            content: `
+# The "Confirm Design" Trigger (System Behaviour)
+
+## Critical Rule
+
+NexDT contains a **non-obvious but critical rule**:
+
+**Saving changes to a submitted Colo App automatically triggers Confirm Design.**
+
+## What This Means
+
+- You **cannot** "quietly tweak" a design
+- Every engineering change must be explicitly reviewed and approved
+- The system enforces **conscious decision-making**
+
+## What This Prevents
+
+- Accidental approvals
+- Unreviewed overrides
+- Silent engineering liability
+            `,
+            keyTakeaways: [
+              "Saving edits on submitted apps triggers Confirm Design",
+              "Prevents quiet tweaks—enforces explicit review",
+              "Every engineering change requires conscious approval"
+            ],
+            warnings: [
+              "You cannot quietly edit without triggering confirmation workflow"
+            ]
+          },
+          {
+            id: "final-approval",
+            title: "Final Approval & Transaction Review",
+            duration: "10 min",
+            content: `
+# Final Approval & Transaction Review
+
+## What Approval Really Means
+
+Final approval is the **last gate**.
+
+Before approving, Engineers must review:
+- **Application status** (must be Submitted)
+- **Transaction logs** (Add / Remove actions)
+- **Consistency** between scene and logs
+
+## Why Transaction Logs Are Critical
+
+Transaction logs:
+- Become part of **audit trails**
+- Affect **reporting**
+- Represent **real-world changes**
+
+## What Happens After Approval
+
+Once approved:
+- The **digital twin is updated**
+- The design becomes **authoritative**
+- Downstream tools (IEA, EME, reporting) **rely on this data**
+- Any further changes require a **new application**
+
+**Engineering approval carries real operational consequences.**
+            `,
+            keyTakeaways: [
+              "Verify status and transaction logs before approval",
+              "Transaction logs become part of audit trails",
+              "Approval updates digital twin and affects downstream systems"
             ]
           }
         ],
@@ -963,29 +1141,94 @@ Each application is independent and can be reviewed separately.
           questions: [
             {
               id: "q1",
-              question: "What is a Colocation Application?",
+              question: "Why does NexDT lock the application after submission?",
               type: "single",
               options: [
-                { id: "a", text: "A user login credential" },
-                { id: "b", text: "A proposed set of changes to site equipment" },
-                { id: "c", text: "A 3D model file" },
-                { id: "d", text: "A CSV data export" }
+                { id: "a", text: "To improve performance" },
+                { id: "b", text: "To enforce a clear handover of responsibility" },
+                { id: "c", text: "To prevent accidental deletions" },
+                { id: "d", text: "To speed up approvals" }
               ],
               correctAnswer: "b",
-              explanation: "A Colocation Application represents a proposed set of changes to a site, such as adding or removing equipment."
+              explanation: "Locking enforces a clear handover of responsibility from Colo User to Engineering team."
             },
             {
               id: "q2",
-              question: "Which application state indicates the engineering team is evaluating changes?",
+              question: "Why should Engineers inspect the default scene first?",
               type: "single",
               options: [
-                { id: "a", text: "Draft" },
-                { id: "b", text: "Under Review" },
-                { id: "c", text: "Rejected" },
-                { id: "d", text: "Archived" }
+                { id: "a", text: "To unlock editing" },
+                { id: "b", text: "To establish a mental baseline before reviewing changes" },
+                { id: "c", text: "To recalculate IEA" },
+                { id: "d", text: "To check user permissions" }
               ],
               correctAnswer: "b",
-              explanation: "'Under Review' indicates the engineering team is actively evaluating the proposed changes."
+              explanation: "Inspecting the default scene establishes a mental baseline to understand what changes are being proposed."
+            },
+            {
+              id: "q3",
+              question: "Which issue would most likely require an engineering edit?",
+              type: "single",
+              options: [
+                { id: "a", text: "Slight colour differences" },
+                { id: "b", text: "Equipment intersecting a mount or structure" },
+                { id: "c", text: "Long application name" },
+                { id: "d", text: "Missing description text" }
+              ],
+              correctAnswer: "b",
+              explanation: "Equipment intersecting a mount or structure is a physical impossibility that requires correction."
+            },
+            {
+              id: "q4",
+              question: "Why does NexDT allow Engineers to override submissions?",
+              type: "single",
+              options: [
+                { id: "a", text: "For convenience" },
+                { id: "b", text: "To enforce engineering correctness and accountability" },
+                { id: "c", text: "To speed up Colo User workflows" },
+                { id: "d", text: "To reduce documentation" }
+              ],
+              correctAnswer: "b",
+              explanation: "Engineers enforce feasibility and correctness while Colo Users propose intent."
+            },
+            {
+              id: "q5",
+              question: "Why does NexDT force Confirm Design after engineering edits?",
+              type: "single",
+              options: [
+                { id: "a", text: "To slow engineers down" },
+                { id: "b", text: "To ensure intentional final approval of changes" },
+                { id: "c", text: "To re-run modelling" },
+                { id: "d", text: "To notify Colo Users" }
+              ],
+              correctAnswer: "b",
+              explanation: "The system enforces conscious decision-making to prevent accidental approvals and unreviewed overrides."
+            },
+            {
+              id: "q6",
+              question: "What is the most important thing to verify before approval?",
+              type: "single",
+              options: [
+                { id: "a", text: "UI layout" },
+                { id: "b", text: "Transaction logs accurately reflect changes" },
+                { id: "c", text: "File sizes" },
+                { id: "d", text: "User roles" }
+              ],
+              correctAnswer: "b",
+              explanation: "Transaction logs become part of audit trails and represent real-world changes."
+            },
+            {
+              id: "q7",
+              question: "An Engineer adds a missing antenna, saves, and is redirected to Confirm Design. What should they do?",
+              type: "single",
+              options: [
+                { id: "a", text: "Navigate back without approving" },
+                { id: "b", text: "Review logs carefully, then approve if correct" },
+                { id: "c", text: "Ask the Colo User to resubmit" },
+                { id: "d", text: "Cancel the application" }
+              ],
+              correctAnswer: "b",
+              explanation: "The Engineer should review transaction logs to verify the changes are correct before approving."
             }
           ]
         }
