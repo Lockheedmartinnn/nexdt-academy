@@ -4,7 +4,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import ReactMarkdown from 'react-markdown';
 import { 
@@ -21,38 +21,13 @@ import VideoPlayer from "@/components/academy/VideoPlayer";
 import { tracks } from "@/components/academy/courseData";
 
 export default function Lesson() {
-  const [urlParams, setUrlParams] = useState(() => new URLSearchParams(window.location.search));
+  const location = useLocation();
+  const urlParams = new URLSearchParams(location.search);
   const trackId = urlParams.get('track');
   const moduleId = urlParams.get('module');
   const lessonId = urlParams.get('lesson');
   
   const queryClient = useQueryClient();
-
-  // Update URL params when location changes
-  useEffect(() => {
-    const handleLocationChange = () => {
-      setUrlParams(new URLSearchParams(window.location.search));
-    };
-    
-    window.addEventListener('popstate', handleLocationChange);
-    
-    // Listen to custom navigation events
-    const observer = new MutationObserver(handleLocationChange);
-    observer.observe(document.querySelector('title') || document.body, { 
-      childList: true, 
-      subtree: true 
-    });
-    
-    return () => {
-      window.removeEventListener('popstate', handleLocationChange);
-      observer.disconnect();
-    };
-  }, []);
-
-  // Force update when URL search params change
-  useEffect(() => {
-    setUrlParams(new URLSearchParams(window.location.search));
-  }, [window.location.search]);
 
   const track = tracks.find(t => t.id === trackId);
   const module = track?.modules?.find(m => m.id === moduleId);
