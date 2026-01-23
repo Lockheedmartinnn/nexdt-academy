@@ -99,12 +99,13 @@ export default function Certificate() {
             <div className="relative text-center">
               {/* Logo & Header */}
               <div className="flex items-center justify-center gap-3 mb-8">
-                <div className="p-3 bg-blue-600 rounded-xl">
-                  <Award className="w-8 h-8 text-white" />
-                </div>
+                <img 
+                  src="https://www.sitesee.com.au/wp-content/uploads/2022/10/sitesee-logo.svg" 
+                  alt="SiteSee Logo" 
+                  className="h-10"
+                />
                 <div className="text-left">
-                  <h2 className="text-xl font-bold text-slate-900">NexDT</h2>
-                  <p className="text-sm text-slate-500">by SiteSee</p>
+                  <h2 className="text-xl font-bold text-slate-900">NexDT Academy</h2>
                 </div>
               </div>
 
