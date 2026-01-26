@@ -3256,8 +3256,8 @@ View user activity:
 ];
 
 export const finalAssessment = {
-  title: "NextDT Master Certification Assessment",
-  description: "Complete this comprehensive final assessment to earn your NextDT Certified User certificate. This assessment covers all modules and workflows.",
+  title: "NextDT Certification",
+  description: "Complete this assessment to earn your NextDT Certified User certificate.",
   passingScore: 80,
   questions: [
     {

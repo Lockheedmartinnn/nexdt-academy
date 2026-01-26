@@ -101,14 +101,14 @@ export default function Track() {
 
           <div className="flex items-start justify-between">
             <div>
-              <Badge className="bg-white/20 text-white border-0 mb-4">Course Track</Badge>
+              <Badge className="bg-white/20 text-white border-0 mb-4">Onboarding Path</Badge>
               <h1 className="text-3xl font-bold mb-3">{track.title}</h1>
               <p className="text-white/80 max-w-2xl">{track.description}</p>
               
               <div className="flex items-center gap-6 mt-6 text-white/90">
                 <div className="flex items-center gap-2">
                   <BookOpen className="w-5 h-5" />
-                  <span>{track.modules?.length || 0} modules</span>
+                  <span>{track.modules?.length || 0} steps</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="w-5 h-5" />
@@ -120,7 +120,7 @@ export default function Track() {
             <Link to={getFirstIncompleteLessonUrl()}>
               <Button size="lg" className="bg-white text-slate-900 hover:bg-slate-100 gap-2">
                 <PlayCircle className="w-5 h-5" />
-                Continue Learning
+                Continue
               </Button>
             </Link>
           </div>
@@ -147,9 +147,9 @@ export default function Track() {
                         {isModuleComplete ? <CheckCircle2 className="w-5 h-5" /> : moduleIndex + 1}
                       </div>
                       <div>
-                        <CardTitle className="text-lg">Module {moduleIndex + 1}: {module.title}</CardTitle>
+                        <CardTitle className="text-lg">Step {moduleIndex + 1}: {module.title}</CardTitle>
                         <p className="text-sm text-slate-500 mt-1">
-                          {moduleProgress.completed} of {moduleProgress.total} lessons complete
+                          {moduleProgress.completed} of {moduleProgress.total} sections complete
                         </p>
                       </div>
                     </div>
