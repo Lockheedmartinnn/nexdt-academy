@@ -60,7 +60,7 @@ export default function Certificate() {
         <div className="flex items-center justify-between">
           <Link to={createPageUrl('Academy')} className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors">
             <ArrowLeft className="w-4 h-4" />
-            Back to Academy
+            Back to Onboarding
           </Link>
           <div className="flex gap-2">
             <Button variant="outline" className="gap-2" onClick={() => window.print()}>
@@ -105,7 +105,7 @@ export default function Certificate() {
                   className="h-10"
                 />
                 <div className="text-left">
-                  <h2 className="text-xl font-bold text-slate-900">NextDT Academy</h2>
+                  <h2 className="text-xl font-bold text-slate-900">NextDT Onboarding</h2>
                 </div>
               </div>
 
@@ -130,7 +130,7 @@ export default function Certificate() {
               {/* Description */}
               <div className="max-w-2xl mx-auto mb-10">
                 <p className="text-slate-600 leading-relaxed">
-                  has successfully completed the NextDT Academy certification program, 
+                  has successfully completed the NextDT Onboarding certification program, 
                   demonstrating comprehensive knowledge of the NextDT digital twin platform 
                   for telecommunications infrastructure management.
                 </p>
@@ -179,7 +179,7 @@ export default function Certificate() {
                 </div>
                 <div className="text-center">
                   <div className="w-40 border-b border-slate-300 mb-2" />
-                  <p className="text-sm text-slate-500">NextDT Academy</p>
+                  <p className="text-sm text-slate-500">NextDT Onboarding</p>
                 </div>
               </div>
             </div>
