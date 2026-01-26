@@ -17,114 +17,95 @@ import React from 'react';
 export const tracks = [
   {
     id: "nexdt-complete",
-    title: "SiteSee NextDT Academy",
-    description: "Train users to confidently use NextDT for engineering review, data validation, configuration, and reporting — using official SiteSee documentation and videos.",
-    duration: "6 hours",
+    title: "NextDT Platform Onboarding",
+    description: "Get up to speed with NextDT for engineering review, data validation, and approvals. Understand what decisions each tool supports and how to use them correctly.",
+    duration: "~2 hours",
     color: "bg-blue-600",
     bgColor: "bg-blue-50",
     icon: <GraduationCap className="w-6 h-6 text-blue-600" />,
     modules: [
       {
         id: "module-1",
-        title: "NextDT Overview & Core Concepts",
+        title: "Before You Start Using NextDT",
         lessons: [
           {
             id: "what-is-nexdt",
-            title: "What is NexDT?",
-            duration: "10 min",
+            title: "What NextDT Actually Does",
+            duration: "3 min",
             content: `
-# What is NexDT?
+**What decision does NextDT help you make?**
 
-**NexDT** is SiteSee's engineering and validation portal used to review, assess, and approve tower configurations using 3D models, equipment data, and engineering calculations.
+NextDT answers: *"Can we safely approve this tower configuration?"*
 
-It enables users to:
+## What NextDT Does
 
-- View **as-built 3D models**
-- Manage **applications and equipment**
-- Run **engineering assessments** (IEA and EME)
-- Validate whether a tower remains within **safe load-bearing and compliance limits**
+- Reviews 3D tower models and equipment data
+- Runs structural and RF safety checks
+- Validates whether changes stay within safe limits
+- Tracks approval workflows
 
-NextDT is used **after capture** and **before approval**.
+**When you use it:** After capture, before approval.
 
-## Where NextDT Fits in the SiteSee Workflow
+## Your Role Determines What You Do
 
-A simplified workflow looks like this:
+**Engineers** → Review, approve, validate safety  
+**Colo Users** → Propose equipment changes  
+**Admins** → Manage users and configure equipment library
 
-1. A site is captured and processed into an **as-built model**
-2. The model and equipment data are loaded into **NextDT**
-3. Users review the site and manage **applications**
-4. Engineering tools (IEA / EME) are run
-5. Results are reviewed before approvals or changes are submitted
+## What NextDT Does NOT Do
 
-**NextDT acts as the engineering truth layer for SiteSee.**
+❌ Capture sites  
+❌ Replace certified engineering  
+❌ Design new towers  
 
-## Who Uses NextDT?
-
-NextDT is used by multiple types of users, including:
-
-- **Engineers** — responsible for reviewing data, approving as-builts, and validating safety
-- **Colocation (Colo) users** — manage equipment belonging to their organization
-- **Support and Admin users** — assist with reports, validation, and platform support
-
-Each user may see or edit different information, but all users work within the same core system.
-
-## What NextDT Does Not Do
-
-It's important to understand the boundaries of NextDT:
-
-- NextDT does **not** capture sites
-- NextDT does **not** replace certified structural engineering
-- NextDT does **not** design new towers
-
-NextDT provides **indicative assessments and validation**, not final engineering certification.
+**NextDT provides indicative assessments for decision support.**
             `,
             keyTakeaways: [
-              "NextDT is used after capture and before approval",
-              "Acts as the engineering truth layer for SiteSee",
-              "Provides indicative assessments, not final certification"
+              "NextDT validates tower safety after capture, before approval",
+              "Provides decision support, not final certification",
+              "Your role determines what actions you can take"
             ]
           },
           {
             id: "key-concepts",
-            title: "Key Concepts You Must Understand",
-            duration: "8 min",
+            title: "Core Terms Before You Click Anything",
+            duration: "4 min",
             content: `
-# Key Concepts You Must Understand
-
-Before using NextDT, it's important to understand these concepts:
+**What do these terms actually mean in NextDT?**
 
 ## Applications
 
-An **Application** represents a specific engineering or colocation workflow for a site.
+**What it tracks:** A specific change request or review workflow for a site.
 
-Applications are used to:
-- Review equipment
-- Run assessments
-- Track changes and approvals
+**What you do with it:**  
+✓ Propose equipment changes  
+✓ Run safety assessments  
+✓ Track approval status
 
 ## Existing vs Proposed
 
-- **Existing** refers to equipment currently installed on the tower
-- **Proposed** refers to new or modified equipment being evaluated
+**Existing** = Equipment currently on the tower (baseline)  
+**Proposed** = New or modified equipment you're evaluating
 
-Engineering results can be viewed as:
-- **Existing only**
-- **Existing + Proposed**
+**Why this matters:** IEA calculations change when you toggle between these modes.
 
 ## IEA & EME
 
-### IEA (Indicative Engineering Assessment)
-Evaluates whether a tower remains within safe structural limits based on equipment configuration.
+**IEA** answers: *"Can the structure handle this load?"*  
+**EME** answers: *"Is RF exposure within safe limits?"*
 
-### EME (Electromagnetic Energy)
-Evaluates electromagnetic exposure based on installed equipment.
+**Both require:**  
+→ As-built site  
+→ Equipment present  
+→ Accurate metadata
 
-Both tools rely on **accurate equipment and as-built data**.
+**What goes wrong if data is incomplete:**  
+Results become meaningless and misleading.
             `,
             keyTakeaways: [
-              "Applications track specific engineering/colocation workflows",
-              "Existing = current equipment, Proposed = new/modified equipment",
-              "IEA and EME depend on accurate data quality"
+              "Applications = change workflows you track and approve",
+              "Existing = baseline, Proposed = what you're testing",
+              "Incomplete data = unreliable outputs"
             ]
           }
         ],
