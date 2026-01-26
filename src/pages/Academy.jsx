@@ -106,15 +106,14 @@ export default function Academy() {
             NextDT Onboarding
           </h1>
           <p className="text-xl text-slate-300 max-w-2xl mb-8">
-            Master the digital twin platform for telecommunications infrastructure. 
-            Complete all courses to earn your NextDT Certified User certificate.
+            Get up to speed with NextDT—understand what each tool decides and how to use the platform correctly.
           </p>
 
           <div className="flex flex-wrap gap-4 mb-10">
             <Link to={createPageUrl('Track?id=fundamentals')}>
               <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white gap-2">
                 <Play className="w-5 h-5" />
-                Start Learning
+                Get Started
               </Button>
             </Link>
             {progress.certificate_issued && (
@@ -144,17 +143,17 @@ export default function Academy() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <p className="text-white/70 text-sm">Your Progress</p>
+                  <p className="text-white/70 text-sm">Onboarding Progress</p>
                   <p className="text-2xl font-bold text-white">{Math.round(overallProgress)}% Complete</p>
                 </div>
                 <div className="flex gap-6 text-sm">
                   <div className="text-center">
                     <p className="text-2xl font-bold text-white">{tracks.length}</p>
-                    <p className="text-white/70">Tracks</p>
+                    <p className="text-white/70">Paths</p>
                   </div>
                   <div className="text-center">
                     <p className="text-2xl font-bold text-white">{totalModules}</p>
-                    <p className="text-white/70">Modules</p>
+                    <p className="text-white/70">Steps</p>
                   </div>
                   <div className="text-center">
                     <p className="text-2xl font-bold text-emerald-400">{completedModulesCount}</p>
@@ -172,8 +171,8 @@ export default function Academy() {
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-2xl font-bold text-slate-900">Course Tracks</h2>
-            <p className="text-slate-600 mt-1">Complete all tracks to unlock the final certification assessment</p>
+            <h2 className="text-2xl font-bold text-slate-900">Onboarding Paths</h2>
+            <p className="text-slate-600 mt-1">Complete all steps to earn your NextDT certification</p>
           </div>
         </div>
 
@@ -193,11 +192,11 @@ export default function Academy() {
                     <Trophy className={`w-8 h-8 ${overallProgress >= 100 ? 'text-emerald-600' : 'text-slate-400'}`} />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-slate-900">Final Certification Assessment</h3>
+                    <h3 className="text-xl font-bold text-slate-900">Final Certification</h3>
                     <p className="text-slate-600 mt-1">
                       {overallProgress >= 100 
-                        ? 'You\'ve completed all tracks! Take the final assessment to earn your certificate.'
-                        : 'Complete all course tracks to unlock the certification assessment.'}
+                        ? 'Complete the final assessment to earn your certificate.'
+                        : 'Complete all onboarding steps to unlock certification.'}
                     </p>
                   </div>
                 </div>
@@ -222,10 +221,10 @@ export default function Academy() {
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="flex items-center justify-between text-sm text-slate-600">
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-slate-900">NextDT Academy</span>
+              <span className="font-semibold text-slate-900">NextDT Onboarding</span>
               <span>by SiteSee</span>
             </div>
-            <p>Official training for the NextDT digital twin platform</p>
+            <p>Get started with the NextDT digital twin platform</p>
           </div>
         </div>
       </div>

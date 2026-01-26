@@ -168,59 +168,59 @@ Results become meaningless and misleading.
       },
       {
         id: "module-1-2",
-        title: "IEA & EME Fundamentals",
+        title: "Before You Run IEA or EME",
         lessons: [
           {
             id: "iea-eme-overview",
-            title: "IEA & EME Core Tools",
-            duration: "12 min",
+            title: "What These Tools Actually Decide",
+            duration: "5 min",
             content: `
-# IEA & EME Fundamentals (NextDT Core Tools)
+**What decision are you trying to make?**
 
-## What Problem Are We Solving?
+Choose your tool:
 
-Before using any engineering tool, it's critical to understand **what decision the tool supports**.
+**IEA** → Can the structure handle this load?  
+**EME** → Is RF exposure within safe limits?
 
-### Two Core Tools in NextDT
+## What Each Tool Checks
 
-**IEA — Indicative Engineering Assessment**
+**IEA (Indicative Engineering Assessment)**
 
-Evaluates **structural feasibility** of a tower based on:
-- Existing equipment
-- Proposed equipment
-- Wind and structural parameters
+Checks:  
+→ Structural capacity vs equipment load  
+→ Wind impact on tower  
+→ Existing vs Proposed scenarios
 
-**Key idea**: IEA answers *"Can the structure handle this?"*
+**EME (Electromagnetic Energy)**
 
-**EME — Electromagnetic Energy**
+Checks:  
+→ RF exposure compliance  
+→ Antenna power and frequency  
+→ Regulatory thresholds
 
-Evaluates **RF exposure and compliance**, based on:
-- Antenna configuration
-- Equipment data
-- Regulatory limits
+## What Needs to Be True for This to Work
 
-**Key idea**: EME answers *"Is this RF-safe and compliant?"*
+Both tools require:  
+✓ Site marked as **As-Built**  
+✓ Equipment present in the model  
+✓ Correct manufacturer and model metadata
 
-## When IEA & EME Actually Work
+## What Goes Wrong If Data Is Missing
 
-IEA and EME **depend entirely on data quality**.
+**Incomplete data causes:**  
+→ Invalid calculations  
+→ Misleading safety assessments  
+→ False approvals or rejections
 
-They require:
-- The site to be **As-Built**
-- Equipment present in the model
-- Correct catalogue and equipment metadata
-
-They will **not** produce meaningful results if these conditions are missing.
-
-⚠️ **Warning**: Running IEA or EME on incomplete data leads to misleading outputs.
+**Before you run either tool:** Verify the site is As-Built and equipment is loaded.
             `,
             keyTakeaways: [
-              "IEA evaluates structural feasibility, EME evaluates RF compliance",
-              "Both tools require as-built sites with equipment present",
-              "Results are only meaningful with accurate data quality"
+              "IEA = structural safety, EME = RF compliance",
+              "Both require As-Built sites with equipment",
+              "Missing data = unreliable results"
             ],
             warnings: [
-              "Running IEA or EME on incomplete data leads to misleading outputs"
+              "Never run on incomplete data—outputs will be misleading"
             ]
           },
           {
