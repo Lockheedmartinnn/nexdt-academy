@@ -119,7 +119,7 @@ export default function FinalAssessment() {
           <div className="flex items-center justify-between mb-4">
             <Link to={createPageUrl('Academy')} className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              Back to Academy
+              Back to Onboarding
             </Link>
             <img 
               src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/253764dc9_image.png" 

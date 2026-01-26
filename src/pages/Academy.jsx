@@ -103,7 +103,7 @@ export default function Academy() {
           </div>
           
           <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-            NextDT Academy
+            NextDT Onboarding
           </h1>
           <p className="text-xl text-slate-300 max-w-2xl mb-8">
             Master the digital twin platform for telecommunications infrastructure. 

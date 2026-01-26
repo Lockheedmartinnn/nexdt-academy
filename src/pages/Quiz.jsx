@@ -137,7 +137,7 @@ export default function Quiz() {
             <h2 className="text-xl font-bold mb-2">Quiz Not Found</h2>
             <p className="text-slate-600 mb-4">The requested quiz could not be found.</p>
             <Link to={createPageUrl('Academy')}>
-              <Button>Return to Academy</Button>
+              <Button>Return to Onboarding</Button>
             </Link>
           </CardContent>
         </Card>

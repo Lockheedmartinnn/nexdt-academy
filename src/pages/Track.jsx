@@ -48,7 +48,7 @@ export default function Track() {
             <h2 className="text-xl font-bold mb-2">Track Not Found</h2>
             <p className="text-slate-600 mb-4">The requested course track could not be found.</p>
             <Link to={createPageUrl('Academy')}>
-              <Button>Return to Academy</Button>
+              <Button>Return to Onboarding</Button>
             </Link>
           </CardContent>
         </Card>
@@ -90,7 +90,7 @@ export default function Track() {
           <div className="flex items-center justify-between mb-6">
             <Link to={createPageUrl('Academy')} className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              Back to Academy
+              Back to Onboarding
             </Link>
             <img 
               src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/253764dc9_image.png" 
