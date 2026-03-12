@@ -5,9 +5,9 @@ export const PATHS = {
     emoji: '🏗️',
     description: 'Propose & submit equipment changes',
     subtitle: 'Learn to create applications, manage equipment changes, and submit for engineering review.',
-    durationText: '3 modules · ~60 min',
+    durationText: '4 modules · ~90 min',
     color: '#3B82F6',
-    moduleIds: ['m0', 'c1', 'c2'],
+    moduleIds: ['m0', 'c0', 'c1', 'c2'],
   },
   engineer: {
     id: 'engineer',
