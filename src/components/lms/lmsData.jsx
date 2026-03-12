@@ -15,9 +15,9 @@ export const PATHS = {
     emoji: '⚙️',
     description: 'Review, approve, validate safety',
     subtitle: 'Master IEA/EME analysis, review submitted ColoApps, and make engineering decisions.',
-    durationText: '3 modules · ~60 min',
+    durationText: '4 modules · ~90 min',
     color: '#10B981',
-    moduleIds: ['m0', 'e1', 'e2'],
+    moduleIds: ['m0', 'e1', 'e2', 'e3'],
   },
   bim_admin: {
     id: 'bim_admin',
