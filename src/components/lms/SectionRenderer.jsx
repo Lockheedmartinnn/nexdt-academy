@@ -13,6 +13,7 @@ import ChecklistCard from './ChecklistCard';
 import WorkflowCard from './WorkflowCard';
 import RolesCard from './RolesCard';
 import DoNotDoCard from './DoNotDoCard';
+import ObjectiveCard from './ObjectiveCard';
 
 export default function SectionRenderer({ section, onCheckCorrect, onThinkContinue, onQuizPass, onQuizFail }) {
   if (!section) return null;
@@ -46,6 +47,8 @@ export default function SectionRenderer({ section, onCheckCorrect, onThinkContin
       return <RolesCard section={section} />;
     case 'donotdo':
       return <DoNotDoCard section={section} />;
+    case 'objective':
+      return <ObjectiveCard section={section} />;
     default:
       return null;
   }
