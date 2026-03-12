@@ -171,6 +171,79 @@ export const MODULES = {
     ],
   },
 
+  // ─── MODULE C0: COLO PRE-OPS ──────────────────────────────
+  c0: {
+    id: 'c0',
+    path: 'colo',
+    title: 'Pre-Operational Requirements',
+    subtitle: 'What must be true before you touch anything',
+    duration: '15 min',
+    icon: '🔍',
+    sections: [
+      {
+        id: 'c0-obj',
+        type: 'objective',
+        intro: 'By the end of this module, you will understand the upstream dependencies your workflow depends on — and why failing to verify them causes downstream failures.',
+        outcomes: [
+          'Understand why **BIM metadata accuracy** is critical before running operations',
+          'Know the four **operational constraints** that can fail silently',
+          'Understand the **ghost equipment** failure and how to avoid it',
+          'Know your **permissions scope** before editing',
+        ],
+      },
+      {
+        id: 'c0-mandate',
+        type: 'read',
+        title: 'The Engineering Truth Layer — Your Role',
+        intro: 'Operational integrity is non-negotiable. It starts with verifying upstream data in the BIM Admin tool. Errors in metadata or geometry linking propagate through the entire system.',
+        bullets: [
+          { icon: '🚨', text: '**Incorrect metadata causes EME to fail silently** — results appear valid but are based on wrong data', detail: 'If Manufacturer/Model fields don\'t exactly match the catalogue, "Get Config" returns nothing. The EME calculation appears to run but produces no usable output. A compliance report generated on this data is physically meaningless.' },
+          { icon: '🔗', text: '**Mesh Reference must be explicitly linked** by the BIM Admin after every GLB upload', detail: 'Uploading a GLB file is only the first half. The Mesh Reference dropdown is the specific action that instantiates the asset. Without this pointer, the object has a record in the catalogue but no presence in the 3D environment.' },
+          { icon: '📐', text: '**Axis orientation must comply with CAD law** — +Z up, +Y emitter face, millimetre scale', detail: 'NexDT hard-codes mounting brackets and clearance logic to the millimetre. Any scale or orientation violation renders the asset unusable for engineering approvals and produces invalid EME interpretations.' },
+          { icon: '🏢', text: '**Organisation mapping controls your access scope** — you can only touch what\'s yours', detail: 'Organisation assignment determines which equipment you can see and edit. This is enforced at the data level, not just the UI. Colo Users assigned to Organisation A cannot interact with Organisation B equipment even if it\'s on the same tower.' },
+        ],
+      },
+      {
+        id: 'c0-constraints',
+        type: 'mistakes',
+        title: 'Critical Operational Constraints',
+        items: [
+          { mistake: 'Manufacturer & Model Mismatch', consequence: 'Mismatches prevent EME auto-configuration. "Get Config" returns no data — the equipment is unevaluable for RF compliance. The failure is silent: the workflow appears to continue but produces no meaningful EME output.' },
+          { mistake: 'Missing Mesh Reference Link', consequence: 'Failure to link the GLB file results in Ghost Objects — geometry that is present in data but invisible in the 3D scene. Engineers cannot validate placement, orientation, or structural clearances. This forces application rejection and manual data recovery.' },
+          { mistake: 'Wrong Z-Up Orientation in CAD model', consequence: 'Incorrect axis alignment leads to physically impossible mounting configurations — inverted equipment, signal paths pointing into the ground, or rotated geometry. This triggers automatic rejection of colocation applications.' },
+          { mistake: 'Missing or Wrong Organisation Mapping', consequence: 'Prevents Colo Users from accessing their permitted assets, or incorrectly exposes them to proprietary data from other organisations. Misconfigured mapping breaks the entire ColoApp attribution chain.' },
+        ],
+      },
+      {
+        id: 'c0-ghost',
+        type: 'read',
+        title: 'The Ghost Equipment Failure — A Case Study',
+        intro: 'This failure scenario illustrates how a single upstream omission breaks an entire workflow.',
+        bullets: [
+          { icon: '🔧', text: '**BIM Admin correctly inputs all metadata** for a new 5G antenna, uploads the GLB file', detail: 'Everything looks correct: Manufacturer, Model, ESA, Type, Subtype — all filled in. The GLB is uploaded successfully. The entry appears in catalogue search results.' },
+          { icon: '❌', text: '**BIM Admin does NOT link the Mesh Reference** dropdown — skips this step', detail: 'The file exists in storage. The catalogue entry exists. But the pointer connecting them is missing. The asset is an orphan — it has a record but no 3D instantiation.' },
+          { icon: '🏗️', text: '**Colo User finds the antenna** in the catalog and adds it to the scene', detail: 'The equipment appears to be added successfully. The session looks normal. But the antenna is invisible — it exists in data, but renders as nothing in the 3D environment.' },
+          { icon: '⚙️', text: '**Engineer cannot validate placement** — visual audit fails, application is rejected', detail: 'The Reviewing Engineer cannot see the antenna to check for clashes, orientation, or physical plausibility. This creates a "trust gap" between the Colo User and the Engineer, forcing a full application rejection and manual data recovery.' },
+        ],
+        callout: { variant: 'danger', title: 'One missed click by a BIM Admin halts an entire site deployment.', body: 'The cost of omission scales: BIM Admin time → Colo User time → Engineer review time → site deployment delay. Verify the Mesh Reference is linked before publishing any new BIM equipment entry.' },
+      },
+      {
+        id: 'c0-check',
+        type: 'check',
+        question: 'A Colo User adds a new antenna to the scene but it appears invisible. What is the most likely cause?',
+        options: [
+          { id: 'a', text: 'The site is not marked As-Built' },
+          { id: 'b', text: 'The BIM Admin did not link the Mesh Reference after uploading the GLB' },
+          { id: 'c', text: 'The IEA calculation has not been run yet' },
+          { id: 'd', text: 'The Colo User needs to enable My Equipment Filter' },
+        ],
+        correctAnswer: 'b',
+        explanation: 'Ghost equipment is caused by a missing Mesh Reference link. The GLB file exists in storage but is not instantiated — it has no 3D presence in the scene.',
+        maxAttempts: 2,
+      },
+    ],
+  },
+
   // ─── MODULE C1: IEA FUNDAMENTALS (COLO) ───────────────────
   c1: {
     id: 'c1',
