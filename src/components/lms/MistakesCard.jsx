@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { XCircle, ChevronDown } from 'lucide-react';
+import ScreenshotPlaceholder from './ScreenshotPlaceholder';
 
 export default function MistakesCard({ section }) {
   const [expanded, setExpanded] = useState(null);
@@ -26,7 +27,7 @@ export default function MistakesCard({ section }) {
             >
               <XCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: '#EF4444' }} />
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium" style={{ color: '#FCA5A5' }}>{item.mistake}</p>
+                <p className="text-sm font-medium text-left" style={{ color: '#FCA5A5' }}>{item.mistake}</p>
               </div>
               <ChevronDown
                 className="w-4 h-4 flex-shrink-0 transition-transform"
@@ -34,12 +35,15 @@ export default function MistakesCard({ section }) {
               />
             </button>
             {expanded === i && (
-              <div
-                className="px-5 pb-4 ml-7"
-                style={{ background: 'rgba(239,68,68,0.04)' }}
-              >
-                <p className="text-xs font-semibold mb-1" style={{ color: '#6B7280' }}>CONSEQUENCE</p>
-                <p className="text-sm" style={{ color: '#94A3B8' }}>{item.consequence}</p>
+              <div className="px-5 pb-5 ml-7 space-y-3" style={{ background: 'rgba(239,68,68,0.04)' }}>
+                <ScreenshotPlaceholder
+                  label={`What goes wrong: ${item.mistake}`}
+                  annotations={[{ label: 'What breaks', color: 'red' }]}
+                />
+                <div>
+                  <p className="text-xs font-semibold mb-1" style={{ color: '#6B7280' }}>CONSEQUENCE</p>
+                  <p className="text-sm" style={{ color: '#94A3B8' }}>{item.consequence}</p>
+                </div>
               </div>
             )}
           </div>

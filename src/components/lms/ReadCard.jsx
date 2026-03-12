@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import CalloutBox from './CalloutBox';
+import ScreenshotPlaceholder from './ScreenshotPlaceholder';
 
 function BulletText({ text }) {
   return (
@@ -14,6 +15,50 @@ function BulletText({ text }) {
     >
       {text}
     </ReactMarkdown>
+  );
+}
+
+function CollapsibleBullet({ bullet }) {
+  const [open, setOpen] = useState(false);
+  const icon = typeof bullet === 'object' ? bullet.icon : null;
+  const text = typeof bullet === 'string' ? bullet : bullet.text;
+  const detail = typeof bullet === 'object' ? bullet.detail : null;
+
+  return (
+    <li className="flex items-start gap-3">
+      {icon ? (
+        <span className="text-lg flex-shrink-0 mt-0.5">{icon}</span>
+      ) : (
+        <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ background: '#3B82F6' }} />
+      )}
+      <div className="flex-1 min-w-0">
+        <span className="text-sm leading-relaxed" style={{ color: '#CBD5E1' }}>
+          <BulletText text={text} />
+        </span>
+        {detail && (
+          <div className="mt-1.5">
+            <button
+              onClick={() => setOpen(!open)}
+              className="flex items-center gap-1 text-xs transition-all"
+              style={{ color: open ? '#93C5FD' : '#4B5563' }}
+            >
+              <span
+                className="inline-block transition-transform"
+                style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)', fontSize: '10px' }}
+              >
+                ▾
+              </span>
+              {open ? 'Hide explanation' : 'Show explanation'}
+            </button>
+            {open && (
+              <p className="text-xs mt-2 leading-relaxed" style={{ color: '#6B7280', lineHeight: 1.6, paddingLeft: '0.25rem', borderLeft: '2px solid rgba(55,65,81,0.5)' }}>
+                {detail}
+              </p>
+            )}
+          </div>
+        )}
+      </div>
+    </li>
   );
 }
 
@@ -105,7 +150,10 @@ function ResultGuideCard({ section }) {
 
 function TabsCard({ section }) {
   const [active, setActive] = useState(0);
-  const importanceLabel = { normal: null, high: { text: 'Verify before calculating', color: '#F59E0B' }, critical: { text: '← Most influential section', color: '#EF4444' } };
+  const importanceBadge = {
+    high: { text: 'Verify before calculating', color: '#F59E0B' },
+    critical: { text: '← Most influential section', color: '#EF4444' },
+  };
   return (
     <div className="rounded-xl overflow-hidden" style={{ background: '#111827', border: '1px solid rgba(55,65,81,0.8)', borderLeft: '4px solid #3B82F6' }}>
       <div className="px-5 py-5">
@@ -125,17 +173,17 @@ function TabsCard({ section }) {
               }}
             >
               {tab.name}
-              {tab.importance === 'critical' && <span className="ml-1.5" style={{ color: '#EF4444' }}>●</span>}
-              {tab.importance === 'high' && <span className="ml-1.5" style={{ color: '#F59E0B' }}>●</span>}
+              {tab.importance === 'critical' && <span className="ml-1.5" style={{ color: active === i ? '#fff' : '#EF4444' }}>●</span>}
+              {tab.importance === 'high' && <span className="ml-1.5" style={{ color: active === i ? '#fff' : '#F59E0B' }}>●</span>}
             </button>
           ))}
         </div>
         {section.tabs?.[active] && (
           <div className="p-4 rounded-lg" style={{ background: 'rgba(30,41,59,0.5)' }}>
             <p className="text-sm" style={{ color: '#CBD5E1' }}>{section.tabs[active].description}</p>
-            {importanceLabel[section.tabs[active].importance] && (
-              <p className="text-xs mt-2 font-semibold" style={{ color: importanceLabel[section.tabs[active].importance].color }}>
-                {importanceLabel[section.tabs[active].importance].text}
+            {importanceBadge[section.tabs[active].importance] && (
+              <p className="text-xs mt-2 font-semibold" style={{ color: importanceBadge[section.tabs[active].importance].color }}>
+                {importanceBadge[section.tabs[active].importance].text}
               </p>
             )}
           </div>
@@ -151,6 +199,14 @@ export default function ReadCard({ section }) {
   if (section.isResultGuide) return <ResultGuideCard section={section} />;
   if (section.isTabs) return <TabsCard section={section} />;
 
+  // Determine if bullets have detail fields → show screenshot pattern for those
+  const hasBulletsWithDetail = section.bullets?.some(b => typeof b === 'object' && b.detail);
+  const hasUIContext = section.bullets?.some(b => {
+    const text = typeof b === 'string' ? b : b.text || '';
+    return /click|toggle|navigate|open|enable|select|go to|expand/i.test(text);
+  });
+  const showScreenshot = hasBulletsWithDetail && hasUIContext;
+
   return (
     <div className="rounded-xl overflow-hidden" style={{ background: '#111827', border: '1px solid rgba(55,65,81,0.8)', borderLeft: '4px solid #3B82F6' }}>
       <div className="px-5 py-5">
@@ -159,27 +215,27 @@ export default function ReadCard({ section }) {
             📘 {section.title}
           </p>
         )}
+
+        {/* Screenshot placeholder for UI-heavy sections */}
+        {showScreenshot && (
+          <div className="mb-4">
+            <ScreenshotPlaceholder
+              label={section.title || 'UI Reference'}
+              annotations={[{ label: 'Key elements', color: 'yellow' }]}
+            />
+          </div>
+        )}
+
         {section.intro && (
           <p className="text-sm mb-4" style={{ color: '#94A3B8' }}>{section.intro}</p>
         )}
+
         <ul className="space-y-3">
-          {section.bullets?.map((bullet, i) => {
-            const text = typeof bullet === 'string' ? bullet : bullet.text;
-            const icon = typeof bullet === 'object' ? bullet.icon : null;
-            return (
-              <li key={i} className="flex items-start gap-3">
-                {icon ? (
-                  <span className="text-lg flex-shrink-0 mt-0.5">{icon}</span>
-                ) : (
-                  <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ background: '#3B82F6' }} />
-                )}
-                <span className="text-sm leading-relaxed" style={{ color: '#CBD5E1' }}>
-                  <BulletText text={text} />
-                </span>
-              </li>
-            );
-          })}
+          {section.bullets?.map((bullet, i) => (
+            <CollapsibleBullet key={i} bullet={bullet} />
+          ))}
         </ul>
+
         {section.callout && (
           <div className="mt-4">
             <CalloutBox {...section.callout} />

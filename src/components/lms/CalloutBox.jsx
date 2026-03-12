@@ -1,5 +1,5 @@
-import React from 'react';
-import { AlertTriangle, AlertCircle, Info, Lightbulb } from 'lucide-react';
+import React, { useState } from 'react';
+import { AlertTriangle, AlertCircle, Info, Lightbulb, ChevronDown } from 'lucide-react';
 
 const VARIANTS = {
   warning: {
@@ -33,29 +33,45 @@ const VARIANTS = {
 };
 
 export default function CalloutBox({ variant = 'info', title, body, isRiskBanner = false }) {
+  const [open, setOpen] = useState(false);
   const config = VARIANTS[variant] || VARIANTS.info;
   const Icon = config.icon;
+  const hasBody = !!body;
 
   return (
     <div
       className="rounded-xl p-4"
-      style={{
-        background: config.bg,
-        border: `1px solid ${config.border}`,
-      }}
+      style={{ background: config.bg, border: `1px solid ${config.border}` }}
     >
       <div className="flex items-start gap-3">
         <Icon className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: config.iconColor }} />
-        <div>
+        <div className="flex-1 min-w-0">
           {title && (
             <p className="font-semibold text-sm" style={{ color: config.titleColor }}>
               {title}
             </p>
           )}
-          {body && (
-            <p className="text-sm mt-1" style={{ color: '#94A3B8' }}>
-              {body}
-            </p>
+
+          {hasBody && (
+            <>
+              <button
+                onClick={() => setOpen(!open)}
+                className="flex items-center gap-1 text-xs mt-1.5 transition-all"
+                style={{ color: open ? config.iconColor : 'rgba(107,114,128,0.8)' }}
+              >
+                <ChevronDown
+                  className="w-3.5 h-3.5 transition-transform"
+                  style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                />
+                {open ? 'Hide explanation' : 'Show explanation'}
+              </button>
+
+              {open && (
+                <p className="text-sm mt-2 leading-relaxed" style={{ color: '#94A3B8' }}>
+                  {body}
+                </p>
+              )}
+            </>
           )}
         </div>
       </div>
