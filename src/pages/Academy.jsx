@@ -1,231 +1,263 @@
-import React, { useState, useEffect } from 'react';
-import { base44 } from "@/api/base44Client";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "react-router-dom";
-import { createPageUrl } from "@/utils";
-import { 
-  GraduationCap, 
-  Trophy, 
-  BookOpen, 
-  Clock,
-  ChevronRight,
-  Award,
-  Play
-} from "lucide-react";
-import CourseCard from "@/components/academy/CourseCard";
-import { tracks } from "@/components/academy/courseData";
+import React, { useEffect, useMemo } from 'react';
+import { base44 } from '@/api/base44Client';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
+import { ChevronRight, CheckCircle2, Circle, Award, LogOut, BookOpen } from 'lucide-react';
+import { PATHS, MODULES, getModulesForPath } from '@/components/lms/lmsData';
+
+function PathCard({ path, progress, completedSections, onSelect }) {
+  const modules = getModulesForPath(path.id);
+  const allSectionIds = modules.flatMap(m => (m.sections || []).filter(s => s.type !== 'callout').map(s => s.id));
+  const done = allSectionIds.filter(id => completedSections.includes(id)).length;
+  const total = allSectionIds.length;
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  const isSelected = progress?.track_id === path.id;
+  const firstModule = modules[0];
+  const resumeUrl = firstModule ? createPageUrl(`LMSLesson?path=${path.id}&module=${firstModule.id}&section=0`) : null;
+
+  return (
+    <div
+      className="rounded-2xl overflow-hidden flex flex-col transition-all duration-200 hover:translate-y-[-2px]"
+      style={{
+        background: '#111827',
+        border: `1px solid ${isSelected ? path.color + '40' : 'rgba(55,65,81,0.6)'}`,
+        boxShadow: isSelected ? `0 0 0 1px ${path.color}20` : 'none',
+      }}
+    >
+      {/* Card Top */}
+      <div className="p-6 flex-1">
+        <div className="flex items-start justify-between mb-4">
+          <span className="text-3xl">{path.emoji}</span>
+          {isSelected && pct === 100 && <Award className="w-5 h-5" style={{ color: '#F59E0B' }} />}
+        </div>
+        <h3 className="text-base font-bold mb-1" style={{ color: '#F9FAFB', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+          {path.title}
+        </h3>
+        <p className="text-sm mb-3" style={{ color: '#6B7280' }}>{path.description}</p>
+        <p className="text-xs" style={{ color: '#4B5563' }}>{path.durationText}</p>
+
+        {isSelected && total > 0 && (
+          <div className="mt-4">
+            <div className="flex justify-between items-center mb-1.5">
+              <span className="text-xs" style={{ color: '#6B7280' }}>{done}/{total} sections complete</span>
+              <span className="text-xs font-semibold" style={{ color: path.color }}>{pct}%</span>
+            </div>
+            <div className="h-1.5 rounded-full w-full" style={{ background: 'rgba(55,65,81,0.5)' }}>
+              <div className="h-full rounded-full transition-all duration-700" style={{ width: `${pct}%`, background: path.color }} />
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Card Action */}
+      <div className="px-6 pb-6">
+        {isSelected ? (
+          <Link to={resumeUrl}>
+            <button
+              className="w-full py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all"
+              style={{ background: path.color, color: '#fff' }}
+            >
+              {pct > 0 ? 'Continue Path' : 'Start Path'}
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </Link>
+        ) : (
+          <button
+            onClick={() => onSelect(path.id)}
+            className="w-full py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all"
+            style={{ background: 'rgba(55,65,81,0.4)', color: '#94A3B8', border: '1px solid rgba(55,65,81,0.5)' }}
+          >
+            Select This Path
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ModuleProgressItem({ module, completedSections, pathId }) {
+  const navSections = (module.sections || []).filter(s => s.type !== 'callout');
+  const done = navSections.filter(s => completedSections.includes(s.id)).length;
+  const isComplete = done === navSections.length && navSections.length > 0;
+  const firstSection = 0;
+
+  return (
+    <Link to={createPageUrl(`LMSLesson?path=${pathId}&module=${module.id}&section=${firstSection}`)}>
+      <div
+        className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all hover:bg-white/5"
+        style={{ background: 'rgba(17,24,39,0.4)', border: '1px solid rgba(55,65,81,0.4)' }}
+      >
+        <div
+          className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-lg"
+          style={{ background: isComplete ? 'rgba(16,185,129,0.12)' : 'rgba(55,65,81,0.4)' }}
+        >
+          {isComplete ? '✅' : module.icon}
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-medium truncate" style={{ color: '#F9FAFB' }}>{module.title}</p>
+          <p className="text-xs" style={{ color: '#4B5563' }}>
+            {done}/{navSections.length} sections · {module.duration}
+          </p>
+        </div>
+        <ChevronRight className="w-4 h-4 flex-shrink-0" style={{ color: '#4B5563' }} />
+      </div>
+    </Link>
+  );
+}
 
 export default function Academy() {
   const queryClient = useQueryClient();
-  
-  const { data: user } = useQuery({
-    queryKey: ['user'],
-    queryFn: () => base44.auth.me(),
-  });
+
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.href = 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap';
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+    return () => { try { document.head.removeChild(link); } catch (e) {} };
+  }, []);
+
+  const { data: user } = useQuery({ queryKey: ['user'], queryFn: () => base44.auth.me() });
 
   const { data: progressData } = useQuery({
-    queryKey: ['progress', user?.id],
+    queryKey: ['progress', user?.email],
     queryFn: () => base44.entities.CourseProgress.filter({ created_by: user?.email }),
     enabled: !!user?.email,
   });
 
-  const progress = progressData?.[0] || {};
-  
-  const totalModules = tracks.reduce((acc, t) => acc + (t.modules?.length || 0), 0);
-  const completedModulesCount = progress.completed_modules?.length || 0;
-  const overallProgress = totalModules > 0 ? (completedModulesCount / totalModules) * 100 : 0;
+  const progress = progressData?.[0] || null;
+  const selectedPathId = progress?.track_id;
+  const completedSections = progress?.completed_lessons || [];
 
-  const skipEverythingMutation = useMutation({
-    mutationFn: async () => {
-      if (!user?.email || user.role !== 'admin') return;
-      
-      // Get all lessons and modules
-      const allLessons = [];
-      const allModules = [];
-      tracks.forEach(track => {
-        track.modules?.forEach(module => {
-          const moduleId = `${track.id}-${module.id}`;
-          allModules.push(moduleId);
-          module.lessons?.forEach(lesson => {
-            allLessons.push(`${track.id}-${module.id}-${lesson.id}`);
-          });
-        });
-      });
-
-      const certificateId = `NEXDT-${Date.now().toString(36).toUpperCase()}-ADMIN`;
-      
-      const data = {
-        track_id: 'nexdt-complete',
-        completed_lessons: allLessons,
-        completed_modules: allModules,
-        completed_tracks: tracks.map(t => t.id),
-        quiz_scores: {},
-        final_assessment_score: 100,
-        certificate_issued: true,
-        certificate_id: certificateId,
-        certificate_date: new Date().toISOString(),
-        points: 10000,
-        badges: [
-          { id: 'first_module', earned_date: new Date().toISOString() },
-          { id: 'perfect_quiz', earned_date: new Date().toISOString() },
-          { id: 'fast_learner', earned_date: new Date().toISOString() },
-          { id: 'perfect_assessment', earned_date: new Date().toISOString() },
-          { id: 'certified_user', earned_date: new Date().toISOString() },
-          { id: 'streak_master', earned_date: new Date().toISOString() }
-        ]
-      };
-
+  const selectPathMutation = useMutation({
+    mutationFn: async (pathId) => {
+      const data = { track_id: pathId, completed_lessons: completedSections };
       if (progress?.id) {
-        await base44.entities.CourseProgress.update(progress.id, data);
-      } else {
-        await base44.entities.CourseProgress.create(data);
+        return base44.entities.CourseProgress.update(progress.id, data);
       }
+      return base44.entities.CourseProgress.create({ track_id: pathId, completed_lessons: [] });
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['progress'] });
-    }
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['progress'] }),
   });
 
+  const selectedPath = selectedPathId ? PATHS[selectedPathId] : null;
+  const selectedModules = selectedPathId ? getModulesForPath(selectedPathId) : [];
+
+  const overallProgress = useMemo(() => {
+    if (!selectedPathId) return 0;
+    const allIds = selectedModules.flatMap(m => (m.sections || []).filter(s => s.type !== 'callout').map(s => s.id));
+    if (allIds.length === 0) return 0;
+    return Math.round((allIds.filter(id => completedSections.includes(id)).length / allIds.length) * 100);
+  }, [selectedPathId, selectedModules, completedSections]);
+
+  const initials = user?.full_name ? user.full_name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) : 'U';
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      {/* Hero Section */}
-      <div className="bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto px-6 py-16">
-          <div className="flex items-center gap-3 mb-4">
-            <img 
-              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/253764dc9_image.png" 
-              alt="SiteSee Logo" 
-              className="h-8"
+    <div style={{ background: '#0A0E1A', minHeight: '100vh', fontFamily: "'Inter', sans-serif" }}>
+      {/* Top Bar */}
+      <div style={{ background: '#0A0E1A', borderBottom: '1px solid rgba(55,65,81,0.4)' }}>
+        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <img
+              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/253764dc9_image.png"
+              alt="SiteSee"
+              className="h-6"
             />
+            <span className="text-sm font-semibold" style={{ color: '#94A3B8' }}>NexDT Academy</span>
           </div>
-          
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-            NextDT Onboarding
+          <div className="flex items-center gap-3">
+            {user && (
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: '#3B82F6', color: '#fff' }}>
+                  {initials}
+                </div>
+                <span className="text-sm hidden sm:block" style={{ color: '#6B7280' }}>{user.full_name}</span>
+              </div>
+            )}
+            <button
+              onClick={() => base44.auth.logout()}
+              className="p-1.5 rounded-lg transition-all"
+              style={{ color: '#4B5563' }}
+              title="Logout"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 py-12">
+        {/* Hero */}
+        <div className="mb-12 text-center max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-4 text-xs font-mono" style={{ background: 'rgba(59,130,246,0.1)', color: '#93C5FD', border: '1px solid rgba(59,130,246,0.2)' }}>
+            SITESEE · NEXDT ONBOARDING
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#F9FAFB', fontFamily: "'Plus Jakarta Sans', sans-serif", lineHeight: 1.2 }}>
+            NexDT Academy
           </h1>
-          <p className="text-xl text-slate-300 max-w-2xl mb-8">
-            Get up to speed with NextDT—understand what each tool decides and how to use the platform correctly.
+          <p className="text-lg" style={{ color: '#6B7280' }}>
+            Professional training for the NexDT digital twin platform.
+            {selectedPath ? '' : ' Select your role to get started.'}
           </p>
+        </div>
 
-          <div className="flex flex-wrap gap-4 mb-10">
-            <Link to={createPageUrl('Track?id=fundamentals')}>
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white gap-2">
-                <Play className="w-5 h-5" />
-                Get Started
-              </Button>
-            </Link>
-            {progress.certificate_issued && (
-              <Link to={createPageUrl('Certificate')}>
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 gap-2">
-                  <Award className="w-5 h-5" />
-                  View Certificate
-                </Button>
-              </Link>
-            )}
-            {user?.role === 'admin' && !progress.certificate_issued && (
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-amber-300/50 text-amber-300 hover:bg-amber-500/20 gap-2"
-                onClick={() => skipEverythingMutation.mutate()}
-                disabled={skipEverythingMutation.isPending}
-              >
-                <Trophy className="w-5 h-5" />
-                {skipEverythingMutation.isPending ? 'Completing...' : 'Admin: Skip to Certificate'}
-              </Button>
+        {/* Path Cards */}
+        <div className="mb-12">
+          <div className="flex items-center justify-between mb-5">
+            <h2 className="text-sm font-mono font-medium" style={{ color: '#4B5563' }}>
+              {selectedPath ? 'YOUR LEARNING PATHS' : 'SELECT YOUR ROLE'}
+            </h2>
+            {selectedPath && (
+              <div className="flex items-center gap-2">
+                <div className="h-1.5 rounded-full" style={{ width: 80, background: 'rgba(55,65,81,0.5)' }}>
+                  <div className="h-full rounded-full" style={{ width: `${overallProgress}%`, background: selectedPath.color }} />
+                </div>
+                <span className="text-xs" style={{ color: '#6B7280' }}>{overallProgress}% complete</span>
+              </div>
             )}
           </div>
 
-          {/* Progress Overview */}
-          <Card className="bg-white/10 backdrop-blur border-white/20">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <p className="text-white/70 text-sm">Onboarding Progress</p>
-                  <p className="text-2xl font-bold text-white">{Math.round(overallProgress)}% Complete</p>
-                </div>
-                <div className="flex gap-6 text-sm">
-                  <div className="text-center">
-                    <p className="text-2xl font-bold text-white">{tracks.length}</p>
-                    <p className="text-white/70">Paths</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-2xl font-bold text-white">{totalModules}</p>
-                    <p className="text-white/70">Steps</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-2xl font-bold text-emerald-400">{completedModulesCount}</p>
-                    <p className="text-white/70">Completed</p>
-                  </div>
-                </div>
-              </div>
-              <Progress value={overallProgress} className="h-2 bg-white/20" />
-            </CardContent>
-          </Card>
+          <div className="grid md:grid-cols-3 gap-5">
+            {Object.values(PATHS).map((path) => (
+              <PathCard
+                key={path.id}
+                path={path}
+                progress={progress}
+                completedSections={completedSections}
+                onSelect={(id) => selectPathMutation.mutate(id)}
+              />
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* Course Tracks */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="flex items-center justify-between mb-8">
+        {/* Module Overview for selected path */}
+        {selectedPath && selectedModules.length > 0 && (
           <div>
-            <h2 className="text-2xl font-bold text-slate-900">Onboarding Paths</h2>
-            <p className="text-slate-600 mt-1">Complete all steps to earn your NextDT certification</p>
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tracks.map((track) => (
-            <CourseCard key={track.id} track={track} progress={progress} />
-          ))}
-        </div>
-
-        {/* Final Assessment Card */}
-        <div className="mt-12">
-          <Card className={`border-2 ${overallProgress >= 100 ? 'border-emerald-200 bg-emerald-50' : 'border-slate-200 bg-slate-50'}`}>
-            <CardContent className="p-8">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className={`p-4 rounded-xl ${overallProgress >= 100 ? 'bg-emerald-100' : 'bg-slate-200'}`}>
-                    <Trophy className={`w-8 h-8 ${overallProgress >= 100 ? 'text-emerald-600' : 'text-slate-400'}`} />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-900">Final Certification</h3>
-                    <p className="text-slate-600 mt-1">
-                      {overallProgress >= 100 
-                        ? 'Complete the final assessment to earn your certificate.'
-                        : 'Complete all onboarding steps to unlock certification.'}
-                    </p>
-                  </div>
-                </div>
-                <Link to={createPageUrl('FinalAssessment')}>
-                  <Button 
-                    size="lg"
-                    disabled={overallProgress < 100}
-                    className={overallProgress >= 100 ? 'bg-emerald-600 hover:bg-emerald-700' : ''}
-                  >
-                    {progress.certificate_issued ? 'Retake Assessment' : 'Take Assessment'}
-                    <ChevronRight className="w-5 h-5 ml-1" />
-                  </Button>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-
-      {/* Footer */}
-      <div className="border-t border-slate-200 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="flex items-center justify-between text-sm text-slate-600">
-            <div className="flex items-center gap-2">
-              <span className="font-semibold text-slate-900">NextDT Onboarding</span>
-              <span>by SiteSee</span>
+            <div className="flex items-center gap-2 mb-5">
+              <BookOpen className="w-4 h-4" style={{ color: '#4B5563' }} />
+              <h2 className="text-sm font-mono font-medium" style={{ color: '#4B5563' }}>
+                {selectedPath.title.toUpperCase()} — MODULES
+              </h2>
             </div>
-            <p>Get started with the NextDT digital twin platform</p>
+            <div className="grid md:grid-cols-2 gap-3">
+              {selectedModules.map((module) => (
+                <ModuleProgressItem
+                  key={module.id}
+                  module={module}
+                  completedSections={completedSections}
+                  pathId={selectedPathId}
+                />
+              ))}
+            </div>
           </div>
+        )}
+
+        {/* Footer */}
+        <div className="mt-16 pt-8 text-center" style={{ borderTop: '1px solid rgba(55,65,81,0.3)' }}>
+          <p className="text-xs" style={{ color: '#374151' }}>
+            NexDT Academy by SiteSee · Professional platform training
+          </p>
         </div>
       </div>
     </div>

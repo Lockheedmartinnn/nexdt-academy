@@ -5,8 +5,8 @@ import { GraduationCap, Award, BookOpen, Home } from 'lucide-react';
 import ProfileSidebar from '@/components/ProfileSidebar';
 
 export default function Layout({ children, currentPageName }) {
-  // Hide layout for certificate page (print-friendly)
-  if (currentPageName === 'Certificate') {
+  // LMS pages manage their own full-screen layout
+  if (currentPageName === 'Certificate' || currentPageName === 'Academy' || currentPageName === 'LMSLesson') {
     return <>{children}</>;
   }
 
