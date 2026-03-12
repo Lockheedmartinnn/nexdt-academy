@@ -107,6 +107,30 @@ export const MODULES = {
         ],
       },
       {
+        id: 'm0-golden',
+        type: 'checklist',
+        title: 'The 5 Golden Rules of Data Integrity',
+        intro: 'All users must adhere to these non-negotiable standards to prevent session corruption and downstream engineering failures.',
+        items: [
+          { label: 'Explicitly Link the Mesh Reference after every GLB upload', detail: 'When a BIM Admin uploads a GLB file, they must link it via the Mesh Reference dropdown. If skipped, the geometry is not instantiated, resulting in "ghost" objects — invisible to Engineers and Colo Users, yet present in data, causing IEA and EME failures.' },
+          { label: 'Wait for the Green Initialisation Bar to disappear before editing', detail: 'Upon creating an application, a green progress bar appears. You MUST wait for it to fully disappear. Background initialisation tasks must complete — interrupting them causes session corruption and data loss that requires recreating the application.' },
+          { label: 'Follow the CAD Modelling Specifications without exception', detail: 'All 3D assets must comply: Format = GLB/GLTF 2.0, units = millimetres, Up direction = +Z, Emitter face = +Y. Violations lead to inverted mounts, signal paths pointing into the ground, and invalid engineering approvals.' },
+          { label: 'Enable the "My Equipment" Filter before editing anything', detail: 'Users must enable this filter before touching the 3D scene. It restricts interaction to the user\'s specific organisation, preventing accidental modification of competitor assets and guaranteeing correct data scope.' },
+          { label: 'Use exact case-sensitive Manufacturer & Model names', detail: 'Manufacturer and Model fields are case-sensitive. Mismatches cause "silent" EME failures where port configurations fail to return — the assessment appears to run but produces no usable config data.' },
+        ],
+      },
+      {
+        id: 'm0-applied',
+        type: 'scenarios',
+        title: 'Applied Scenario: The Upgrade Workflow',
+        intro: 'A Colo User is replacing an existing 4G panel with a 5G antenna. Identify the three critical steps required to execute this safely within the Engineering Truth Layer standards.',
+        scenarios: [
+          { status: 'pass', icon: '1️⃣', condition: 'Application Setup & Initialisation', meaning: 'Create the application in NexDT and wait for the green progress bar to fully disappear. The system is instantiating geometry and metadata during this time.', action: 'Do NOT proceed with any edits until the bar disappears — interruption causes session corruption.', color: '#3B82F6' },
+          { status: 'pass', icon: '2️⃣', condition: 'Enable My Equipment Filter', meaning: 'Toggle the My Equipment Filter ON before touching any equipment in the 3D scene. This ensures you are only editing assets permitted for your specific organisation.', action: 'Confirm your equipment is highlighted with distinct colouring and full manufacturer details visible.', color: '#10B981' },
+          { status: 'pass', icon: '3️⃣', condition: 'Run IEA: Existing vs Existing + Proposed', meaning: 'After placing the new 5G antenna, run IEA and compare Existing structural load against Existing + Proposed to determine feasibility before submitting for Engineering Review.', action: 'Document the result. If Existing + Proposed exceeds limits, flag for Engineering review — not automatic rejection.', color: '#F59E0B' },
+        ],
+      },
+      {
         id: 'm0-summary',
         type: 'read',
         title: 'Summary',
