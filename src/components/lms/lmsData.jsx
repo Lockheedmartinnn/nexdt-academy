@@ -653,10 +653,10 @@ export const MODULES = {
       {
         id: 'e1-infographic-modes',
         type: 'infographic',
-        imageUrl: IMG_MODELLING,
+        imageUrl: IMG_PLATFORM,
         containerHeight: 360,
-        label: 'NexDT — Modelling Specifications',
-        caption: 'Modelling Specifications: File Format, Axis Orientation & Centred Origin',
+        label: 'NexDT — Platform Overview',
+        caption: 'Platform Overview: Site Capture → NexDT Engineering Truth Layer → Final Approval',
         crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       // SECTION 5 — Existing vs Existing + Proposed
