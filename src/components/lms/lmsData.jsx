@@ -1126,6 +1126,15 @@ export const MODULES = {
       { id: 'b2-s0', type: 'callout', variant: 'danger', isRiskBanner: true, title: '🔴 RISK LEVEL: HIGHEST', body: 'Actions in this module have system-wide impact and NO automated rollback. Incorrect use can orphan equipment, break ColoApps, and require manual engineering recovery.' },
       { id: 'b2-watch', type: 'watch', title: 'Admin Console Overview', videoId: 'o5dktAxAuiE', startTime: 0, endTime: 300, timestampLabel: '00:00 – 05:00', focusText: 'Focus on: The Organisation management flow and user creation sequence' },
       {
+        id: 'b2-infographic-roles',
+        type: 'infographic',
+        imageUrl: IMG1,
+        containerHeight: 220,
+        label: 'NexDT — Super Admin Governance',
+        caption: 'Super Admin Governance: Core platform roles (User, Engineer, Administrator) + MFA Onboarding Flow',
+        crop: { imageWidth: '200%', marginTop: -510, marginLeft: -980 },
+      },
+      {
         id: 'b2-controls',
         type: 'concepts',
         title: 'What the Admin Console Actually Controls',
