@@ -1,7 +1,10 @@
 // Infographic image URLs
-const IMG1 = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/e7ff53d15_unnamed-2.png';
-const IMG2 = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/ad7a723ac_unnamed-3.png';
-const IMG3 = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/2092558be_unnamed.png';
+const IMG_PLATFORM   = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/90cdb9409_infographic_1_platform_overview.png';
+const IMG_IEA_EME    = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/042f9b569_infographic_2_iea_vs_eme.png';
+const IMG_RIP        = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/621092d98_infographic_3_rip_replace.png';
+const IMG_BIM        = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/5448c0c57_infographic_4_bim_admin.png';
+const IMG_MODELLING  = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/7e8589730_infographic_5_modelling_specs.png';
+const IMG_ADMIN      = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/2728951c3_infographic_6_super_admin.png';
 
 export const PATHS = {
   colo: {
