@@ -854,11 +854,11 @@ export const MODULES = {
       {
         id: 'e3-infographic-ieaveme',
         type: 'infographic',
-        imageUrl: IMG1,
-        containerHeight: 240,
+        imageUrl: IMG_IEA_EME,
+        containerHeight: 340,
         label: 'NexDT — IEA vs EME Assessment',
         caption: 'Engineering Assessment: IEA (Structural Feasibility) vs EME (RF Safety & Compliance)',
-        crop: { imageWidth: '200%', marginTop: -185, marginLeft: -490 },
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       {
         id: 'e3-compare',
