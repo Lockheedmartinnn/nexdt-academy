@@ -70,11 +70,11 @@ export const MODULES = {
       {
         id: 'm0-infographic-overview',
         type: 'infographic',
-        imageUrl: IMG1,
-        containerHeight: 220,
+        imageUrl: IMG_PLATFORM,
+        containerHeight: 340,
         label: 'NexDT Platform Overview',
         caption: 'Platform overview: Site Capture → NexDT (Engineering Truth Layer) → Final Approval',
-        crop: { imageWidth: '200%', marginTop: -60, marginLeft: -10 },
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       {
         id: 'm0-workflow',
