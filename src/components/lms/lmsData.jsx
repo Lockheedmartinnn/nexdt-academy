@@ -831,6 +831,15 @@ export const MODULES = {
         ],
       },
       {
+        id: 'e3-infographic-ieaveme',
+        type: 'infographic',
+        imageUrl: IMG1,
+        containerHeight: 240,
+        label: 'NexDT — IEA vs EME Assessment',
+        caption: 'Engineering Assessment: IEA (Structural Feasibility) vs EME (RF Safety & Compliance)',
+        crop: { imageWidth: '200%', marginTop: -185, marginLeft: -490 },
+      },
+      {
         id: 'e3-compare',
         type: 'read',
         title: 'IEA vs EME — Two Engines, Different Physics',
