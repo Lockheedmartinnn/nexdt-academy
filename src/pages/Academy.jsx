@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ChevronRight, CheckCircle2, Circle, Award, LogOut, BookOpen } from 'lucide-react';
+import { ChevronRight, CheckCircle2, Circle, Award, LogOut, BookOpen, User } from 'lucide-react';
 import { PATHS, MODULES, getModulesForPath } from '@/components/lms/lmsData';
+import UserSidePanel from '@/components/lms/UserSidePanel';
 
 function PathCard({ path, progress, completedSections, onSelect }) {
   const modules = getModulesForPath(path.id);
