@@ -1015,6 +1015,15 @@ export const MODULES = {
           { icon: '📡', term: 'EME Analysis', definition: 'EME pulls configuration from BIM metadata using Manufacturer/Model as the lookup key. A mismatch between BIM entry and catalogue returns no config — EME silently fails to populate.', color: '#10B981' },
         ],
       },
+      {
+        id: 'b1-infographic-bim',
+        type: 'infographic',
+        imageUrl: IMG1,
+        containerHeight: 240,
+        label: 'NexDT — BIM Admin Essentials',
+        caption: 'BIM Admin Essentials: Metadata First → Asset Upload → CRITICAL: Link Mesh Reference',
+        crop: { imageWidth: '200%', marginTop: -60, marginLeft: -980 },
+      },
       { id: 'b1-watch', type: 'watch', title: 'BIM Admin Overview', videoId: 'zShR12je8bQ', startTime: 0, endTime: 300, timestampLabel: '00:00 – 05:00', focusText: 'Focus on: The metadata form and the asset upload + mesh reference linking steps' },
       {
         id: 'b1-metadata',
