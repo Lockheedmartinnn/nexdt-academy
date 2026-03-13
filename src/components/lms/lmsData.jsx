@@ -65,6 +65,15 @@ export const MODULES = {
         callout: { variant: 'info', title: 'NexDT is used after capture and before approval.', body: 'It is the engineering truth layer — sitting between site capture and final approval in every SiteSee workflow.' },
       },
       {
+        id: 'm0-infographic-overview',
+        type: 'infographic',
+        imageUrl: IMG1,
+        containerHeight: 220,
+        label: 'NexDT Platform Overview',
+        caption: 'Platform overview: Site Capture → NexDT (Engineering Truth Layer) → Final Approval',
+        crop: { imageWidth: '200%', marginTop: -60, marginLeft: -10 },
+      },
+      {
         id: 'm0-workflow',
         type: 'steps',
         title: 'Where NexDT Fits in the SiteSee Workflow',
