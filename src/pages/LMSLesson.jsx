@@ -189,6 +189,7 @@ export default function LMSLesson() {
         moduleTitle={module?.title}
         overallProgress={overallProgress}
         onMenuToggle={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+        onProfileClick={() => setProfilePanelOpen(true)}
       />
 
       <div className="flex" style={{ height: 'calc(100vh - 49px)' }}>
