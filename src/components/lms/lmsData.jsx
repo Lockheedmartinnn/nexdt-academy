@@ -1199,11 +1199,11 @@ export const MODULES = {
       {
         id: 'b2-infographic-upstream',
         type: 'infographic',
-        imageUrl: IMG2,
-        containerHeight: 320,
-        label: 'NexDT — Upstream Asset Integrity',
-        caption: 'Upstream: Metadata-First Asset Creation → Mesh Reference Link → Non-Negotiable Modelling Rules',
-        crop: { imageWidth: '200%', marginTop: -40, marginLeft: -10 },
+        imageUrl: IMG_BIM,
+        containerHeight: 360,
+        label: 'NexDT — BIM Admin Essentials',
+        caption: 'BIM Admin Essentials: Metadata First → Asset Upload → CRITICAL: Link Mesh Reference',
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       {
         id: 'b2-downstream',
