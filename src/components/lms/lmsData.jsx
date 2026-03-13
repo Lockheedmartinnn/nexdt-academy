@@ -920,10 +920,10 @@ export const MODULES = {
       {
         id: 'e3-infographic-metadata',
         type: 'infographic',
-        imageUrl: IMG_RIP,
+        imageUrl: IMG_BIM,
         containerHeight: 380,
-        label: 'NexDT — Assessment & Submission Flow',
-        caption: 'Rip & Replace Workflow: Application Setup → Rip → Replace → Assess & Submit',
+        label: 'NexDT — BIM Admin Essentials',
+        caption: 'BIM-to-EME Pipeline: Metadata First → Mesh Reference → Catalogue Lookup → Port Config',
         crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       {
