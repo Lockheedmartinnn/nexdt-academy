@@ -920,11 +920,11 @@ export const MODULES = {
       {
         id: 'e3-infographic-metadata',
         type: 'infographic',
-        imageUrl: IMG3,
-        containerHeight: 220,
-        label: 'NexDT — Metadata-Driven Results',
-        caption: 'Foundation of Accuracy: Metadata-Driven Results, ESA, Indicative vs Certified — Assessment & Submission',
-        crop: { imageWidth: '185%', marginTop: -870, marginLeft: -5 },
+        imageUrl: IMG_RIP,
+        containerHeight: 380,
+        label: 'NexDT — Assessment & Submission Flow',
+        caption: 'Rip & Replace Workflow: Application Setup → Rip → Replace → Assess & Submit',
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       {
         id: 'e3-prereqs',
