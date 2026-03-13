@@ -445,11 +445,11 @@ export const MODULES = {
       {
         id: 'c2-infographic-downstream',
         type: 'infographic',
-        imageUrl: IMG2,
-        containerHeight: 260,
-        label: 'NexDT — Downstream Rip & Replace',
-        caption: 'My Equipment Guardrail → Layered Change Tracking → IEA submission flow',
-        crop: { imageWidth: '200%', marginTop: -100, marginLeft: -980 },
+        imageUrl: IMG_IEA_EME,
+        containerHeight: 340,
+        label: 'NexDT — IEA vs EME',
+        caption: 'Engineering Assessment: IEA (Structural Feasibility) vs EME (RF Safety & Compliance)',
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       {
         id: 'c2-p4-steps',
