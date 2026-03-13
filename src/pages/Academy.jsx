@@ -168,23 +168,24 @@ export default function Academy() {
             />
             <span className="text-sm font-semibold" style={{ color: '#94A3B8' }}>NexDT Academy</span>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             {user && (
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: '#3B82F6', color: '#fff' }}>
+              <button
+                onClick={() => setSidePanelOpen(true)}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all"
+                style={{ background: 'rgba(30,41,59,0.6)', border: '1px solid rgba(55,65,81,0.5)', color: '#94A3B8' }}
+              >
+                <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: '#3B82F6', color: '#fff' }}>
                   {initials}
                 </div>
-                <span className="text-sm hidden sm:block" style={{ color: '#6B7280' }}>{user.full_name}</span>
-              </div>
+                <span className="text-sm hidden sm:block">{user.full_name}</span>
+                {overallProgress > 0 && (
+                  <span className="text-xs font-semibold px-1.5 py-0.5 rounded-full hidden sm:block" style={{ background: selectedPath ? selectedPath.color + '22' : 'rgba(59,130,246,0.15)', color: selectedPath?.color || '#93C5FD' }}>
+                    {overallProgress}%
+                  </span>
+                )}
+              </button>
             )}
-            <button
-              onClick={() => base44.auth.logout()}
-              className="p-1.5 rounded-lg transition-all"
-              style={{ color: '#4B5563' }}
-              title="Logout"
-            >
-              <LogOut className="w-4 h-4" />
-            </button>
           </div>
         </div>
       </div>
