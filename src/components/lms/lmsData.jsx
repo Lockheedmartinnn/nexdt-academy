@@ -1185,6 +1185,15 @@ export const MODULES = {
         callout: { variant: 'warning', title: 'Lost MFA + no recovery code requires Admin intervention.', body: 'Users who lose their MFA device without saving the recovery code are locked out. As the Admin, you\'ll need to manually reset their MFA — a time-consuming process. Educate users to save the recovery code before they complete onboarding.' },
       },
       {
+        id: 'b2-infographic-upstream',
+        type: 'infographic',
+        imageUrl: IMG2,
+        containerHeight: 320,
+        label: 'NexDT — Upstream Asset Integrity',
+        caption: 'Upstream: Metadata-First Asset Creation → Mesh Reference Link → Non-Negotiable Modelling Rules',
+        crop: { imageWidth: '200%', marginTop: -40, marginLeft: -10 },
+      },
+      {
         id: 'b2-downstream',
         type: 'read',
         title: 'How Admin Errors Propagate Downstream',
