@@ -1,4 +1,5 @@
 import React from 'react';
+import InfographicCard from './InfographicCard';
 import ReadCard from './ReadCard';
 import WatchCard from './WatchCard';
 import ThinkCard from './ThinkCard';
