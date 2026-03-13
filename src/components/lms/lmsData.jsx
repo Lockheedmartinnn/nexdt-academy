@@ -368,6 +368,15 @@ export const MODULES = {
     phases: ['Setup', 'Filter', 'Rip', 'Replace', 'IEA', 'Submit'],
     sections: [
       {
+        id: 'c2-infographic-workflow',
+        type: 'infographic',
+        imageUrl: IMG1,
+        containerHeight: 260,
+        label: 'NexDT — Rip & Replace Workflow',
+        caption: 'Rip & Replace: Application Setup → Filter → Rip → Replace → Assess & Submit',
+        crop: { imageWidth: '200%', marginTop: -335, marginLeft: -10 },
+      },
+      {
         id: 'c2-overview',
         type: 'read',
         title: 'What is a Rip & Replace?',
