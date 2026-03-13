@@ -399,6 +399,16 @@ export const MODULES = {
     phases: ['Setup', 'Filter', 'Rip', 'Replace', 'IEA', 'Submit'],
     sections: [
       {
+        id: 'c2-intro-video',
+        type: 'watch',
+        title: 'Intro — The Rip & Replace Workflow',
+        videoId: VID_RIP_REPLACE,
+        startTime: 0,
+        endTime: null,
+        timestampLabel: 'Full video',
+        focusText: 'Watch this intro before stepping through the workflow — it gives you the full picture first.',
+      },
+      {
         id: 'c2-infographic-workflow',
         type: 'infographic',
         imageUrl: IMG_RIP,
