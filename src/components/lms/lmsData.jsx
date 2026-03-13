@@ -1062,6 +1062,16 @@ export const MODULES = {
     duration: '60 min',
     icon: '🗂️',
     sections: [
+      {
+        id: 'b1-intro-video',
+        type: 'watch',
+        title: 'Intro — BIM: Architect of Digital Twins',
+        videoId: VID_BIM_ADMIN,
+        startTime: 0,
+        endTime: null,
+        timestampLabel: 'Full video',
+        focusText: 'Watch this first — it explains the BIM Admin role and why it sits upstream of everything else.',
+      },
       { id: 'b1-s0', type: 'callout', variant: 'danger', title: 'Upstream Critical: BIM Admin errors propagate everywhere.', body: 'BIM Admin sits upstream of modelling, EME, approvals, and reporting. A single error here cascades into every downstream system. Treat every change as production-critical.' },
       {
         id: 'b1-chain',
