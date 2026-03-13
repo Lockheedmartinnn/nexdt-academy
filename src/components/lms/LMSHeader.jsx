@@ -54,12 +54,14 @@ export default function LMSHeader({ user, moduleTitle, overallProgress = 0, onMe
             <span className="text-xs" style={{ color: '#4B5563' }}>{Math.round(overallProgress)}%</span>
           </div>
 
-          <div
-            className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
+          <button
+            onClick={onProfileClick}
+            className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 transition-all"
             style={{ background: '#3B82F6', color: '#fff' }}
+            title="My Progress"
           >
             {initials}
-          </div>
+          </button>
         </div>
       </div>
 
