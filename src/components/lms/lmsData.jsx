@@ -517,6 +517,15 @@ export const MODULES = {
           'Avoid common misuses of **indicative engineering outputs**',
         ],
       },
+      {
+        id: 'e1-infographic-tools',
+        type: 'infographic',
+        imageUrl: IMG3,
+        containerHeight: 300,
+        label: 'NexDT — IEA vs EME Core Tools',
+        caption: 'Core Tools: IEA (Structural Feasibility) vs EME (RF Safety) — deterministic logic, analysis modes',
+        crop: { imageWidth: '185%', marginTop: -330, marginLeft: -5 },
+      },
       // SECTION 1 — What Problem Are We Solving?
       {
         id: 'e1-s1',
