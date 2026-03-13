@@ -1193,6 +1193,16 @@ export const MODULES = {
     duration: '45 min',
     icon: '🛡️',
     sections: [
+      {
+        id: 'b2-intro-video',
+        type: 'watch',
+        title: 'Intro — Super Admin: Digital Governance',
+        videoId: VID_SUPER_ADMIN,
+        startTime: 0,
+        endTime: null,
+        timestampLabel: 'Full video',
+        focusText: 'Watch this before proceeding — it covers the gravity of Super Admin responsibilities.',
+      },
       { id: 'b2-s0', type: 'callout', variant: 'danger', isRiskBanner: true, title: '🔴 RISK LEVEL: HIGHEST', body: 'Actions in this module have system-wide impact and NO automated rollback. Incorrect use can orphan equipment, break ColoApps, and require manual engineering recovery.' },
       { id: 'b2-watch', type: 'watch', title: 'Admin Console Overview', videoId: 'o5dktAxAuiE', startTime: 0, endTime: 300, timestampLabel: '00:00 – 05:00', focusText: 'Focus on: The Organisation management flow and user creation sequence' },
       {
