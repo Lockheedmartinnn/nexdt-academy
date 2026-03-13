@@ -915,6 +915,15 @@ export const MODULES = {
         focusText: 'Focus on: The "Get Config" step, port auto-population, and what happens when the config returns empty',
       },
       {
+        id: 'e3-infographic-metadata',
+        type: 'infographic',
+        imageUrl: IMG3,
+        containerHeight: 220,
+        label: 'NexDT — Metadata-Driven Results',
+        caption: 'Foundation of Accuracy: Metadata-Driven Results, ESA, Indicative vs Certified — Assessment & Submission',
+        crop: { imageWidth: '185%', marginTop: -870, marginLeft: -5 },
+      },
+      {
         id: 'e3-prereqs',
         type: 'checklist',
         title: 'Prerequisites Before Running EME',
