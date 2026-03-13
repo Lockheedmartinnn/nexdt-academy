@@ -27,17 +27,15 @@ export default function InfographicCard({ section }) {
         </div>
       </div>
 
-      {/* Crop window */}
-      <div style={{ height: containerHeight, overflow: 'hidden', position: 'relative', background: '#fff' }}>
+      {/* Full image display */}
+      <div style={{ background: '#fff', padding: '0' }}>
         <img
           src={imageUrl}
           alt={caption || 'Infographic'}
           style={{
             display: 'block',
-            width: crop?.imageWidth || '100%',
-            maxWidth: 'none',
-            marginTop: crop?.marginTop ? `${crop.marginTop}px` : 0,
-            marginLeft: crop?.marginLeft ? `${crop.marginLeft}px` : 0,
+            width: '100%',
+            height: 'auto',
           }}
         />
       </div>
