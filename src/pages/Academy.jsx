@@ -263,6 +263,15 @@ export default function Academy() {
           </p>
         </div>
       </div>
+
+      {/* Side Panel */}
+      {sidePanelOpen && (
+        <UserSidePanel
+          user={user}
+          progress={progress}
+          onClose={() => setSidePanelOpen(false)}
+        />
+      )}
     </div>
   );
 }
