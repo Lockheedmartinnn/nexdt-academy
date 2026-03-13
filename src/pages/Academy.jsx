@@ -110,6 +110,7 @@ function ModuleProgressItem({ module, completedSections, pathId }) {
 
 export default function Academy() {
   const queryClient = useQueryClient();
+  const [sidePanelOpen, setSidePanelOpen] = useState(false);
 
   useEffect(() => {
     const link = document.createElement('link');
