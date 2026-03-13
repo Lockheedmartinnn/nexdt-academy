@@ -1268,6 +1268,7 @@ export function getSectionLabel(section) {
     case 'donotdo': return section.title || 'What Not To Do';
     case 'callout': return null;
     case 'objective': return 'Learning Objectives';
+    case 'infographic': return section.caption ? section.caption.split(':')[0] : 'Reference Diagram';
     default: return section.title || 'Section';
   }
 }
