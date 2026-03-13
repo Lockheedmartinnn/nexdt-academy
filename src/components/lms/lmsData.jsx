@@ -1065,11 +1065,11 @@ export const MODULES = {
       {
         id: 'b1-infographic-cad',
         type: 'infographic',
-        imageUrl: IMG1,
-        containerHeight: 200,
+        imageUrl: IMG_MODELLING,
+        containerHeight: 360,
         label: 'NexDT — Modelling Specifications',
         caption: 'Modelling Specs: File Format & Units → Axis Orientation (+Z up, +Y emitter) → Centred Origin',
-        crop: { imageWidth: '200%', marginTop: -410, marginLeft: -490 },
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       {
         id: 'b1-cad',
