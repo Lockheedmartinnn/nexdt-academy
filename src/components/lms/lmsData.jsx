@@ -653,11 +653,11 @@ export const MODULES = {
       {
         id: 'e1-infographic-modes',
         type: 'infographic',
-        imageUrl: IMG3,
-        containerHeight: 240,
-        label: 'NexDT — Analysis Modes',
-        caption: 'Analysis Modes: "Existing" baseline vs "Existing + Proposed" impact evaluation',
-        crop: { imageWidth: '185%', marginTop: -330, marginLeft: -880 },
+        imageUrl: IMG_MODELLING,
+        containerHeight: 360,
+        label: 'NexDT — Modelling Specifications',
+        caption: 'Modelling Specifications: File Format, Axis Orientation & Centred Origin',
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       // SECTION 5 — Existing vs Existing + Proposed
       {
