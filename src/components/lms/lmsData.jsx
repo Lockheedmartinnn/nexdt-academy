@@ -440,6 +440,15 @@ export const MODULES = {
 
       // PHASE 4
       {
+        id: 'c2-infographic-downstream',
+        type: 'infographic',
+        imageUrl: IMG2,
+        containerHeight: 260,
+        label: 'NexDT — Downstream Rip & Replace',
+        caption: 'My Equipment Guardrail → Layered Change Tracking → IEA submission flow',
+        crop: { imageWidth: '200%', marginTop: -100, marginLeft: -980 },
+      },
+      {
         id: 'c2-p4-steps',
         type: 'steps',
         phase: 3,
