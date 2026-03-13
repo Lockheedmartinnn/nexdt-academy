@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Menu } from 'lucide-react';
 
-export default function LMSHeader({ user, moduleTitle, overallProgress = 0, onMenuToggle }) {
+export default function LMSHeader({ user, moduleTitle, overallProgress = 0, onMenuToggle, onProfileClick }) {
   const initials = user?.full_name
     ? user.full_name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
     : 'U';
