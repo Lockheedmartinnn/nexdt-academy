@@ -53,6 +53,7 @@ export default function LMSLesson() {
   const [sectionIdx, setSectionIdx] = useState(initialSection);
   const [unlockedSections, setUnlockedSections] = useState(new Set());
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [profilePanelOpen, setProfilePanelOpen] = useState(false);
   const queryClient = useQueryClient();
 
   const module = MODULES[moduleId];
