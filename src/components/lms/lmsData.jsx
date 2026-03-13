@@ -1140,11 +1140,11 @@ export const MODULES = {
       {
         id: 'b2-infographic-roles',
         type: 'infographic',
-        imageUrl: IMG1,
-        containerHeight: 220,
+        imageUrl: IMG_ADMIN,
+        containerHeight: 380,
         label: 'NexDT — Super Admin Governance',
         caption: 'Super Admin Governance: Core platform roles (User, Engineer, Administrator) + MFA Onboarding Flow',
-        crop: { imageWidth: '200%', marginTop: -510, marginLeft: -980 },
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       {
         id: 'b2-controls',
