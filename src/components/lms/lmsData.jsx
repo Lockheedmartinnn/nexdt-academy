@@ -565,6 +565,16 @@ export const MODULES = {
     icon: '🔬',
     sections: [
       {
+        id: 'e1-intro-video',
+        type: 'watch',
+        title: 'Intro — NexDT IEA & EME',
+        videoId: VID_IEA_EME,
+        startTime: 0,
+        endTime: null,
+        timestampLabel: 'Full video',
+        focusText: 'Watch this before diving into IEA and EME — it explains both tools and why they matter.',
+      },
+      {
         id: 'e1-obj',
         type: 'objective',
         intro: 'By the end of this module, you will be able to:',
