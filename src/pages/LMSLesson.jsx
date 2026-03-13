@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import LMSHeader from '@/components/lms/LMSHeader';
 import LMSSidebar from '@/components/lms/LMSSidebar';
 import SectionRenderer from '@/components/lms/SectionRenderer';
+import UserSidePanel from '@/components/lms/UserSidePanel';
 import { MODULES, PATHS, getModulesForPath } from '@/components/lms/lmsData';
 
 function PhaseTracker({ phases, currentPhase }) {
