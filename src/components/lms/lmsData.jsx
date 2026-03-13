@@ -1,3 +1,11 @@
+// ─── VIDEO PLACEHOLDERS (replace with YouTube IDs when uploaded) ───────────
+const VID_UNBROKEN_CHAIN   = 'PLACEHOLDER_UNBROKEN_CHAIN';   // The_Unbroken_Chain.mp4
+const VID_NEXDT_WORKFLOW   = 'PLACEHOLDER_NEXDT_WORKFLOW';   // The_NexDT_Workflow.mp4
+const VID_RIP_REPLACE      = 'PLACEHOLDER_RIP_REPLACE';      // The_Rip_&_Replace_Workflow.mp4
+const VID_IEA_EME          = 'PLACEHOLDER_IEA_EME';          // NexDT_IEA_&_EME.mp4
+const VID_BIM_ADMIN        = 'PLACEHOLDER_BIM_ADMIN';        // BIM__Architect_of_Digital_Twins.mp4
+const VID_SUPER_ADMIN      = 'PLACEHOLDER_SUPER_ADMIN';      // Super_Admin__Digital_Governance.mp4
+
 // Infographic image URLs
 const IMG_PLATFORM   = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/90cdb9409_infographic_1_platform_overview.png';
 const IMG_IEA_EME    = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/042f9b569_infographic_2_iea_vs_eme.png';
