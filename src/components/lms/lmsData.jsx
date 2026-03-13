@@ -1154,6 +1154,7 @@ export function getSectionLabel(section) {
     case 'workflow': return section.title || 'Workflow';
     case 'donotdo': return section.title || 'What Not To Do';
     case 'callout': return null;
+    case 'objective': return 'Learning Objectives';
     default: return section.title || 'Section';
   }
 }
