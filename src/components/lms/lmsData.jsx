@@ -91,11 +91,11 @@ export const MODULES = {
       {
         id: 'm0-infographic-roles',
         type: 'infographic',
-        imageUrl: IMG1,
-        containerHeight: 200,
+        imageUrl: IMG_ADMIN,
+        containerHeight: 360,
         label: 'NexDT — Core Platform Roles',
         caption: 'Super Admin Governance: User roles and MFA onboarding flow',
-        crop: { imageWidth: '200%', marginTop: -520, marginLeft: -980 },
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       {
         id: 'm0-roles',
