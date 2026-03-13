@@ -373,11 +373,11 @@ export const MODULES = {
       {
         id: 'c2-infographic-workflow',
         type: 'infographic',
-        imageUrl: IMG1,
-        containerHeight: 260,
+        imageUrl: IMG_RIP,
+        containerHeight: 380,
         label: 'NexDT — Rip & Replace Workflow',
         caption: 'Rip & Replace: Application Setup → Filter → Rip → Replace → Assess & Submit',
-        crop: { imageWidth: '200%', marginTop: -335, marginLeft: -10 },
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       {
         id: 'c2-overview',
