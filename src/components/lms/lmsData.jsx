@@ -541,11 +541,11 @@ export const MODULES = {
       {
         id: 'e1-infographic-tools',
         type: 'infographic',
-        imageUrl: IMG3,
-        containerHeight: 300,
+        imageUrl: IMG_IEA_EME,
+        containerHeight: 340,
         label: 'NexDT — IEA vs EME Core Tools',
         caption: 'Core Tools: IEA (Structural Feasibility) vs EME (RF Safety) — deterministic logic, analysis modes',
-        crop: { imageWidth: '185%', marginTop: -330, marginLeft: -5 },
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       // SECTION 1 — What Problem Are We Solving?
       {
