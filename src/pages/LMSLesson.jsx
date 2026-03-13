@@ -311,6 +311,15 @@ export default function LMSLesson() {
           </div>
         </div>
       </div>
+
+      {/* Profile Side Panel */}
+      {profilePanelOpen && (
+        <UserSidePanel
+          user={user}
+          progress={progress}
+          onClose={() => setProfilePanelOpen(false)}
+        />
+      )}
     </div>
   );
 }
