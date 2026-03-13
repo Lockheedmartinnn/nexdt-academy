@@ -1,3 +1,8 @@
+// Infographic image URLs
+const IMG1 = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/e7ff53d15_unnamed-2.png';
+const IMG2 = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/ad7a723ac_unnamed-3.png';
+const IMG3 = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/2092558be_unnamed.png';
+
 export const PATHS = {
   colo: {
     id: 'colo',
