@@ -629,6 +629,15 @@ export const MODULES = {
           { name: 'Load Sources', description: 'THE MOST INFLUENTIAL SECTION. Here you see existing and proposed equipment. Toggle each item on/off to include or exclude from calculations. Every toggle directly affects the final structural load result. For Existing + Proposed analysis, ensure all proposed equipment is toggled ON.', importance: 'critical' },
         ],
       },
+      {
+        id: 'e1-infographic-modes',
+        type: 'infographic',
+        imageUrl: IMG3,
+        containerHeight: 240,
+        label: 'NexDT — Analysis Modes',
+        caption: 'Analysis Modes: "Existing" baseline vs "Existing + Proposed" impact evaluation',
+        crop: { imageWidth: '185%', marginTop: -330, marginLeft: -880 },
+      },
       // SECTION 5 — Existing vs Existing + Proposed
       {
         id: 'e1-existing-proposed',
