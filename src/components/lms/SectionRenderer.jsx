@@ -50,6 +50,8 @@ export default function SectionRenderer({ section, onCheckCorrect, onThinkContin
       return <DoNotDoCard section={section} />;
     case 'objective':
       return <ObjectiveCard section={section} />;
+    case 'infographic':
+      return <InfographicCard section={section} />;
     default:
       return null;
   }
