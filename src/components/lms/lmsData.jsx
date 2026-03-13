@@ -1030,11 +1030,11 @@ export const MODULES = {
       {
         id: 'b1-infographic-bim',
         type: 'infographic',
-        imageUrl: IMG1,
-        containerHeight: 240,
+        imageUrl: IMG_BIM,
+        containerHeight: 360,
         label: 'NexDT — BIM Admin Essentials',
         caption: 'BIM Admin Essentials: Metadata First → Asset Upload → CRITICAL: Link Mesh Reference',
-        crop: { imageWidth: '200%', marginTop: -60, marginLeft: -980 },
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       { id: 'b1-watch', type: 'watch', title: 'BIM Admin Overview', videoId: 'zShR12je8bQ', startTime: 0, endTime: 300, timestampLabel: '00:00 – 05:00', focusText: 'Focus on: The metadata form and the asset upload + mesh reference linking steps' },
       {
