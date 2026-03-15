@@ -22,10 +22,17 @@ function ModuleCertModal({ module, path, user, onClose }) {
           <X className="w-5 h-5" />
         </button>
 
-        {/* Gold decoration */}
-        <div className="flex justify-center mb-4">
-          <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ background: 'rgba(251,191,36,0.12)', border: '2px solid rgba(251,191,36,0.4)' }}>
-            <Award className="w-8 h-8" style={{ color: '#FBBF24' }} />
+        {/* SiteSee Logo + Branding */}
+        <div className="flex flex-col items-center mb-5">
+          <img
+            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/253764dc9_image.png"
+            alt="SiteSee"
+            className="h-7 mb-3"
+            style={{ filter: 'brightness(0) invert(1) opacity(0.9)' }}
+          />
+          <div className="w-full h-px mb-4" style={{ background: 'linear-gradient(to right, transparent, rgba(251,191,36,0.4), transparent)' }} />
+          <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ background: 'rgba(251,191,36,0.12)', border: '2px solid rgba(251,191,36,0.4)' }}>
+            <Award className="w-7 h-7" style={{ color: '#FBBF24' }} />
           </div>
         </div>
 
