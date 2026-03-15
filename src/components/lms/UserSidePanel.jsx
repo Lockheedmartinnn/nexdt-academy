@@ -51,7 +51,12 @@ function ModuleCertModal({ module, path, user, onClose }) {
           </p>
         </div>
 
-        <p className="text-xs mb-6" style={{ color: '#4B5563' }}>Issued {date} · NexDT Academy by SiteSee</p>
+        <p className="text-xs mb-6" style={{ color: '#4B5563' }}>Issued {date}</p>
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <div className="h-px flex-1" style={{ background: 'rgba(55,65,81,0.4)' }} />
+          <span className="text-xs" style={{ color: '#374151' }}>NexDT Academy · SiteSee</span>
+          <div className="h-px flex-1" style={{ background: 'rgba(55,65,81,0.4)' }} />
+        </div>
 
         <button
           onClick={() => window.print()}
