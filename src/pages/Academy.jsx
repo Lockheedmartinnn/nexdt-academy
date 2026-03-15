@@ -331,11 +331,6 @@ export default function Academy() {
                   const navSections = (module.sections || []).filter(s => s.type !== 'callout');
                   const done = navSections.filter(s => completedSections.includes(s.id)).length;
                   const isComplete = done === navSections.length && navSections.length > 0;
-                  const prevModule = idx > 0 ? selectedModules[idx - 1] : null;
-                  const prevComplete = prevModule
-                    ? (prevModule.sections || []).filter(s => s.type !== 'callout').every(s => completedSections.includes(s.id))
-                    : true;
-
                   return (
                     <Link
                       key={module.id}
