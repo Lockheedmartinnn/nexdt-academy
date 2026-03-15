@@ -123,7 +123,6 @@ export default function Academy() {
   const completedSections = progress?.completed_lessons || [];
 
   const introProgress = useMemo(() => getIntroProgress(completedSections), [completedSections]);
-  const introUnlocked = true;
   const pathsUnlocked = introProgress.isComplete;
 
   const selectPathMutation = useMutation({
