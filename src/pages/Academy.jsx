@@ -3,7 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ChevronRight, Award, BookOpen, CheckCircle2, ArrowRight, Lock } from 'lucide-react';
+import { ChevronRight, Award, ArrowRight, Lock } from 'lucide-react';
 import { PATHS, MODULES, getModulesForPath } from '@/components/lms/lmsData';
 import UserSidePanel from '@/components/lms/UserSidePanel';
 
