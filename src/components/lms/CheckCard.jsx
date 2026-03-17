@@ -60,12 +60,12 @@ export default function CheckCard({ section, onCorrect, isUnlocked = true }) {
       <div className="px-5 py-5">
         <div className="flex items-center gap-2 mb-4">
           {isUnlocked ? (
-            <CheckCircle2 className="w-4 h-4" style={{ color: '#10B981' }} />
+            <HelpCircle className="w-4 h-4" style={{ color: '#3B82F6' }} />
           ) : (
             <Lock className="w-4 h-4" style={{ color: '#6B7280' }} />
           )}
-          <span className="text-xs font-mono font-medium tracking-wider" style={{ color: '#10B981' }}>
-            ✅ KNOWLEDGE CHECK
+          <span className="text-xs font-mono font-medium tracking-wider" style={{ color: '#6B7280' }}>
+            KNOWLEDGE CHECK
           </span>
           {attempts > 0 && !isCorrect && attempts < maxAttempts && (
             <span className="text-xs ml-auto" style={{ color: '#F59E0B' }}>
@@ -125,7 +125,10 @@ export default function CheckCard({ section, onCorrect, isUnlocked = true }) {
 
           {submitted && isCorrect && (
             <div className="p-4 rounded-lg" style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)' }}>
-              <p className="font-semibold text-sm mb-1" style={{ color: '#34D399' }}>✓ Correct!</p>
+              <div className="flex items-center gap-1.5 mb-1">
+                <CheckCircle2 className="w-4 h-4" style={{ color: '#34D399' }} />
+                <p className="font-semibold text-sm" style={{ color: '#34D399' }}>Correct</p>
+              </div>
               {section.explanation && <p className="text-sm" style={{ color: '#94A3B8' }}>{section.explanation}</p>}
             </div>
           )}
