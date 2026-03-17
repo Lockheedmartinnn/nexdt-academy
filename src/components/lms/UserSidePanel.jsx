@@ -134,7 +134,7 @@ export default function UserSidePanel({ user, progress, onClose }) {
           {selectedPath && (
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <TrendingUp className="w-4 h-4" style={{ color: '#4B5563' }} />
+                <BarChart2 className="w-4 h-4" style={{ color: '#4B5563' }} />
                 <span className="text-xs font-mono" style={{ color: '#4B5563' }}>OVERALL PROGRESS</span>
               </div>
               <div className="p-4 rounded-xl" style={{ background: 'rgba(30,41,59,0.5)', border: '1px solid rgba(55,65,81,0.4)' }}>
