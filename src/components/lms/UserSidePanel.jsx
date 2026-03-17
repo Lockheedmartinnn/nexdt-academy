@@ -174,9 +174,12 @@ export default function UserSidePanel({ user, progress, onClose }) {
                         border: `1px solid ${isComplete ? 'rgba(16,185,129,0.25)' : 'rgba(55,65,81,0.4)'}`,
                       }}
                     >
-                      <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 text-base"
-                        style={{ background: isComplete ? 'rgba(16,185,129,0.15)' : 'rgba(55,65,81,0.4)' }}>
-                        {isComplete ? '✅' : m.icon}
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                       style={{ background: isComplete ? 'rgba(16,185,129,0.15)' : 'rgba(55,65,81,0.4)' }}>
+                        {isComplete
+                          ? <CheckCircle2 className="w-4 h-4" style={{ color: '#10B981' }} />
+                          : <span className="text-base">{m.icon}</span>
+                        }
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-xs font-medium truncate mb-1" style={{ color: '#F9FAFB' }}>{m.title}</p>
