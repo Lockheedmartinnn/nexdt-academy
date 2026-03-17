@@ -229,7 +229,10 @@ export default function UserSidePanel({ user, progress, onClose }) {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-xs font-semibold truncate" style={{ color: '#F9FAFB' }}>{m.title}</p>
-                      <p className="text-xs" style={{ color: '#FBBF24' }}>View Certificate →</p>
+                      <div className="flex items-center gap-1">
+                        <p className="text-xs" style={{ color: '#FBBF24' }}>View Certificate</p>
+                        <ChevronRight className="w-3 h-3" style={{ color: '#FBBF24' }} />
+                      </div>
                     </div>
                   </button>
                 ))}
