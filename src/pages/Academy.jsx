@@ -229,7 +229,10 @@ export default function Academy() {
               className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0"
               style={{ background: introProgress.isComplete ? 'rgba(16,185,129,0.12)' : 'rgba(59,130,246,0.12)' }}
             >
-              {introProgress.isComplete ? '✅' : INTRO_MODULE.icon}
+              {introProgress.isComplete
+                ? <CheckCircle2 className="w-6 h-6" style={{ color: '#10B981' }} />
+                : <span className="text-2xl">{INTRO_MODULE.icon}</span>
+              }
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="text-base font-bold mb-1" style={{ color: '#F9FAFB', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
@@ -350,7 +353,10 @@ export default function Academy() {
                           className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-lg"
                           style={{ background: isComplete ? 'rgba(16,185,129,0.12)' : 'rgba(55,65,81,0.4)' }}
                         >
-                          {isComplete ? '✅' : module.icon}
+                          {isComplete
+                            ? <CheckCircle2 className="w-5 h-5" style={{ color: '#10B981' }} />
+                            : <span className="text-lg">{module.icon}</span>
+                          }
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium truncate" style={{ color: '#F9FAFB' }}>{module.title}</p>
