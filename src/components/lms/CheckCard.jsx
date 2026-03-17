@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckCircle2, XCircle, Lock } from 'lucide-react';
+import { CheckCircle2, XCircle, Lock, HelpCircle } from 'lucide-react';
 
 export default function CheckCard({ section, onCorrect, isUnlocked = true }) {
   const [selected, setSelected] = useState(null);

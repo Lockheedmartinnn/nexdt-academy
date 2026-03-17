@@ -96,7 +96,7 @@ export default function QuizUI({ section, onPass, onFail }) {
             )}
           </div>
           <h3 className="text-xl font-bold mb-1" style={{ color: '#F9FAFB' }}>
-            {passed ? '🎉 You passed!' : 'Not quite'}
+            {passed ? 'You passed!' : 'Not quite'}
           </h3>
           <p className="text-sm mb-6" style={{ color: '#6B7280' }}>
             {passed ? 'Well done — this module is complete.' : `Review the material and try again.`}
@@ -202,9 +202,15 @@ export default function QuizUI({ section, onPass, onFail }) {
               border: `1px solid ${isCorrect ? 'rgba(16,185,129,0.25)' : 'rgba(239,68,68,0.2)'}`,
             }}
           >
-            <p className="font-semibold text-sm mb-1" style={{ color: isCorrect ? '#34D399' : '#FCA5A5' }}>
-              {isCorrect ? '✓ Correct' : '✗ Incorrect'}
-            </p>
+            <div className="flex items-center gap-1.5 mb-1">
+              {isCorrect
+                ? <CheckCircle2 className="w-4 h-4" style={{ color: '#34D399' }} />
+                : <XCircle className="w-4 h-4" style={{ color: '#FCA5A5' }} />
+              }
+              <p className="font-semibold text-sm" style={{ color: isCorrect ? '#34D399' : '#FCA5A5' }}>
+                {isCorrect ? 'Correct' : 'Incorrect'}
+              </p>
+            </div>
             {q.explanation && <p className="text-sm" style={{ color: '#94A3B8' }}>{q.explanation}</p>}
           </div>
         )}
