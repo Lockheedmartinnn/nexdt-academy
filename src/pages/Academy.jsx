@@ -28,35 +28,36 @@ function PathCard({ path, progress, completedSections, onSelect, unlocked }) {
   const firstNonIntroModule = modules.find(m => m.id !== INTRO_MODULE_ID) || modules[0];
   const resumeUrl = firstNonIntroModule ? createPageUrl(`LMSLesson?path=${path.id}&module=${firstNonIntroModule.id}&section=0`) : null;
 
+  let borderColor;
+  if (!unlocked) borderColor = 'rgba(55,65,81,0.4)';
+  else if (isSelected) borderColor = path.color + '60';
+  else borderColor = 'rgba(55,65,81,0.6)';
+
   return (
     <div
       className="rounded-2xl overflow-hidden flex flex-col transition-all duration-200"
       style={{
         background: '#111827',
-        border: `1px solid ${!unlocked ? 'rgba(55,65,81,0.3)' : isSelected ? path.color + '40' : 'rgba(55,65,81,0.6)'}`,
-        opacity: unlocked ? 1 : 0.5,
+        border: `1px solid ${borderColor}`,
+        boxShadow: isSelected ? `0 0 0 2px ${path.color}30` : 'none',
         position: 'relative',
       }}
     >
-      {!unlocked && (
-        <div className="absolute inset-0 flex items-center justify-center z-10 rounded-2xl" style={{ background: 'rgba(10,14,26,0.6)' }}>
-          <div className="flex flex-col items-center gap-2">
-            <Lock className="w-6 h-6" style={{ color: '#4B5563' }} />
-            <p className="text-xs" style={{ color: '#4B5563' }}>Complete the intro first</p>
-          </div>
-        </div>
-      )}
-
       <div className="p-6 flex-1">
         <div className="flex items-start justify-between mb-4">
           <span className="text-3xl">{path.emoji}</span>
-          {isSelected && pct === 100 && <Award className="w-5 h-5" style={{ color: '#F59E0B' }} />}
+          {isSelected && pct === 100
+            ? <Award className="w-5 h-5" style={{ color: '#F59E0B' }} />
+            : isSelected
+            ? <div className="w-5 h-5 rounded-full border-2 flex items-center justify-center" style={{ borderColor: path.color }}><div className="w-2 h-2 rounded-full" style={{ background: path.color }} /></div>
+            : null
+          }
         </div>
         <h3 className="text-base font-bold mb-1" style={{ color: '#F9FAFB', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
           {path.title}
         </h3>
         <p className="text-sm mb-3" style={{ color: '#6B7280' }}>{path.description}</p>
-        <p className="text-xs" style={{ color: '#4B5563' }}>{path.durationText}</p>
+        <p className="text-xs" style={{ color: '#6B7280' }}>{path.durationText}</p>
 
         {isSelected && total > 0 && (
           <div className="mt-4">
@@ -87,10 +88,15 @@ function PathCard({ path, progress, completedSections, onSelect, unlocked }) {
             onClick={() => unlocked && onSelect(path.id)}
             disabled={!unlocked}
             className="w-full py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all"
-            style={{ background: 'rgba(55,65,81,0.4)', color: '#94A3B8', border: '1px solid rgba(55,65,81,0.5)' }}
+            style={{
+              background: unlocked ? path.color + '18' : 'rgba(55,65,81,0.25)',
+              color: unlocked ? path.color : '#4B5563',
+              border: `1px solid ${unlocked ? path.color + '40' : 'rgba(55,65,81,0.3)'}`,
+              cursor: unlocked ? 'pointer' : 'not-allowed',
+            }}
           >
-            Select This Path
-            <ChevronRight className="w-4 h-4" />
+            {unlocked ? 'Select This Path' : <><Lock className="w-3.5 h-3.5" /> Complete intro first</>}
+            {unlocked && <ChevronRight className="w-4 h-4" />}
           </button>
         )}
       </div>
