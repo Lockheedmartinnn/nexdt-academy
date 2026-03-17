@@ -58,7 +58,7 @@ function ModuleItem({ module, pathId, activeModuleId, activeSectionIdx, complete
           {isModuleComplete ? (
             <CheckCircle2 className="w-4 h-4" style={{ color: '#10B981' }} />
           ) : (
-            <BookOpen className="w-4 h-4" style={{ color: isActiveModule ? '#3B82F6' : '#4B5563' }} />
+            <Circle className="w-4 h-4" style={{ color: isActiveModule ? '#3B82F6' : '#4B5563' }} />
           )}
         </span>
         <span className="flex-1 text-xs font-medium leading-snug" style={{ color: isActiveModule ? '#F9FAFB' : '#94A3B8' }}>
