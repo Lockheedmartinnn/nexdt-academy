@@ -354,9 +354,18 @@ export default function Academy() {
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium truncate" style={{ color: '#F9FAFB' }}>{module.title}</p>
-                          <p className="text-xs" style={{ color: '#4B5563' }}>
+                          <p className="text-xs mb-1.5" style={{ color: '#4B5563' }}>
                             {done}/{navSections.length} sections · {module.duration}
                           </p>
+                          <div className="h-1 rounded-full w-full" style={{ background: 'rgba(55,65,81,0.5)' }}>
+                            <div
+                              className="h-full rounded-full transition-all duration-500"
+                              style={{
+                                width: `${navSections.length > 0 ? Math.round((done / navSections.length) * 100) : 0}%`,
+                                background: isComplete ? '#10B981' : selectedPath.color,
+                              }}
+                            />
+                          </div>
                         </div>
                         <ChevronRight className="w-4 h-4 flex-shrink-0" style={{ color: '#4B5563' }} />
                       </div>
