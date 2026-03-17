@@ -28,7 +28,7 @@ function PhaseTracker({ phases, currentPhase }) {
                   border: `1px solid ${isPast ? 'rgba(16,185,129,0.4)' : isCurrent ? '#3B82F6' : 'rgba(55,65,81,0.4)'}`,
                 }}
               >
-                {isPast ? '✓' : i + 1}
+                {isPast ? <Check className="w-3 h-3" /> : i + 1}
               </div>
               <span className="text-xs hidden sm:block" style={{ color: isCurrent ? '#F9FAFB' : isPast ? '#10B981' : '#4B5563' }}>
                 {phase}
