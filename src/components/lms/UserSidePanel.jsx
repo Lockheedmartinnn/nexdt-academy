@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Award, CheckCircle2, ChevronRight, Download, Star, TrendingUp, BookOpen, LogOut } from 'lucide-react';
+import { X, Award, CheckCircle2, Download, BarChart2, BookOpen, LogOut } from 'lucide-react';
 import { PATHS, MODULES, getModulesForPath } from '@/components/lms/lmsData';
 import { createPageUrl } from '@/utils';
 import { Link } from 'react-router-dom';
