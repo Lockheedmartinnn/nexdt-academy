@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { CheckCircle2, Circle, Lock, ChevronDown, ChevronRight, BookOpen } from 'lucide-react';
+import { CheckCircle2, Circle, Lock, ChevronDown, ChevronRight } from 'lucide-react';
 import { getModulesForPath, getSectionLabel, PATHS, MODULES } from './lmsData';
 
 function SidebarSection({ sectionIdx, section, isActive, isComplete, isLocked, pathId, moduleId, onClick }) {
