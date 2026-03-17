@@ -210,7 +210,7 @@ export default function Academy() {
             className="w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
             style={{ background: introProgress.isComplete ? '#10B981' : '#3B82F6', color: '#fff' }}
           >
-            {introProgress.isComplete ? '✓' : '1'}
+            {introProgress.isComplete ? <CheckCircle2 className="w-4 h-4" /> : '1'}
           </div>
           <span className="text-sm font-semibold" style={{ color: '#F9FAFB' }}>
             Start Here — Platform Overview <span className="text-xs font-normal ml-1" style={{ color: '#4B5563' }}>Required for all users</span>
@@ -289,7 +289,7 @@ export default function Academy() {
               color: pathsUnlocked ? '#fff' : '#4B5563',
             }}
           >
-            {selectedPath ? '✓' : '2'}
+            {selectedPath ? <CheckCircle2 className="w-4 h-4" /> : '2'}
           </div>
           <span className="text-sm font-semibold" style={{ color: pathsUnlocked ? '#F9FAFB' : '#4B5563' }}>
             Select Your Role
