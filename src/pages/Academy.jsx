@@ -162,11 +162,11 @@ export default function Academy() {
       {/* Top Bar */}
       <div style={{ background: '#0A0E1A', borderBottom: '1px solid rgba(55,65,81,0.4)' }}>
         <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4 -ml-2">
             <img
               src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/253764dc9_image.png"
               alt="SiteSee"
-              className="h-6"
+              className="h-10"
             />
             <span className="text-sm font-semibold" style={{ color: '#94A3B8' }}>NexDT Academy</span>
           </div>
