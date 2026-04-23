@@ -4,7 +4,7 @@ const VID_NEXDT_WORKFLOW   = '1LtFvDnWOSo';   // The_NexDT_Workflow.mp4
 const VID_RIP_REPLACE      = 'OhAjtWlqQaA';   // The_Rip_&_Replace_Workflow.mp4
 const VID_IEA_EME          = 'dZc8fFSB5LU';   // NexDT_IEA_&_EME.mp4
 const VID_BIM_ADMIN        = 'tpUksqWptbM';   // BIM__Architect_of_Digital_Twins.mp4
-const VID_SUPER_ADMIN      = 'PLACEHOLDER_SUPER_ADMIN';      // Super_Admin__Digital_Governance.mp4
+const VID_SUPER_ADMIN      = 'OhAjtWlqQaA';   // Super_Admin__Digital_Governance.mp4
 
 // Infographic image URLs
 const IMG_PLATFORM   = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/90cdb9409_infographic_1_platform_overview.png';
