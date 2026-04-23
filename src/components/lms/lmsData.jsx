@@ -1,7 +1,7 @@
 // ─── VIDEO PLACEHOLDERS (replace with YouTube IDs when uploaded) ───────────
 const VID_UNBROKEN_CHAIN   = 'eNjpgsNJjTM';   // The_Unbroken_Chain.mp4
 const VID_NEXDT_WORKFLOW   = 'eNjpgsNJjTM';   // The_NexDT_Workflow.mp4
-const VID_RIP_REPLACE      = 'OhAjtWlqQaA';   // The_Rip_&_Replace_Workflow.mp4
+const VID_RIP_REPLACE      = '1LtFvDnWOSo';   // The_Rip_&_Replace_Workflow.mp4
 const VID_IEA_EME          = 'dZc8fFSB5LU';   // NexDT_IEA_&_EME.mp4
 const VID_BIM_ADMIN        = 'tpUksqWptbM';   // BIM__Architect_of_Digital_Twins.mp4
 const VID_SUPER_ADMIN      = 'OhAjtWlqQaA';   // Super_Admin__Digital_Governance.mp4
