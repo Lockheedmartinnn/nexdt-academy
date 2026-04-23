@@ -112,12 +112,6 @@ export default function StepsCard({ section }) {
       {/* Active step */}
       {steps[activeStep] && (
         <div className="px-5 py-5 space-y-4">
-          {/* Screenshot */}
-          <ScreenshotPlaceholder
-            label={`Step ${activeStep + 1}: ${steps[activeStep].title}`}
-            annotations={getAnnotations(steps[activeStep])}
-          />
-
           {/* Caption */}
           <div className="flex items-start gap-3">
             <div
