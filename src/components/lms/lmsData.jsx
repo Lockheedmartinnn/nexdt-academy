@@ -430,54 +430,8 @@ export const MODULES = {
         ],
       },
 
-      // PHASE 1
-      {
-        id: 'c2-p1-steps',
-        type: 'steps',
-        phase: 0,
-        title: 'Phase 1 — Application Setup',
-        steps: [
-          { number: 1, title: 'Start from the Default Scene', description: 'Navigate to the site and open the default scene — not an existing application. The default scene represents the as-built baseline. Starting from a previous application will cause tracking issues.', warning: null },
-          { number: 2, title: 'Click Create Application', description: 'Find "Create Application" in the left side menu. Give it a descriptive, recognisable name. The convention: "Rip and Replace – [Site Name]". This name appears in logs, approvals, and the Engineering review queue.', warning: null },
-          { number: 3, title: 'Wait for the Green Bar', description: 'After creating, a green progress bar appears at the top of the screen. This indicates background initialisation tasks are running — scene preparation, data linking, audit trail creation. Do NOT proceed until it fully disappears.', warning: 'Editing during initialisation corrupts the session. This is not a cosmetic warning — it will cause data integrity issues that require the application to be recreated.' },
-        ],
-      },
-      { id: 'c2-p1-watch', type: 'watch', phase: 0, title: 'Phase 1 — Setup', videoId: 'ZwtJNhz1aNc', startTime: 70, endTime: 125, timestampLabel: '01:10 – 02:05', focusText: 'Focus on: The Create Application button and the green progress bar behaviour' },
-      { id: 'c2-p1-callout', type: 'callout', phase: 0, variant: 'warning', title: 'Do not proceed until the green bar disappears.', body: 'Editing during initialization corrupts the session. Background tasks must complete first — this is not optional.' },
-      { id: 'c2-p1-check', type: 'check', phase: 0, question: 'What does the green progress bar indicate after creating an application?', options: [{ id: 'a', text: 'The application has been submitted successfully' }, { id: 'b', text: 'Background initialization tasks are still running' }, { id: 'c', text: 'IEA is calculating in the background' }, { id: 'd', text: 'The application is ready to edit immediately' }], correctAnswer: 'b', explanation: 'The green bar indicates background initialization is in progress. Wait for it to disappear before proceeding.', maxAttempts: 2 },
-
-      // PHASE 2
-      {
-        id: 'c2-p2-read',
-        type: 'read',
-        phase: 1,
-        title: 'Phase 2 — My Equipment Filter',
-        intro: 'Before touching anything in the 3D scene, enable the My Equipment Filter. This is not optional.',
-        bullets: [
-          { icon: '🔍', text: 'The filter **shows only your organisation\'s equipment**, highlighted with distinct colouring', detail: 'Without the filter active, you can see all equipment on the tower — including competitor assets. The filter makes your equipment visually distinct with full manufacturer details.' },
-          { icon: '🚫', text: 'Without it: **competitor assets are visible but restricted** — you may accidentally interact with them', detail: 'Clicking on equipment belonging to other organisations without the filter shows limited data. You risk confusing their equipment with yours, especially on shared towers.' },
-          { icon: '✅', text: 'Always enable **before touching anything** in the 3D scene — it takes one click', detail: 'Toggle "My Equipment Filter" in the left panel. Your equipment will immediately highlight and show full manufacturer details, assembly numbers, and configuration data.' },
-        ],
-      },
-      { id: 'c2-p2-watch', type: 'watch', phase: 1, title: 'Phase 2 — Filter', videoId: 'ZwtJNhz1aNc', startTime: 125, endTime: 200, timestampLabel: '02:05 – 03:20', focusText: 'Focus on: How equipment highlighting changes when the filter is toggled on and off' },
-      { id: 'c2-p2-check', type: 'check', phase: 1, question: 'Why should you enable the My Equipment Filter before editing?', options: [{ id: 'a', text: 'It speeds up 3D rendering' }, { id: 'b', text: 'To restrict visibility and editing to your permitted equipment only' }, { id: 'c', text: 'It automatically activates the IEA tool' }, { id: 'd', text: 'It is required to create a new layer' }], correctAnswer: 'b', explanation: 'The filter ensures you only interact with equipment your organisation owns, preventing accidental edits to other organisations\' assets.', maxAttempts: 2 },
-
-      // PHASE 3
-      {
-        id: 'c2-p3-steps',
-        type: 'steps',
-        phase: 2,
-        title: 'Phase 3 — The Rip (Remove Old Equipment)',
-        steps: [
-          { number: 1, title: 'Enable the Selector Tool', description: 'Switch to the Selector Tool (arrow icon) in the toolbar. This puts you in selection mode — clicking an object selects it rather than navigating around it.', warning: null },
-          { number: 2, title: 'Select the Equipment to Remove', description: 'Click the equipment panel or antenna you want to remove. The selected item should highlight. Confirm it\'s yours (manufacturer details should be visible if the filter is active).', warning: null },
-          { number: 3, title: 'Click Edit and Add a Layer', description: 'Click the Edit button in the properties panel. You\'ll be prompted to Add a Layer. Name it descriptively — e.g. "Replace 5G Upgrade". This layer is the audit trail for this change. Without it, you cannot delete.', warning: 'The layer is REQUIRED. The system blocks deletion without one. Do not try to skip this step.' },
-          { number: 4, title: 'Delete the Equipment', description: 'With the layer created, click the Delete Equipment icon (trash). The equipment is removed from the digital twin. This action is tracked in the layer and does not take effect on the real site until the application is approved.', warning: null },
-        ],
-      },
-      { id: 'c2-p3-watch', type: 'watch', phase: 2, title: 'Phase 3 — Rip', videoId: 'ZwtJNhz1aNc', startTime: 200, endTime: 300, timestampLabel: '03:20 – 05:00', focusText: 'Focus on: The layer creation dialog and the trash icon confirmation step' },
-      { id: 'c2-p3-callout', type: 'callout', phase: 2, variant: 'danger', title: 'Cannot delete without a layer.', body: 'The system blocks equipment deletion if no layer has been created. Adding a layer is mandatory — it creates the audit trail for this change.' },
-      { id: 'c2-p3-check', type: 'check', phase: 2, question: 'Why is adding a layer required before deleting equipment?', options: [{ id: 'a', text: 'To unlock the delete button visually' }, { id: 'b', text: 'To track the change request in the application audit trail' }, { id: 'c', text: 'To trigger IEA automatically' }, { id: 'd', text: 'To notify the Engineering team' }], correctAnswer: 'b', explanation: 'Adding a layer creates the change tracking record that ties this modification to your application.', maxAttempts: 2 },
+      // APPLICATION SETUP VIDEO
+      { id: 'c2-p1-watch', type: 'watch', phase: 0, title: 'Application Setup & Workflow Overview', videoId: 'ZwtJNhz1aNc', startTime: 70, endTime: 125, timestampLabel: '01:10 – 02:05', focusText: 'Focus on: The Create Application button and the green progress bar behaviour' },
 
       // PHASE 4
       {
