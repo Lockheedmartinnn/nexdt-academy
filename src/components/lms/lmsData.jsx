@@ -67,16 +67,7 @@ export const MODULES = {
         timestampLabel: 'Full video',
         focusText: 'Watch this first — it sets the context for everything you\'ll learn in NexDT Academy.',
       },
-      {
-        id: 'm0-workflow-video',
-        type: 'watch',
-        title: 'The NexDT Workflow',
-        videoId: VID_NEXDT_WORKFLOW,
-        startTime: 0,
-        endTime: null,
-        timestampLabel: 'Full video',
-        focusText: 'Overview of the full NexDT platform workflow from site capture to approval.',
-      },
+
       {
         id: 'm0-obj',
         type: 'objective',
