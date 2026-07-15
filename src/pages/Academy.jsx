@@ -4,7 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { ChevronRight, Award, ArrowRight, Lock, CheckCircle2 } from 'lucide-react';
-import { PATHS, MODULES, getModulesForPath } from '@/components/lms/lmsData';
+import { PATHS, MODULES, getModulesForPath, getVisiblePaths } from '@/components/lms/lmsData';
 import UserSidePanel from '@/components/lms/UserSidePanel';
 
 const INTRO_MODULE = MODULES['m0'];
@@ -129,7 +129,10 @@ export default function Academy() {
   const completedSections = progress?.completed_lessons || [];
 
   const introProgress = useMemo(() => getIntroProgress(completedSections), [completedSections]);
-  const pathsUnlocked = introProgress.isComplete;
+  const isPartner = user?.role === 'partner';
+  const pathsUnlocked = isPartner || introProgress.isComplete;
+  const visiblePathIds = getVisiblePaths(user?.role);
+  const visiblePaths = visiblePathIds.map(id => PATHS[id]).filter(Boolean);
 
   const selectPathMutation = useMutation({
     mutationFn: async (pathId) => {
@@ -207,6 +210,7 @@ export default function Academy() {
           </p>
         </div>
 
+        {!isPartner && (<>
         {/* ── STEP 1: Intro Module ── */}
         <div className="mb-4 flex items-center gap-3">
           <div
@@ -282,6 +286,7 @@ export default function Academy() {
             style={{ color: pathsUnlocked ? '#4B5563' : 'rgba(55,65,81,0.3)' }}
           />
         </div>
+        </>)}
 
         {/* ── STEP 2: Select Role / Path ── */}
         <div className="mb-4 flex items-center gap-3">
@@ -300,8 +305,8 @@ export default function Academy() {
           </span>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-4 mb-8">
-          {Object.values(PATHS).map((path) => (
+        <div className={`grid gap-4 mb-8 ${visiblePaths.length === 1 ? 'grid-cols-1 max-w-sm' : 'md:grid-cols-2 lg:grid-cols-4'}`}>
+          {visiblePaths.map((path) => (
             <PathCard
               key={path.id}
               path={path}
@@ -362,7 +367,12 @@ export default function Academy() {
                           }
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium truncate" style={{ color: '#F9FAFB' }}>{module.title}</p>
+                          <div className="flex items-center gap-2">
+                            <p className="text-sm font-medium truncate" style={{ color: '#F9FAFB' }}>{module.title}</p>
+                            {module.isNew && (
+                              <span className="text-xs font-bold px-1.5 py-0.5 rounded-full flex-shrink-0" style={{ background: 'rgba(16,185,129,0.15)', color: '#10B981', border: '1px solid rgba(16,185,129,0.3)' }}>NEW</span>
+                            )}
+                          </div>
                           <p className="text-xs mb-1.5" style={{ color: '#4B5563' }}>
                             {done}/{navSections.length} sections · {module.duration}
                           </p>

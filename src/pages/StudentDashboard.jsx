@@ -5,98 +5,9 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import {
   Award, CheckCircle2, BookOpen, BarChart2, ChevronRight,
-  ArrowLeft, LogOut, Clock, Target, TrendingUp, Download, X, Users
+  ArrowLeft, LogOut, Clock, Target, TrendingUp, Download, X
 } from 'lucide-react';
 import { PATHS, MODULES, getModulesForPath } from '@/components/lms/lmsData';
-
-function getPathPct(progressRecord) {
-  if (!progressRecord?.track_id) return 0;
-  const modules = getModulesForPath(progressRecord.track_id);
-  const allIds = modules.flatMap(m => (m.sections || []).filter(s => s.type !== 'callout').map(s => s.id));
-  if (allIds.length === 0) return 0;
-  const done = (progressRecord.completed_lessons || []).filter(id => allIds.includes(id)).length;
-  return Math.round((done / allIds.length) * 100);
-}
-
-function TeamProgressSection({ allProgress, allUsers }) {
-  // Join progress with user names
-  const rows = useMemo(() => {
-    return allProgress.map(p => {
-      const matchedUser = allUsers.find(u => u.email === p.created_by);
-      const path = p.track_id ? PATHS[p.track_id] : null;
-      const modules = p.track_id ? getModulesForPath(p.track_id) : [];
-      const completedModules = modules.filter(m => {
-        const navSections = (m.sections || []).filter(s => s.type !== 'callout');
-        return navSections.length > 0 && navSections.every(s => (p.completed_lessons || []).includes(s.id));
-      }).length;
-      const pct = getPathPct(p);
-      return {
-        email: p.created_by,
-        name: matchedUser?.full_name || p.created_by,
-        path,
-        pct,
-        completedModules,
-        totalModules: modules.length,
-      };
-    }).sort((a, b) => b.pct - a.pct);
-  }, [allProgress, allUsers]);
-
-  const initials = (name) => name ? name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) : '?';
-
-  return (
-    <div className="rounded-2xl p-5" style={{ background: '#111827', border: '1px solid rgba(55,65,81,0.4)' }}>
-      <div className="flex items-center gap-2 mb-4">
-        <Users className="w-4 h-4" style={{ color: '#4B5563' }} />
-        <span className="text-xs font-mono" style={{ color: '#4B5563' }}>TEAM PROGRESS</span>
-        <span className="ml-auto text-xs px-2 py-0.5 rounded-full" style={{ background: 'rgba(55,65,81,0.4)', color: '#6B7280' }}>
-          {rows.length} learner{rows.length !== 1 ? 's' : ''}
-        </span>
-      </div>
-
-      {rows.length === 0 ? (
-        <p className="text-sm text-center py-6" style={{ color: '#4B5563' }}>No other learners yet.</p>
-      ) : (
-        <div className="space-y-3">
-          {rows.map((row, i) => (
-            <div key={row.email} className="flex items-center gap-3 p-3 rounded-xl"
-              style={{ background: 'rgba(30,41,59,0.4)', border: '1px solid rgba(55,65,81,0.4)' }}>
-              {/* Rank */}
-              <span className="text-xs font-mono w-5 text-right flex-shrink-0" style={{ color: '#374151' }}>
-                {i + 1}
-              </span>
-              {/* Avatar */}
-              <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
-                style={{ background: row.path ? row.path.color + '30' : 'rgba(59,130,246,0.2)', color: row.path?.color || '#93C5FD' }}>
-                {initials(row.name)}
-              </div>
-              {/* Name + path */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <p className="text-xs font-medium truncate" style={{ color: '#F9FAFB' }}>{row.name}</p>
-                  {row.path && (
-                    <span className="text-xs px-1.5 py-0.5 rounded flex-shrink-0"
-                      style={{ background: row.path.color + '18', color: row.path.color }}>
-                      {row.path.emoji}
-                    </span>
-                  )}
-                </div>
-                <div className="h-1.5 rounded-full w-full" style={{ background: 'rgba(55,65,81,0.5)' }}>
-                  <div className="h-full rounded-full transition-all duration-500"
-                    style={{ width: `${row.pct}%`, background: row.path?.color || '#3B82F6' }} />
-                </div>
-              </div>
-              {/* Pct + modules */}
-              <div className="flex-shrink-0 text-right">
-                <p className="text-xs font-bold" style={{ color: row.path?.color || '#3B82F6' }}>{row.pct}%</p>
-                <p className="text-xs" style={{ color: '#374151' }}>{row.completedModules}/{row.totalModules} mod</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 
 function ModuleCertModal({ module, path, user, onClose }) {
   const date = new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -166,24 +77,6 @@ export default function StudentDashboard() {
     queryFn: () => base44.entities.CourseProgress.filter({ created_by: user?.email }),
     enabled: !!user?.email,
   });
-
-  // All users' progress (for team view)
-  const { data: allProgressData } = useQuery({
-    queryKey: ['allProgress'],
-    queryFn: () => base44.entities.CourseProgress.list(),
-    enabled: !!user,
-  });
-
-  const { data: allUsers } = useQuery({
-    queryKey: ['allUsers'],
-    queryFn: () => base44.entities.User.list(),
-    enabled: !!user,
-  });
-
-  const otherProgress = useMemo(() =>
-    (allProgressData || []).filter(p => p.created_by !== user?.email),
-    [allProgressData, user?.email]
-  );
 
   const progress = progressData?.[0] || null;
   const selectedPathId = progress?.track_id;
@@ -411,12 +304,6 @@ export default function StudentDashboard() {
             )}
           </div>
         </div>
-
-        {/* Team Progress */}
-        {otherProgress.length > 0 && (
-          <TeamProgressSection allProgress={otherProgress} allUsers={allUsers || []} />
-        )}
-
       </div>
 
       {certModal && (

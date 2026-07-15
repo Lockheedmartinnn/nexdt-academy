@@ -1,0 +1,77 @@
+{
+  "name": "CourseProgress",
+  "type": "object",
+  "properties": {
+    "track_id": {
+      "type": "string",
+      "description": "ID of the course track"
+    },
+    "module_id": {
+      "type": "string",
+      "description": "ID of the current module"
+    },
+    "lesson_id": {
+      "type": "string",
+      "description": "ID of the current lesson"
+    },
+    "completed_lessons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of completed lesson IDs"
+    },
+    "completed_modules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of completed module IDs"
+    },
+    "completed_tracks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of completed track IDs"
+    },
+    "quiz_scores": {
+      "type": "object",
+      "description": "Quiz scores by module ID"
+    },
+    "final_assessment_score": {
+      "type": "number",
+      "description": "Final assessment score percentage"
+    },
+    "certificate_issued": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether certificate has been issued"
+    },
+    "certificate_id": {
+      "type": "string",
+      "description": "Unique certificate ID"
+    },
+    "certificate_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date certificate was issued"
+    },
+    "points": {
+      "type": "number",
+      "default": 0,
+      "description": "Total points earned"
+    },
+    "badges": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "default": [],
+      "description": "Earned badges"
+    }
+  },
+  "required": [
+    "track_id"
+  ]
+}

@@ -1,6 +1,5 @@
 // ─── VIDEO PLACEHOLDERS (replace with YouTube IDs when uploaded) ───────────
 const VID_UNBROKEN_CHAIN   = 'eNjpgsNJjTM';   // The_Unbroken_Chain.mp4
-const VID_NEXDT_WORKFLOW   = 'eNjpgsNJjTM';   // The_NexDT_Workflow.mp4
 const VID_RIP_REPLACE      = '1LtFvDnWOSo';   // The_Rip_&_Replace_Workflow.mp4
 const VID_IEA_EME          = 'dZc8fFSB5LU';   // NexDT_IEA_&_EME.mp4
 const VID_BIM_ADMIN        = 'tpUksqWptbM';   // BIM__Architect_of_Digital_Twins.mp4
@@ -21,9 +20,10 @@ export const PATHS = {
     emoji: '🏗️',
     description: 'Propose & submit equipment changes',
     subtitle: 'Learn to create applications, manage equipment changes, and submit for engineering review.',
-    durationText: '4 modules · ~90 min',
+    durationText: '5 modules · ~110 min',
     color: '#3B82F6',
-    moduleIds: ['m0', 'c0', 'c1', 'c2'],
+    moduleIds: ['m0', 'c0', 'c1', 'c2', 'tm1'],
+    roles: ['colo', 'admin', 'user'],
   },
   engineer: {
     id: 'engineer',
@@ -34,16 +34,41 @@ export const PATHS = {
     durationText: '4 modules · ~90 min',
     color: '#10B981',
     moduleIds: ['m0', 'e1', 'e2', 'e3'],
+    roles: ['engineer', 'admin', 'user'],
   },
   bim_admin: {
     id: 'bim_admin',
-    title: 'BIM / Admin Path',
+    title: 'BIM Administrator Path',
     emoji: '🔧',
-    description: 'Configure equipment & manage users',
-    subtitle: 'Configure the BIM equipment library, manage organisations, and administer the platform.',
-    durationText: '3 modules · ~105 min',
+    description: 'Manage models & asset library',
+    subtitle: 'Upload digital twins (IFC/GLB), handle model QA, validate site data, and manage the asset library.',
+    durationText: '2 modules · ~75 min',
     color: '#F59E0B',
-    moduleIds: ['m0', 'b1', 'b2'],
+    moduleIds: ['m0', 'b1'],
+    roles: ['bim_admin', 'admin', 'user'],
+  },
+  support_admin: {
+    id: 'support_admin',
+    title: 'Support Administrator Path',
+    emoji: '🛟',
+    description: 'Tickets, jobs, accounts & troubleshooting',
+    subtitle: 'Handle support tickets, monitor job statuses, manage user accounts, answer customer queries, and troubleshoot the platform.',
+    durationText: '3 modules · ~90 min',
+    color: '#06B6D4',
+    moduleIds: ['m0', 'tm1', 'b2'],
+    roles: ['support_admin', 'admin', 'user'],
+  },
+  partner: {
+    id: 'partner',
+    title: 'Partner Onboarding',
+    emoji: '🤝',
+    description: 'For drone pilots & delivery partners',
+    subtitle: 'Entry-level onboarding for external partners: SiteSee overview, capture standards, data submission, and support escalation.',
+    durationText: '4 modules · ~60 min',
+    color: '#8B5CF6',
+    moduleIds: ['p0', 'p1', 'p2', 'p3'],
+    roles: ['partner'],
+    isPartner: true,
   },
 };
 
@@ -1259,6 +1284,211 @@ export const MODULES = {
       { id: 'b2-s8', type: 'check', question: 'Which role grants the ability to approve ColoApp applications?', options: [{ id: 'a', text: 'User' }, { id: 'b', text: 'Engineer' }, { id: 'c', text: 'Colo User (secondary role)' }, { id: 'd', text: 'Site Finder' }], correctAnswer: 'b', explanation: 'Only the Engineer role has authority to review, edit, and approve submitted ColoApp applications.', maxAttempts: 2 },
     ],
   },
+
+  // ─── MODULE TM1: TASK MANAGER ESSENTIALS (Support Admin + Colo) ───
+  tm1: {
+    id: 'tm1',
+    path: 'shared',
+    title: 'Task Manager Essentials',
+    subtitle: 'Creating, tracking, and billing jobs',
+    duration: '20 min',
+    icon: '📋',
+    isNew: true,
+    sections: [
+      { id: 'tm1-obj', type: 'objective', intro: 'By the end of this module, you will understand how to create and track tasks, interpret job statuses, and understand how job status drives billing visibility.', outcomes: ['Create and assign tasks against a site or job', 'Understand each job status and what it means', 'See how job status links to invoicing (status-driven billing visibility)', 'Track job progress as a customer (transparency view)'] },
+      {
+        id: 'tm1-create',
+        type: 'read',
+        title: 'Creating & Assigning Tasks',
+        intro: 'Tasks are how work gets tracked against a site or job in NexDT. A task is always linked to a site (and optionally a job).',
+        bullets: [
+          { icon: '➕', text: '**Create a task** from the site or job detail view', detail: 'Open the site, navigate to the Tasks tab, and click Create Task. Assign a title, description, and due date.' },
+          { icon: '👤', text: '**Assign the task** to a team member or organisation', detail: 'Tasks can be assigned to engineers, colo users, or support staff. The assignee receives a notification and the task appears in their queue.' },
+          { icon: '🔗', text: '**Link the task** to a site and/or job for context', detail: 'Linking ensures the task is visible in the right context and feeds into job status calculations.' },
+        ],
+        callout: { variant: 'info', title: 'Placeholder content', body: 'Detailed walkthrough screenshots and video will be added here once the Task Manager UI is finalised.' },
+      },
+      {
+        id: 'tm1-statuses',
+        type: 'read',
+        title: 'Understanding Job Statuses',
+        intro: 'Every job moves through a defined set of statuses. Each status has a specific meaning and determines what actions are available.',
+        bullets: [
+          { icon: '🆕', text: '**Draft** — the job is being prepared, not yet submitted', detail: 'Draft jobs are editable by the creator. No billing impact.' },
+          { icon: '📤', text: '**Submitted** — the job has been sent for processing', detail: 'Submitted jobs are locked for the submitter. The receiving team now owns next steps.' },
+          { icon: '⚙️', text: '**In Progress** — the job is actively being worked', detail: 'Indicates the job is in the active work queue. Time spent here can be tracked.' },
+          { icon: '✅', text: '**Completed** — the job is finished and approved', detail: 'Completed jobs are eligible for invoicing. This is the trigger for status-driven billing.' },
+          { icon: '↩️', text: '**Returned** — the job was sent back for revision', detail: 'Returned jobs re-enter Draft for the original submitter. No billing impact until re-submitted.' },
+        ],
+      },
+      {
+        id: 'tm1-billing',
+        type: 'read',
+        title: 'Job Status & Invoicing (Status-Driven Billing)',
+        intro: 'Job status directly drives billing visibility. Only jobs that reach the right status become billable.',
+        bullets: [
+          { icon: '💰', text: '**Completed = billable** — only Completed jobs appear on invoices', detail: 'Draft, In Progress, and Returned jobs are not billable. This prevents premature invoicing.' },
+          { icon: '👁️', text: '**Status-driven billing visibility** — finance sees only what is ready', detail: 'The billing view filters by status automatically. No manual selection of billable jobs required.' },
+          { icon: '🧾', text: '**Audit trail** — every status change is logged', detail: 'Each transition (Submitted → In Progress → Completed) is recorded for billing disputes and reconciliation.' },
+        ],
+        callout: { variant: 'info', title: 'Placeholder content', body: 'Screenshots of the billing view and status-driven invoice generation will be added here.' },
+      },
+      {
+        id: 'tm1-transparency',
+        type: 'read',
+        title: 'Tracking Job Progress (Customer Transparency View)',
+        intro: 'Customers can track the progress of their jobs without needing to contact support. The transparency view shows real-time status.',
+        bullets: [
+          { icon: '📊', text: '**Customer view** shows current status, assignee, and timeline', detail: 'Customers see the same status values as internal users, plus a timeline of status changes.' },
+          { icon: '🔔', text: '**Notifications** alert customers on key status changes', detail: 'Customers are notified when a job is Submitted, goes In Progress, is Completed, or Returned.' },
+          { icon: '🚫', text: '**What customers cannot see** — internal notes and other customers\' jobs', detail: 'The transparency view is scoped to the customer\'s own jobs only.' },
+        ],
+      },
+      { id: 'tm1-check', type: 'check', title: 'Quick Check', question: 'Which job status makes a job eligible for invoicing?', options: [{ id: 'a', text: 'Draft' }, { id: 'b', text: 'In Progress' }, { id: 'c', text: 'Completed' }, { id: 'd', text: 'Returned' }], correctAnswer: 'c', explanation: 'Only Completed jobs are billable. This is the core of status-driven billing visibility.', maxAttempts: 2 },
+      {
+        id: 'tm1-quiz',
+        type: 'quiz',
+        title: 'Task Manager Essentials Quiz',
+        passingScore: 80,
+        questions: [
+          { id: 'q1', question: 'What must a task be linked to when created?', options: [{ id: 'a', text: 'A user' }, { id: 'b', text: 'A site and/or job' }, { id: 'c', text: 'An invoice' }, { id: 'd', text: 'A certificate' }], correctAnswer: 'b', explanation: 'Tasks are always linked to a site, and optionally to a job, for context and billing.' },
+          { id: 'q2', question: 'Which status indicates a job is actively being worked?', options: [{ id: 'a', text: 'Draft' }, { id: 'b', text: 'Submitted' }, { id: 'c', text: 'In Progress' }, { id: 'd', text: 'Returned' }], correctAnswer: 'c', explanation: 'In Progress means the job is in the active work queue.' },
+          { id: 'q3', question: 'When does a job become billable?', options: [{ id: 'a', text: 'When submitted' }, { id: 'b', text: 'When in progress' }, { id: 'c', text: 'When completed' }, { id: 'd', text: 'When returned' }], correctAnswer: 'c', explanation: 'Only Completed jobs appear on invoices — status-driven billing visibility.' },
+          { id: 'q4', question: 'What can customers NOT see in the transparency view?', options: [{ id: 'a', text: 'Their own job status' }, { id: 'b', text: 'Status change timeline' }, { id: 'c', text: 'Other customers\' jobs' }, { id: 'd', text: 'Current assignee' }], correctAnswer: 'c', explanation: 'The transparency view is scoped to the customer\'s own jobs only.' },
+        ],
+      },
+    ],
+  },
+
+  // ─── PARTNER ONBOARDING MODULES ───────────────────────────
+  p0: {
+    id: 'p0',
+    path: 'partner',
+    title: 'Welcome to SiteSee & NexDT',
+    subtitle: 'Partner onboarding — overview',
+    duration: '10 min',
+    icon: '👋',
+    sections: [
+      { id: 'p0-obj', type: 'objective', intro: 'Welcome! By the end of this module you will understand what SiteSee and NexDT are, and your role as a partner.', outcomes: ['Understand the SiteSee platform', 'Understand what NexDT does', 'Know your responsibilities as a partner'] },
+      {
+        id: 'p0-what',
+        type: 'read',
+        title: 'What is SiteSee & NexDT?',
+        intro: 'SiteSee captures telecommunications tower sites as 3D digital twins. Partners help us capture and deliver this data.',
+        bullets: [
+          { icon: '🛰️', text: '**SiteSee** captures tower sites as 3D models', detail: 'Using drone-based capture and processing, SiteSee produces accurate as-built digital twins of telecom towers.' },
+          { icon: '⚙️', text: '**NexDT** is the engineering review portal', detail: 'NexDT is where engineers review, assess, and approve tower configurations using the 3D models and equipment data you help provide.' },
+          { icon: '🤝', text: '**Partners** are essential to the pipeline', detail: 'Drone pilots capture the imagery. Delivery partners submit and QA the data. Without you, the digital twin does not exist.' },
+        ],
+      },
+      { id: 'p0-check', type: 'check', title: 'Quick Check', question: 'What is NexDT?', options: [{ id: 'a', text: 'A drone capture app' }, { id: 'b', text: 'The engineering review portal' }, { id: 'c', text: 'A billing system' }, { id: 'd', text: 'A pilot scheduling tool' }], correctAnswer: 'b', explanation: 'NexDT is where engineers review and approve tower configurations. Partners feed data into it.', maxAttempts: 2 },
+    ],
+  },
+  p1: {
+    id: 'p1',
+    path: 'partner',
+    title: 'Pilot Onboarding: Capture Standards',
+    subtitle: 'Mission requirements & capture standards',
+    duration: '20 min',
+    icon: '🛩️',
+    sections: [
+      { id: 'p1-obj', type: 'objective', intro: 'Learn the capture standards and mission requirements for drone-based tower capture.', outcomes: ['Understand capture standards', 'Know mission requirements', 'Plan a compliant capture flight'] },
+      {
+        id: 'p1-standards',
+        type: 'read',
+        title: 'Capture Standards',
+        intro: 'All captures must meet SiteSee standards to produce usable digital twins. Non-compliant captures cannot be processed.',
+        bullets: [
+          { icon: '📐', text: '**Overlap & coverage** requirements', detail: 'Image overlap and full coverage of the tower structure are mandatory. Gaps produce incomplete models.' },
+          { icon: '🌤️', text: '**Weather & lighting** conditions', detail: 'Captures must be done in suitable weather and lighting. Poor conditions degrade model quality.' },
+          { icon: '📍', text: '**Ground control & GPS** accuracy', detail: 'Accurate ground control points ensure the model is geospatially correct.' },
+        ],
+        callout: { variant: 'info', title: 'Placeholder content', body: 'Detailed capture standards, checklists, and example missions will be added here.' },
+      },
+      {
+        id: 'p1-mission',
+        type: 'read',
+        title: 'Mission Requirements',
+        intro: 'Each mission is planned against a specific tower. Follow the mission brief exactly.',
+        bullets: [
+          { icon: '📋', text: '**Review the mission brief** before flying', detail: 'The brief specifies the tower, required coverage, and any site-specific constraints.' },
+          { icon: '🚁', text: '**Fly the planned flight pattern**', detail: 'Deviations from the planned pattern produce unusable data. If conditions change, land and reassess.' },
+          { icon: '📝', text: '**Log the mission** on completion', detail: 'Mission logs are required for QA and for resolving processing issues.' },
+        ],
+      },
+      { id: 'p1-check', type: 'check', title: 'Quick Check', question: 'What happens if a capture does not meet coverage standards?', options: [{ id: 'a', text: 'It is processed anyway' }, { id: 'b', text: 'It cannot be processed into a usable model' }, { id: 'c', text: 'It is auto-fixed' }, { id: 'd', text: 'Nothing' }], correctAnswer: 'b', explanation: 'Non-compliant captures cannot be processed. Coverage and overlap are mandatory.', maxAttempts: 2 },
+    ],
+  },
+  p2: {
+    id: 'p2',
+    path: 'partner',
+    title: 'Data Submission & QA',
+    subtitle: 'Submitting data and quality expectations',
+    duration: '15 min',
+    icon: '📦',
+    sections: [
+      { id: 'p2-obj', type: 'objective', intro: 'Understand how to submit captured data and the QA expectations.', outcomes: ['Submit data correctly', 'Understand QA expectations', 'Handle QA feedback'] },
+      {
+        id: 'p2-submit',
+        type: 'read',
+        title: 'Data Submission',
+        intro: 'After a successful capture, submit data through the partner portal.',
+        bullets: [
+          { icon: '⬆️', text: '**Upload** all imagery and mission logs', detail: 'Use the partner portal to upload the full capture set and the completed mission log.' },
+          { icon: '🗂️', text: '**Organise** by site and mission', detail: 'Correct site and mission attribution is essential. Misattributed data causes processing failures.' },
+          { icon: '✅', text: '**Confirm** submission completeness', detail: 'Incomplete submissions are rejected. Verify file counts against the mission brief before submitting.' },
+        ],
+      },
+      {
+        id: 'p2-qa',
+        type: 'read',
+        title: 'QA Expectations',
+        intro: 'Every submission goes through QA. Understanding expectations prevents rework.',
+        bullets: [
+          { icon: '🔍', text: '**Automated checks** run on upload', detail: 'Coverage, overlap, and file integrity are checked automatically. Failures are flagged immediately.' },
+          { icon: '👤', text: '**Manual QA review** by the SiteSee team', detail: 'A human reviewer checks model quality and accuracy. Feedback is returned via the portal.' },
+          { icon: '↩️', text: '**Rework** if QA fails', detail: 'Failed QA returns the submission to you for rework. Re-submit once issues are addressed.' },
+        ],
+        callout: { variant: 'info', title: 'Placeholder content', body: 'QA checklists and example feedback will be added here.' },
+      },
+      { id: 'p2-check', type: 'check', title: 'Quick Check', question: 'What is required before submitting a capture?', options: [{ id: 'a', text: 'Nothing — submit immediately' }, { id: 'b', text: 'Verify file counts against the mission brief' }, { id: 'c', text: 'Delete mission logs' }, { id: 'd', text: 'Wait for QA' }], correctAnswer: 'b', explanation: 'Verify completeness against the mission brief before submitting. Incomplete submissions are rejected.', maxAttempts: 2 },
+    ],
+  },
+  p3: {
+    id: 'p3',
+    path: 'partner',
+    title: 'Support Escalation',
+    subtitle: 'Who to contact and how',
+    duration: '10 min',
+    icon: '🆘',
+    sections: [
+      { id: 'p3-obj', type: 'objective', intro: 'Know who to contact and how to escalate issues as a partner.', outcomes: ['Know the support channels', 'Understand escalation paths', 'Know response expectations'] },
+      {
+        id: 'p3-channels',
+        type: 'read',
+        title: 'Support Channels',
+        intro: 'Partners have dedicated support channels. Use the right channel for faster resolution.',
+        bullets: [
+          { icon: '💬', text: '**Partner portal** for submission and QA issues', detail: 'Use the portal messaging for anything related to a specific submission or QA feedback.' },
+          { icon: '✉️', text: '**Partner support email** for account and access issues', detail: 'Account, access, and onboarding issues go through the partner support email.' },
+          { icon: '🚨', text: '**Urgent escalation** for safety or site access issues', detail: 'Safety incidents or site access problems must be escalated immediately via the urgent channel.' },
+        ],
+      },
+      {
+        id: 'p3-escalation',
+        type: 'read',
+        title: 'Escalation Paths',
+        intro: 'When and how to escalate.',
+        bullets: [
+          { icon: '1️⃣', text: '**First**: use the standard partner channel', detail: 'Most issues are resolved through the standard partner support channel.' },
+          { icon: '2️⃣', text: '**Second**: escalate to your partner manager if unresolved', detail: 'If you do not receive a response within the expected window, escalate to your assigned partner manager.' },
+          { icon: '3️⃣', text: '**Urgent**: safety issues go straight to the urgent channel', detail: 'Never use the standard channel for safety incidents.' },
+        ],
+        callout: { variant: 'warning', title: 'Placeholder content', body: 'Specific contact details, response SLAs, and the urgent escalation flow will be added here.' },
+      },
+      { id: 'p3-check', type: 'check', title: 'Quick Check', question: 'Where should a safety incident be reported?', options: [{ id: 'a', text: 'Standard partner channel' }, { id: 'b', text: 'Urgent escalation channel' }, { id: 'c', text: 'QA portal' }, { id: 'd', text: 'Wait until next visit' }], correctAnswer: 'b', explanation: 'Safety incidents go straight to the urgent escalation channel — never the standard channel.', maxAttempts: 2 },
+    ],
+  },
 };
 
 export function getModulesForPath(pathId) {
@@ -1287,4 +1517,15 @@ export function getSectionLabel(section) {
     case 'infographic': return section.caption ? section.caption.split(':')[0] : 'Reference Diagram';
     default: return section.title || 'Section';
   }
+}
+
+// Role → visible path mapping. Partners only see the partner track;
+// the four customer roles each see their own path; admins and legacy
+// 'user' roles see all four customer paths (never the partner track).
+export function getVisiblePaths(role) {
+  if (role === 'partner') return ['partner'];
+  if (['colo', 'engineer', 'support_admin', 'bim_admin'].includes(role)) {
+    return [role];
+  }
+  return ['colo', 'engineer', 'support_admin', 'bim_admin'];
 }
