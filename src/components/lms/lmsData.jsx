@@ -4,8 +4,8 @@ import { ESS_MODULE, WF_MODULE, RPM_MODULE, ESSENTIALS_PATH, MODULE_DOC_LINKS, m
 const VID_UNBROKEN_CHAIN   = 'eNjpgsNJjTM';   // The_Unbroken_Chain.mp4
 const VID_RIP_REPLACE      = '1LtFvDnWOSo';   // The_Rip_&_Replace_Workflow.mp4
 const VID_IEA_EME          = 'dZc8fFSB5LU';   // NexDT_IEA_&_EME.mp4
-const VID_BIM_ADMIN        = 'tpUksqWptbM';   // BIM__Architect_of_Digital_Twins.mp4
-const VID_SUPER_ADMIN      = 'OhAjtWlqQaA';   // Super_Admin__Digital_Governance.mp4
+const VID_BIM_ADMIN        = 'zShR12je8bQ';   // Official SiteSee: NexDT BIM Admin Tooling (matches Confluence)
+const VID_SUPER_ADMIN      = 'o5dktAxAuiE';   // Official SiteSee: NexDT User Management / Admin Console (matches Confluence)
 
 // Infographic image URLs
 const IMG_PLATFORM   = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/90cdb9409_infographic_1_platform_overview.png';
