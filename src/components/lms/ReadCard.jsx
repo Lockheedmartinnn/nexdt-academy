@@ -11,6 +11,9 @@ function BulletText({ text }) {
         strong: ({ children }) => (
           <strong style={{ color: '#F9FAFB', fontWeight: 600 }}>{children}</strong>
         ),
+        a: ({ href, children }) => (
+          <a href={href} target="_blank" rel="noopener noreferrer" style={{ color: '#60A5FA', textDecoration: 'underline', textUnderlineOffset: '2px' }}>{children}</a>
+        ),
       }}
     >
       {text}
