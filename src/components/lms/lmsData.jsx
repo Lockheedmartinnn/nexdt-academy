@@ -15,6 +15,16 @@ const IMG_BIM        = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/obje
 const IMG_MODELLING  = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/7e8589730_infographic_5_modelling_specs.png';
 const IMG_ADMIN      = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6972e5e40a5362b66fb3a35c/2728951c3_infographic_6_super_admin.png';
 
+// Platform interface screenshots (Sites Portal viewer)
+const SHOT_SITE_MAP       = 'https://media.base44.com/images/public/6972e5e40a5362b66fb3a35c/391a2a3fe_NexDT_01_site_map.jpg';
+const SHOT_SITE_CARD      = 'https://media.base44.com/images/public/6972e5e40a5362b66fb3a35c/365ba15da_NexDT_02_site_card.jpg';
+const SHOT_3D_VIEWER      = 'https://media.base44.com/images/public/6972e5e40a5362b66fb3a35c/639d11907_NexDT_03_3D_viewer.jpg';
+const SHOT_MEASURE         = 'https://media.base44.com/images/public/6972e5e40a5362b66fb3a35c/face41251_NexDT_04_measuring_tool.jpg';
+const SHOT_PANORAMA        = 'https://media.base44.com/images/public/6972e5e40a5362b66fb3a35c/c1899b9bc_NexDT_05_panorama.jpg';
+const SHOT_CAMERAS         = 'https://media.base44.com/images/public/6972e5e40a5362b66fb3a35c/756b46052_NexDT_06_cameras.jpg';
+const SHOT_EME_ZONE        = 'https://media.base44.com/images/public/6972e5e40a5362b66fb3a35c/ffaa5ef5e_NexDT_07_EME_zone.jpg';
+const SHOT_ORTHOMOSAIC    = 'https://media.base44.com/images/public/6972e5e40a5362b66fb3a35c/81772a713_NexDT_08_2D_orthomosaic.jpg';
+
 export const PATHS = {
   colo: {
     id: 'colo',
@@ -135,6 +145,24 @@ export const MODULES = {
         ],
       },
       {
+        id: 'm0-shot-sitemap',
+        type: 'infographic',
+        imageUrl: SHOT_SITE_MAP,
+        containerHeight: 360,
+        label: 'Sites Portal — Site Map',
+        caption: 'The Sites Portal: search and select a site from the map to open its 3D model and engineering tools.',
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
+      },
+      {
+        id: 'm0-shot-sitecard',
+        type: 'infographic',
+        imageUrl: SHOT_SITE_CARD,
+        containerHeight: 380,
+        label: 'Sites Portal — Site Card',
+        caption: 'Selecting a site pin opens a metadata card (ACMA ID, RFNSA ID, structure type) before entering the 3D viewer.',
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
+      },
+      {
         id: 'm0-infographic-roles',
         type: 'infographic',
         imageUrl: IMG_ADMIN,
@@ -153,6 +181,33 @@ export const MODULES = {
           { icon: '🏗️', name: 'Colo Users', actions: ['View equipment belonging to their organisation', 'Create and submit colocation applications', 'Propose equipment changes (Rip & Replace)', 'Run IEA before submitting'], restriction: 'Cannot see or edit competitor equipment, or approve applications' },
           { icon: '🔧', name: 'Support / Admin', actions: ['Assist with reports and validation', 'Manage user accounts and organisations', 'Configure the BIM equipment library', 'Platform-wide administration'], restriction: 'Highest-risk role — destructive actions have no automated rollback' },
         ],
+      },
+      {
+        id: 'm0-shot-orthomosaic',
+        type: 'infographic',
+        imageUrl: SHOT_ORTHOMOSAIC,
+        containerHeight: 360,
+        label: 'Site View — 2D Orthomosaic',
+        caption: 'Toggle to 2D for a top-down orthomosaic aerial view of the site and surrounding area.',
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
+      },
+      {
+        id: 'm0-shot-panorama',
+        type: 'infographic',
+        imageUrl: SHOT_PANORAMA,
+        containerHeight: 340,
+        label: 'Site View — 360° Panorama',
+        caption: 'Enable the Panoramas toggle to inspect a ground-level 360° view alongside the 3D model.',
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
+      },
+      {
+        id: 'm0-shot-cameras',
+        type: 'infographic',
+        imageUrl: SHOT_CAMERAS,
+        containerHeight: 340,
+        label: 'Site View — Additional Camera Views',
+        caption: 'Enable the Cameras toggle to reveal capture-camera positions overlaid on the 3D model.',
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       {
         id: 'm0-concepts',
@@ -475,6 +530,16 @@ export const MODULES = {
         ],
       },
       { id: 'c2-p4-watch', type: 'watch', phase: 3, title: 'Phase 4 — Replace', videoId: 'ZwtJNhz1aNc', startTime: 300, endTime: 435, timestampLabel: '05:00 – 07:15', focusText: 'Focus on: The catalog search, placement controls, and orientation tools' },
+      {
+        id: 'c2-shot-3dviewer',
+        type: 'infographic',
+        phase: 3,
+        imageUrl: SHOT_3D_VIEWER,
+        containerHeight: 380,
+        label: '3D Viewer — Equipment Detail Panel',
+        caption: 'Selecting equipment in the 3D viewer opens the detail panel: Manufacturer, Model, ESA, dimensions, and pose (elevation/bearing/tilt).',
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
+      },
       { id: 'c2-p4-check', type: 'check', phase: 3, question: 'Which tool adjusts the antenna bearing/azimuth direction?', options: [{ id: 'a', text: 'Translate tools' }, { id: 'b', text: 'Scale tools' }, { id: 'c', text: 'Orientation (rotation) tools' }, { id: 'd', text: 'Layer tools' }], correctAnswer: 'c', explanation: 'Orientation tools control bearing, azimuth and tilt. Translate tools move the physical 3D position.', maxAttempts: 2 },
 
       // PHASE 5
@@ -635,6 +700,15 @@ export const MODULES = {
           { number: 7, title: 'Choose Analysis Mode', description: 'Select whether to calculate Existing only (baseline) or Existing + Proposed (with new equipment included). For ColoApp reviews and approvals, always use Existing + Proposed. Existing-only is useful for understanding current structural state before reviewing changes.', warning: null },
           { number: 8, title: 'Submit and Calculate', description: 'Click Calculate. IEA outputs are deterministic — change any input and the results change. Review the results table showing structural usage percentages for Existing and Existing + Proposed. Document your findings before making any approval decisions.', warning: null },
         ],
+      },
+      {
+        id: 'e1-shot-measure',
+        type: 'infographic',
+        imageUrl: SHOT_MEASURE,
+        containerHeight: 380,
+        label: '3D Viewer — Measuring Tool',
+        caption: 'The measuring tool lets you measure distances and point coordinates directly on the 3D model — useful for verifying clearances and equipment spacing.',
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       {
         id: 'e1-misstep',
@@ -936,6 +1010,15 @@ export const MODULES = {
         endTime: 540,
         timestampLabel: '07:15 – 09:00',
         focusText: 'Focus on: The "Get Config" step, port auto-population, and what happens when the config returns empty',
+      },
+      {
+        id: 'e3-shot-emezone',
+        type: 'infographic',
+        imageUrl: SHOT_EME_ZONE,
+        containerHeight: 380,
+        label: '3D Viewer — EME Zone Display',
+        caption: 'Toggling "Display EME" overlays the RF exposure compliance volume on the 3D model, visualising the EME assessment result.',
+        crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 },
       },
       {
         id: 'e3-infographic-metadata',
