@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { ChevronLeft, ChevronRight, Check } from 'lucide-react';
@@ -106,6 +106,20 @@ export default function LMSLesson() {
     const done = allSectionIds.filter(id => completedSections.includes(id)).length;
     return Math.round((done / allSectionIds.length) * 100);
   }, [pathId, completedSections]);
+
+  const certTriggered = useRef(false);
+  useEffect(() => {
+    if (!user || !progress?.id) return;
+    const selectedTrack = progress.track_id;
+    if (!selectedTrack || pathId !== selectedTrack) return;
+    if (overallProgress !== 100) return;
+    if (progress.certificate_issued) return;
+    if (certTriggered.current) return;
+    certTriggered.current = true;
+    base44.functions.invoke('issueCertificate', { track_id: selectedTrack, track_title: PATHS[selectedTrack]?.title })
+      .then(() => queryClient.invalidateQueries({ queryKey: ['progress'] }))
+      .catch((e) => { console.error('certificate issue failed', e); certTriggered.current = false; });
+  }, [user, progress, overallProgress, pathId, queryClient]);
 
   const navigateTo = (newModuleId, newSectionIdx) => {
     const url = createPageUrl(`LMSLesson?path=${pathId}&module=${newModuleId}&section=${newSectionIdx}`);
