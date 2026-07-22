@@ -27,18 +27,21 @@ export default function InfographicCard({ section }) {
         </div>
       </div>
 
-      {/* Full image display */}
-      <div style={{ background: '#fff', padding: '0' }}>
-        <img
-          src={imageUrl}
-          alt={`${label ? label + ' — ' : ''}${caption || 'NexDT reference diagram'}`}
-          style={{
-            display: 'block',
-            width: '100%',
-            height: 'auto',
-          }}
-        />
-      </div>
+      {/* Image (or a clean labelled frame until a screenshot URL is provided) */}
+      {imageUrl ? (
+        <div style={{ background: '#fff', padding: '0' }}>
+          <img
+            src={imageUrl}
+            alt={`${label ? label + ' — ' : ''}${caption || 'NexDT reference diagram'}`}
+            style={{ display: 'block', width: '100%', height: 'auto' }}
+          />
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center gap-1.5" style={{ minHeight: 150, background: 'rgba(17,24,39,0.6)' }}>
+          <span className="text-xs font-mono tracking-widest" style={{ color: '#60A5FA' }}>NexDT SCREEN</span>
+          <span className="text-sm" style={{ color: '#CBD5E1' }}>{label || caption || 'Screenshot'}</span>
+        </div>
+      )}
 
       {/* Caption */}
       {caption && (
