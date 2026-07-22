@@ -51,10 +51,10 @@ export const PATHS = {
   },
   support_admin: {
     id: 'support_admin',
-    title: 'Support Administrator Path',
+    title: 'Platform Administrator Path',
     emoji: '🛟',
-    description: 'Tickets, jobs, accounts & troubleshooting',
-    subtitle: 'Handle support tickets, monitor job statuses, manage user accounts, answer customer queries, and troubleshoot the platform.',
+    description: 'Manage users, organisations & jobs',
+    subtitle: 'For SiteSee platform administrators: manage users and organisations in the Admin Console and handle job/task workflows. Note: the read-only NexDT "Support Admin" viewing role (view sites, run IEA/EME) is covered in the Essentials Package.',
     durationText: '3 modules · ~90 min',
     color: '#06B6D4',
     moduleIds: ['m0', 'tm1', 'b2'],
