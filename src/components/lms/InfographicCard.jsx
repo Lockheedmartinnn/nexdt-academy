@@ -31,7 +31,7 @@ export default function InfographicCard({ section }) {
       <div style={{ background: '#fff', padding: '0' }}>
         <img
           src={imageUrl}
-          alt={caption || 'Infographic'}
+          alt={`${label ? label + ' — ' : ''}${caption || 'NexDT reference diagram'}`}
           style={{
             display: 'block',
             width: '100%',
