@@ -15,6 +15,7 @@ import WorkflowCard from './WorkflowCard';
 import RolesCard from './RolesCard';
 import DoNotDoCard from './DoNotDoCard';
 import ObjectiveCard from './ObjectiveCard';
+import MatrixCard from './MatrixCard';
 
 export default function SectionRenderer({ section, onCheckCorrect, onThinkContinue, onQuizPass, onQuizFail }) {
   if (!section) return null;
@@ -52,6 +53,8 @@ export default function SectionRenderer({ section, onCheckCorrect, onThinkContin
       return <ObjectiveCard section={section} />;
     case 'infographic':
       return <InfographicCard section={section} />;
+    case 'matrix':
+      return <MatrixCard section={section} />;
     default:
       return null;
   }
