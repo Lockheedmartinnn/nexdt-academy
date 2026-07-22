@@ -1,3 +1,5 @@
+import { SHOTS } from './lmsShots';
+
 // ─────────────────────────────────────────────────────────────
 // lmsDocs.jsx
 // Single source of truth links from the NexDT Academy into the
@@ -114,6 +116,7 @@ export const ESS_MODULE = {
         { number: 4, title: 'Enter the digital twin', description: 'Click the 3D icon to open the viewer, or the folder icon to open the site documents. Note: the 3D icon only appears once a site is As-Built.' },
       ],
     },
+    { id: 'ess-shot-open', type: 'infographic', imageUrl: SHOTS.siteMap, label: 'Finding a site', caption: 'The NexDT site map — pins for each site, the search box and the map/list toggle (Leichhardt Oval demo site).', containerHeight: 360, crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 } },
     { id: 'ess-measure', type: 'steps', title: 'Use the measuring tool',
       steps: [
         { number: 1, title: 'Open the measure tool', description: 'In the 3D viewer, click the measure (ruler) icon in the tools group at the top-right of the scene.' },
@@ -122,6 +125,7 @@ export const ESS_MODULE = {
         { number: 4, title: 'Clear & repeat', description: 'Use Clear to remove the measurement and start again. The measure tool is also available in the 2D orthomosaic for distances and areas.' },
       ],
     },
+    { id: 'ess-shot-measure', type: 'infographic', imageUrl: SHOTS.measure, label: 'The measuring tool', caption: 'Measuring a 2.62 m segment on the 3D model — the panel reports total length, points, segments and marker origin.', containerHeight: 420, crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 } },
     { id: 'ess-more', type: 'read', title: 'Panoramas, cameras & the 2D view',
       bullets: [
         { icon: '🖼️', text: '**Panoramas** — under Site Views, toggle Panoramas. Green dots mark capture points; click one to open it and drag to look around.' },
@@ -131,6 +135,7 @@ export const ESS_MODULE = {
       ],
       callout: { variant: 'tip', title: 'Prospect vs full academy', body: 'The Essentials Package is the "essentials" view for prospective customers — the base functions of NexDT. Onboarded customers continue into their role-specific paths for the full academy.' },
     },
+    { id: 'ess-shot-viewer', type: 'infographic', imageUrl: SHOTS.viewer, label: 'The 3D viewer', caption: 'The NexDT 3D digital twin — sidebar sections, scene tools and the equipment detail panel.', containerHeight: 420, crop: { imageWidth: '100%', marginTop: 0, marginLeft: 0 } },
     { id: 'ess-check', type: 'check', title: 'Quick Check', question: 'Which tool reports total length plus per-point X, Y and height?', options: [ { id: 'a', text: 'The select tool' }, { id: 'b', text: 'The measure (ruler) tool' }, { id: 'c', text: 'The panorama toggle' }, { id: 'd', text: 'The orientation gizmo' } ], correctAnswer: 'b', explanation: 'The measure (ruler) tool draws a segment between two points and reports total length, the points table (X, Y, height), the segments table, and the marker origin.', maxAttempts: 2 },
   ],
 };
