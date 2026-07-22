@@ -1,3 +1,5 @@
+import { ESS_MODULE, WF_MODULE, RPM_MODULE, ESSENTIALS_PATH, MODULE_DOC_LINKS, makeDocsSection } from './lmsDocs';
+
 // ─── VIDEO PLACEHOLDERS (replace with YouTube IDs when uploaded) ───────────
 const VID_UNBROKEN_CHAIN   = 'eNjpgsNJjTM';   // The_Unbroken_Chain.mp4
 const VID_RIP_REPLACE      = '1LtFvDnWOSo';   // The_Rip_&_Replace_Workflow.mp4
@@ -1491,6 +1493,20 @@ export const MODULES = {
   },
 };
 
+// ─── Confluence alignment (SCSUP-3077) ───
+// Merge in the new Confluence-sourced modules and the Essentials Package path,
+// then append a "Source Documentation (Confluence)" section to each module so
+// the academy content links all point to the single source of truth.
+Object.assign(MODULES, { ess: ESS_MODULE, wf: WF_MODULE, rpm: RPM_MODULE });
+if (!PATHS.essentials) PATHS.essentials = ESSENTIALS_PATH;
+
+Object.entries(MODULE_DOC_LINKS).forEach(([mid, links]) => {
+  const mod = MODULES[mid];
+  if (mod && Array.isArray(mod.sections) && !mod.sections.some(s => s.id === `${mid}-docs`)) {
+    mod.sections.push(makeDocsSection(mid, links));
+  }
+});
+
 export function getModulesForPath(pathId) {
   const path = PATHS[pathId];
   if (!path) return [];
@@ -1525,7 +1541,7 @@ export function getSectionLabel(section) {
 export function getVisiblePaths(role) {
   if (role === 'partner') return ['partner'];
   if (['colo', 'engineer', 'support_admin', 'bim_admin'].includes(role)) {
-    return [role];
+    return ['essentials', role];
   }
-  return ['colo', 'engineer', 'support_admin', 'bim_admin'];
+  return ['essentials', 'colo', 'engineer', 'support_admin', 'bim_admin'];
 }
