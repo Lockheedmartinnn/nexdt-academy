@@ -1,16 +1,16 @@
 import React from 'react';
-import { ImageIcon } from 'lucide-react';
+import { Monitor } from 'lucide-react';
 
+// A professional "follow along in the live app" reference frame.
+// Used where a step is best performed in NexDT itself; reads as an
+// intentional prompt (not a missing asset) until a screenshot is provided.
 export default function ScreenshotPlaceholder({ label, annotations = [] }) {
   return (
     <div
       className="rounded-xl overflow-hidden w-full"
-      style={{
-        background: 'rgba(10,14,26,0.8)',
-        border: '1px dashed rgba(55,65,81,0.7)',
-      }}
+      style={{ background: 'rgba(10,14,26,0.85)', border: '1px solid rgba(59,130,246,0.28)' }}
     >
-      {/* Fake browser chrome */}
+      {/* Browser chrome */}
       <div
         className="flex items-center gap-1.5 px-3 py-2"
         style={{ background: 'rgba(17,24,39,0.9)', borderBottom: '1px solid rgba(55,65,81,0.4)' }}
@@ -20,34 +20,34 @@ export default function ScreenshotPlaceholder({ label, annotations = [] }) {
         <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#10B981' }} />
         <div
           className="flex-1 mx-2 rounded px-2 py-0.5 text-xs font-mono"
-          style={{ background: 'rgba(30,41,59,0.6)', color: '#4B5563' }}
+          style={{ background: 'rgba(30,41,59,0.6)', color: '#64748B' }}
         >
           app.nexdt.sitesee.io
         </div>
       </div>
 
-      {/* Placeholder content area */}
-      <div className="flex flex-col items-center justify-center py-10 px-6 gap-4">
+      {/* Reference content area */}
+      <div className="flex flex-col items-center justify-center py-9 px-6 gap-3">
         <div
-          className="w-12 h-12 rounded-xl flex items-center justify-center"
-          style={{ background: 'rgba(55,65,81,0.3)', border: '1px solid rgba(55,65,81,0.5)' }}
+          className="w-11 h-11 rounded-xl flex items-center justify-center"
+          style={{ background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.3)' }}
         >
-          <ImageIcon className="w-6 h-6" style={{ color: '#4B5563' }} />
+          <Monitor className="w-5 h-5" style={{ color: '#60A5FA' }} />
         </div>
 
         <div className="text-center">
           <p
             className="text-xs font-mono font-medium tracking-widest mb-1"
-            style={{ color: '#374151' }}
+            style={{ color: '#60A5FA' }}
           >
-            SCREENSHOT PLACEHOLDER
+            FOLLOW ALONG IN NexDT
           </p>
-          <p className="text-sm font-medium" style={{ color: '#6B7280' }}>
+          <p className="text-sm font-medium" style={{ color: '#CBD5E1' }}>
             {label}
           </p>
         </div>
 
-        {/* Annotation badges */}
+        {/* Key-element badges */}
         {annotations.length > 0 && (
           <div className="flex flex-wrap gap-2 justify-center mt-1">
             {annotations.map((ann, i) => (
@@ -55,9 +55,9 @@ export default function ScreenshotPlaceholder({ label, annotations = [] }) {
                 key={i}
                 className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium"
                 style={{
-                  background: ann.color === 'red' ? 'rgba(239,68,68,0.15)' : 'rgba(245,158,11,0.15)',
-                  color: ann.color === 'red' ? '#FCA5A5' : '#FCD34D',
-                  border: `1px solid ${ann.color === 'red' ? 'rgba(239,68,68,0.3)' : 'rgba(245,158,11,0.3)'}`,
+                  background: ann.color === 'red' ? 'rgba(239,68,68,0.15)' : 'rgba(59,130,246,0.12)',
+                  color: ann.color === 'red' ? '#FCA5A5' : '#93C5FD',
+                  border: `1px solid ${ann.color === 'red' ? 'rgba(239,68,68,0.3)' : 'rgba(59,130,246,0.3)'}`,
                 }}
               >
                 <span>{ann.color === 'red' ? '→' : '▶'}</span>
@@ -67,8 +67,8 @@ export default function ScreenshotPlaceholder({ label, annotations = [] }) {
           </div>
         )}
 
-        <p className="text-xs" style={{ color: '#1F2937' }}>
-          Upload a real screenshot to replace this placeholder
+        <p className="text-xs" style={{ color: '#64748B' }}>
+          Open this screen in the NexDT portal as you read.
         </p>
       </div>
     </div>
