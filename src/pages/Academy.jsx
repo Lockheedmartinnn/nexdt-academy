@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { ChevronRight, Award, ArrowRight, Lock, CheckCircle2 } from 'lucide-react';
 import { PATHS, MODULES, getModulesForPath, getVisiblePaths } from '@/components/lms/lmsData';
+import { CONFLUENCE_DOCS } from '@/components/lms/lmsDocs';
 import UserSidePanel from '@/components/lms/UserSidePanel';
 
 const INTRO_MODULE = MODULES['m0'];
@@ -395,6 +396,34 @@ export default function Academy() {
             </div>
           </>
         )}
+
+        {/* ── Documentation & Resources (Confluence — source of truth) ── */}
+        <div className="mt-14 mb-2 flex items-center gap-3">
+          <div className="w-7 h-7 rounded-full flex items-center justify-center text-sm flex-shrink-0" style={{ background: 'rgba(34,211,238,0.15)' }}>
+            <span>📄</span>
+          </div>
+          <span className="text-sm font-semibold" style={{ color: '#F9FAFB' }}>Documentation &amp; Resources</span>
+        </div>
+        <p className="text-xs mb-4" style={{ color: '#6B7280' }}>
+          All customer-facing documentation now lives in Confluence (migrated from the Zendesk Learning Centre) — the single source of truth. Downloadable PDF exports of each page are also maintained.
+        </p>
+        <div className="grid gap-4 md:grid-cols-2 mb-4">
+          {CONFLUENCE_DOCS.map((group) => (
+            <div key={group.group} className="rounded-2xl p-5" style={{ background: '#111827', border: '1px solid rgba(55,65,81,0.6)' }}>
+              <p className="text-xs font-semibold mb-3 uppercase tracking-wider" style={{ color: '#22D3EE' }}>{group.group}</p>
+              <ul className="space-y-2">
+                {group.items.map((doc) => (
+                  <li key={doc.url}>
+                    <a href={doc.url} target="_blank" rel="noopener noreferrer" className="flex items-start gap-2 text-sm" style={{ color: '#93C5FD' }}>
+                      <span className="flex-shrink-0" style={{ color: '#4B5563' }}>↗</span>
+                      <span>{doc.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
 
         {/* Footer */}
         <div className="mt-16 pt-8 text-center" style={{ borderTop: '1px solid rgba(55,65,81,0.3)' }}>
