@@ -1622,9 +1622,5 @@ export function getSectionLabel(section) {
 // the four customer roles each see their own path; admins and legacy
 // 'user' roles see all four customer paths (never the partner track).
 export function getVisiblePaths(role) {
-  if (role === 'partner') return ['partner'];
-  if (['colo', 'engineer', 'support_admin', 'bim_admin'].includes(role)) {
-    return ['essentials', role];
-  }
-  return ['essentials', 'colo', 'engineer', 'support_admin', 'bim_admin'];
+  return ['essentials', 'colo', 'engineer', 'bim_admin', 'support_admin', 'partner'];
 }

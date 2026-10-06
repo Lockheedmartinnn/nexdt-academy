@@ -130,8 +130,7 @@ export default function Academy() {
   const completedSections = progress?.completed_lessons || [];
 
   const introProgress = useMemo(() => getIntroProgress(completedSections), [completedSections]);
-  const isPartner = user?.role === 'partner';
-  const pathsUnlocked = isPartner || introProgress.isComplete;
+  const pathsUnlocked = true;
   const visiblePathIds = getVisiblePaths(user?.role);
   const visiblePaths = visiblePathIds.map(id => PATHS[id]).filter(Boolean);
 
@@ -211,7 +210,6 @@ export default function Academy() {
           </p>
         </div>
 
-        {!isPartner && (<>
         {/* ── STEP 1: Intro Module ── */}
         <div className="mb-4 flex items-center gap-3">
           <div
@@ -287,7 +285,6 @@ export default function Academy() {
             style={{ color: pathsUnlocked ? '#4B5563' : 'rgba(55,65,81,0.3)' }}
           />
         </div>
-        </>)}
 
         {/* ── STEP 2: Select Role / Path ── */}
         <div className="mb-4 flex items-center gap-3">
