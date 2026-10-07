@@ -8,6 +8,7 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import StudentDashboard from './pages/StudentDashboard';
+import AcademyAssistant from '@/components/assistant/AcademyAssistant';
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -42,6 +43,7 @@ const AuthenticatedApp = () => {
 
   // Render the main app
   return (
+    <>
     <Routes>
       <Route path="/" element={
         <LayoutWrapper currentPageName={mainPageKey}>
@@ -62,6 +64,8 @@ const AuthenticatedApp = () => {
       <Route path="/StudentDashboard" element={<LayoutWrapper currentPageName="StudentDashboard"><StudentDashboard /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
+    <AcademyAssistant />
+    </>
   );
 };
 
