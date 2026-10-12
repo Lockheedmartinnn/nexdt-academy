@@ -20,7 +20,7 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.40';
 
 const SITE_HOST = 'sitesee.atlassian.net';
 
-// Customer Support External (CSE) pages that document the NexDT platform.
+// Confluence pages that document the NexDT platform (mostly Customer Support External).
 const CONFLUENCE_PAGE_IDS = [
   '3327131649', // NexDT Documentation, Resources and Training
   '3536125955', // NexDT - Loading and Viewing Sites - Support Admin Role / Essentials Package Guide
@@ -31,6 +31,9 @@ const CONFLUENCE_PAGE_IDS = [
   '3327328259', // NexDT Console Administrator Role
   '3579052034', // NexDT Setting Up Multiple Roles
   '3024420870', // NexDT Training and Demo - Video Links
+  // From the internal support space, approved for the assistant:
+  '3242426372', // Reset MFA request from user
+  '3457089540', // Contacting Support - For Customers
 ];
 
 const MIN_CONTENT_CHARS = 80;
@@ -263,7 +266,7 @@ async function fetchConfluence(base44: any): Promise<{ articles: Article[]; miss
         title,
         content,
         url: `https://${SITE_HOST}/wiki${webui || `/spaces/CSE/pages/${id}`}`,
-        space_key: 'CSE',
+        space_key: (String(webui).match(/\/spaces\/([^/]+)\//) || [])[1] || 'CSE',
         source_updated: updated,
       });
     } catch (e) {
