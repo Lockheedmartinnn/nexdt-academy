@@ -15,8 +15,8 @@ export default function ProfileSidebar() {
 
   const { data: progressData } = useQuery({
     queryKey: ['progress', user?.id],
-    queryFn: () => base44.entities.CourseProgress.filter({ created_by: user?.email }),
-    enabled: !!user?.email,
+    queryFn: () => base44.entities.CourseProgress.filter({ created_by_id: user?.id }),
+    enabled: !!user?.id,
   });
 
   const progress = progressData?.[0] || {};

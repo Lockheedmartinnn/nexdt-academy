@@ -10,7 +10,7 @@ Deno.serve(async (req) => {
     const trackId = body.track_id;
 
     // Load the user's progress record
-    const records = await base44.entities.CourseProgress.filter({ created_by: user.email });
+    const records = await base44.entities.CourseProgress.filter({ created_by_id: user.id });
     const progress = records?.[0];
     if (!progress) return Response.json({ error: 'No progress record found' }, { status: 404 });
 
