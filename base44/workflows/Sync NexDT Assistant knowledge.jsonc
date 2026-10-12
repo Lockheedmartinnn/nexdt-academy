@@ -1,0 +1,41 @@
+{
+  "name": "Sync NexDT Assistant knowledge",
+  "description": "Daily refresh of the NexDT Assistant's knowledge base: Academy lessons plus the NexDT customer documentation pages on Confluence.",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "17 3 * * *",
+      "one_time_date": null,
+      "timezone": "Australia/Sydney",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "definition": {
+    "do": [
+      {
+        "sync": {
+          "call": "invoke_backend_function",
+          "then": "end",
+          "with": {
+            "function_name": "syncKnowledge",
+            "payload": {}
+          }
+        }
+      }
+    ],
+    "document": {
+      "dsl": "1.0.0",
+      "name": "sync-assistant-knowledge",
+      "namespace": "base44",
+      "version": "1.0.0"
+    }
+  }
+}
