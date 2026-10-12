@@ -116,7 +116,7 @@ const template = readFileSync(join(root, 'scripts/syncKnowledge.template.ts'), '
 if (!template.includes('/*__LESSONS__*/[]')) throw new Error('Template marker /*__LESSONS__*/[] not found');
 const target = join(root, 'base44/functions/syncKnowledge/entry.ts');
 mkdirSync(dirname(target), { recursive: true });
-writeFileSync(target, template.replace('/*__LESSONS__*/[]', JSON.stringify(articles, null, 1)));
+writeFileSync(target, template.replace('/*__LESSONS__*/[]', () => JSON.stringify(articles, null, 1)));
 
 const allPathModules = new Set(Object.values(PATHS).flatMap((p) => p.moduleIds || []));
 console.log(JSON.stringify({
