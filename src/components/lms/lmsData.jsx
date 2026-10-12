@@ -1307,6 +1307,19 @@ export const MODULES = {
         ],
       },
       {
+        id: 'b2-multi-roles',
+        type: 'steps',
+        title: 'Setting Up Multiple Roles for One Person',
+        steps: [
+          { number: 1, title: 'Create a separate login for each role', description: 'For a single person to have multiple roles, create a separate login for each role in the Admin Console. Keep the original email for their primary role (for example an Engineer login on johndoe@company.io).', warning: null },
+          { number: 2, title: 'Use a "+" email alias for each extra role', description: 'Follow the standard structure userEmail+headCustomer_roleName@org.io — for example johndoe+colo_user@org.io for a Colo User login. Each alias is treated as a unique username, and all notifications still arrive in the person\'s primary inbox.', warning: null },
+          { number: 3, title: 'One login per Head Customer is recommended', description: 'The recommendation is for each Colo User that belongs to a Head Customer to have an individual login (johndoe+headCustomer_1_roleName@org.io and johndoe+headCustomer_2_roleName@org.io). Alternatively, add the one Colo User to each required Head Customer organisation; they then change organisation on the organisation page of the User Portal, and can verify it by logging into the Sites Portal and checking their profile information.', warning: null },
+          { number: 4, title: 'Log out when changing role', description: 'When using different emails, the user must log out of the User Portal and log back in with the login for the role they want. A warning or red error may appear on first login — it will still log them in.', warning: null },
+          { number: 5, title: 'Reset passwords with the full alias', description: 'Each alias is an independent account. When requesting a password reset, always enter the full appended email address for that role (e.g. name+coloUser_telecoma@yourcompany.com). Entering the primary email resets the main account instead.', warning: 'Entering the primary email on a password reset changes the credentials for the main account, not the alias.' },
+          { number: 6, title: 'Keep sessions separate in the browser', description: 'Opening a second role in a new tab of the same browser session may overwrite the active login. Recommended: a dedicated browser profile per role (Chrome, Edge, Firefox and Safari all support profiles), which keeps sessions, cookies and saved passwords isolated and lets roles stay open side by side. For quick testing, use a Private / Incognito window — its session is cleared when the window is closed.', warning: null },
+        ],
+      },
+      {
         id: 'b2-mfa',
         type: 'checklist',
         title: 'User Onboarding Sequence (End-User Steps)',
