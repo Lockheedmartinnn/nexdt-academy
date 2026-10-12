@@ -307,7 +307,10 @@ async function answerQuestion(base44: any, llm: any, question: string, history: 
 Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
-    const body = await req.json().catch(() => ({}));
+    const rawText = await req.text().catch(() => '');
+    let body: any = {};
+    try { body = JSON.parse(rawText || '{}'); } catch (_e) { body = {}; }
+    console.log('DEBUGREQ ' + JSON.stringify({ method: req.method, search: new URL(req.url).search.slice(0, 300), raw: rawText.slice(0, 400), ct: req.headers.get('content-type') }));
 
     // Maintenance self-test: runs a batch of questions through the exact same
     // pipeline and writes the results to the function log. Only works with the
