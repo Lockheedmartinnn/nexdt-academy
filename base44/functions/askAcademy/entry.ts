@@ -275,8 +275,12 @@ async function answerQuestion(base44: any, llm: any, question: string, history: 
     for (const n of Array.isArray(result?.used_sources) ? result.used_sources : []) {
       if (validNumbers.has(Number(n))) cited.add(Number(n));
     }
-    for (const m of answer.matchAll(/\[(\d+)\]/g)) {
-      if (validNumbers.has(Number(m[1]))) cited.add(Number(m[1]));
+    // Citations appear as [1] or grouped as [1, 3].
+    for (const m of answer.matchAll(/\[(\d+(?:\s*,\s*\d+)*)\]/g)) {
+      for (const part of m[1].split(',')) {
+        const n = Number(part.trim());
+        if (validNumbers.has(n)) cited.add(n);
+      }
     }
 
     // Guardrail: an "answer" with no valid citation is treated as not found.
