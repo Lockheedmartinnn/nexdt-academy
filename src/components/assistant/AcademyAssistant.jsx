@@ -5,10 +5,10 @@ import { base44 } from '@/api/base44Client';
 import { useAuth } from '@/lib/AuthContext';
 
 const STARTERS = [
-  'How do I stabilise GPS altitude before a mission?',
-  'What camera settings should I use for a tower capture?',
   'How do I do a rip and replace as a Colo User?',
-  'Why did my job fail with a leaning model?',
+  'What is the difference between IEA and EME?',
+  'What can each NexDT role do?',
+  'How do I add equipment from the BIM Catalog?',
 ];
 
 const markdownComponents = {
@@ -128,7 +128,7 @@ export default function AcademyAssistant() {
             </div>
             <div className="flex-1 min-w-0">
               <div className="text-sm font-semibold text-white">NexDT Assistant</div>
-              <div className="text-xs" style={{ color: '#64748B' }}>Answers from SiteSee guides and Academy lessons</div>
+              <div className="text-xs" style={{ color: '#64748B' }}>Answers from NexDT guides and Academy lessons</div>
             </div>
             <button
               onClick={() => setOpen(false)}
@@ -144,8 +144,8 @@ export default function AcademyAssistant() {
             {messages.length === 0 && (
               <div>
                 <p className="mb-3" style={{ color: '#94A3B8' }}>
-                  Ask about NexDT workflows, capture procedures or troubleshooting. Every answer links to the guide it
-                  came from.
+                  Ask about the NexDT platform: applications, equipment, IEA/EME, roles and admin. Every answer links
+                  to the guide it came from. For flying and capture, use the Pilot Companion app.
                 </p>
                 <div className="space-y-2">
                   {STARTERS.map((q) => (
@@ -281,7 +281,7 @@ export default function AcademyAssistant() {
               </button>
             </div>
             <p className="mt-2 text-center" style={{ color: '#475569', fontSize: 11 }}>
-              Answers come from SiteSee documentation. Open the linked source for critical steps.
+              Answers come from NexDT documentation. Open the linked source for critical steps.
             </p>
           </form>
         </div>
