@@ -158,26 +158,36 @@ function htmlToMarkdown(html: string): string {
   });
   s = s.replace(/<\/table>/gi, '\n\n');
 
-  // Numbered lists, innermost first, so step order survives.
-  const innerOl = /<ol\b[^>]*>((?:(?!<ol\b|<\/ol>)[\s\S])*)<\/ol>/i;
-  for (let guard = 0; guard < 500 && innerOl.test(s); guard++) {
-    s = s.replace(innerOl, (_m, body) => {
+  // Lists, innermost first: numbered lists keep their step order and nested
+  // lists are indented under their parent item. \u0001 marks a converted item.
+  const innerList = /<(ol|ul)\b[^>]*>((?:(?!<(?:ol|ul)\b|<\/(?:ol|ul)>)[\s\S])*)<\/\1>/i;
+  for (let guard = 0; guard < 2000 && innerList.test(s); guard++) {
+    s = s.replace(innerList, (_m, tag, body) => {
       let n = 0;
-      const numbered = String(body).replace(/<li\b[^>]*>/gi, () => `\n${++n}. `).replace(/<\/li>/gi, '');
-      return `\n${numbered}\n`;
+      const ordered = String(tag).toLowerCase() === 'ol';
+      const items = String(body)
+        .replace(/\n\u0001/g, '\n\u0001  ')
+        .replace(/<li\b[^>]*>/gi, () => `\n\u0001${ordered ? `${++n}.` : '-'} `)
+        .replace(/<\/li>/gi, '');
+      return `\n${items}\n`;
     });
   }
-  s = s.replace(/<li\b[^>]*>/gi, '\n- ').replace(/<\/li>/gi, '');
+  s = s.replace(/<li\b[^>]*>/gi, '\n\u0001- ').replace(/<\/li>/gi, '');
 
   s = s.replace(/<br\s*\/?>/gi, '\n');
   s = s.replace(/<\/(p|div|ul|blockquote|section|details|summary|pre)>/gi, '\n\n');
   s = s.replace(/<[^>]+>/g, '');
   s = decodeEntities(s);
 
-  const lines = s.split('\n').map((l) => l.replace(/[ \t ]+/g, ' ').trim());
+  const lines = s.split('\n').map((raw) => {
+    const item = raw.match(/^\u0001( *)([\s\S]*)$/);
+    const text = (item ? item[2] : raw).replace(/\u0001/g, '').replace(/[ \t ]+/g, ' ').trim();
+    if (!item) return text;
+    return ' '.repeat(Math.min(item[1].length, 8)) + text;
+  });
   const out: string[] = [];
   for (const line of lines) {
-    if (line === '-' || /^\d+\.$/.test(line)) continue; // empty list item
+    if (/^\s*(-|\d+\.)$/.test(line)) continue; // empty list item
     if (!line && out[out.length - 1] === '') continue;
     out.push(line);
   }
