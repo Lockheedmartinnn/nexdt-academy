@@ -214,21 +214,16 @@ const RESPONSE_SCHEMA = {
   required: ['kind', 'answer', 'used_sources', 'follow_ups'],
 };
 
-Deno.serve(async (req) => {
-  try {
-    const base44 = createClientFromRequest(req);
-    const user = await base44.auth.me();
-    if (!user) return Response.json({ error: 'Unauthorized' }, { status: 401 });
+function cleanHistory(raw: any): { role: string; content: string }[] {
+  return (Array.isArray(raw) ? raw : [])
+    .filter((m: any) => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')
+    .slice(-6)
+    .map((m: any) => ({ role: m.role, content: m.content.slice(0, 600) }));
+}
 
-    const body = await req.json().catch(() => ({}));
-    const question = String(body.question || '').trim().slice(0, MAX_QUESTION_CHARS);
-    if (!question) return Response.json({ error: 'Question is required' }, { status: 400 });
-
-    const history = (Array.isArray(body.history) ? body.history : [])
-      .filter((m: any) => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')
-      .slice(-6)
-      .map((m: any) => ({ role: m.role, content: m.content.slice(0, 600) }));
-
+// The whole answer pipeline: retrieve -> ask the model -> validate citations.
+// `llm` is the Core integrations client to call the model with.
+async function answerQuestion(base44: any, llm: any, question: string, history: { role: string; content: string }[]) {
     const index = await loadIndex(base44);
 
     // Search terms: the question at full weight, the previous user turn at reduced
@@ -267,7 +262,7 @@ Deno.serve(async (req) => {
       `SOURCES:\n${sourcesText}\n\n` +
       `QUESTION:\n${question}`;
 
-    let result: any = await base44.integrations.Core.InvokeLLM({ prompt, response_json_schema: RESPONSE_SCHEMA });
+    let result: any = await llm.InvokeLLM({ prompt, response_json_schema: RESPONSE_SCHEMA });
     if (typeof result === 'string') {
       try { result = JSON.parse(result); } catch (_e) { result = { kind: 'not_found', answer: '', used_sources: [], follow_ups: [] }; }
     }
@@ -299,6 +294,57 @@ Deno.serve(async (req) => {
       ? result.follow_ups.filter((q: any) => typeof q === 'string' && q.trim()).slice(0, 3)
       : [];
 
+    return {
+      kind,
+      answer,
+      usedSources,
+      followUps,
+      retrieved: sources.map((s) => s.title),
+      articleCount: index.articleCount,
+    };
+}
+
+Deno.serve(async (req) => {
+  try {
+    const base44 = createClientFromRequest(req);
+    const body = await req.json().catch(() => ({}));
+
+    // Maintenance self-test: runs a batch of questions through the exact same
+    // pipeline and writes the results to the function log. Only works with the
+    // ASSISTANT_SELF_TEST_KEY secret; nothing is saved to AssistantQuestion.
+    const selfTestKey = Deno.env.get('ASSISTANT_SELF_TEST_KEY') || '';
+    if (selfTestKey && typeof body.self_test_key === 'string' && body.self_test_key === selfTestKey) {
+      const questions = (Array.isArray(body.questions) ? body.questions : []).slice(0, 12);
+      const results: any[] = [];
+      for (const item of questions) {
+        const q = String(typeof item === 'string' ? item : item?.question || '').trim().slice(0, MAX_QUESTION_CHARS);
+        if (!q) continue;
+        let entry: any;
+        try {
+          const r = await answerQuestion(base44, base44.asServiceRole.integrations.Core, q, cleanHistory(item?.history));
+          entry = { q, kind: r.kind, answer: r.answer.slice(0, 1800), cited: r.usedSources.map((s) => s.title), retrieved: r.retrieved, follow_ups: r.followUps };
+        } catch (e) {
+          entry = { q, error: e?.message || String(e) };
+        }
+        console.log('SELFTEST ' + JSON.stringify(entry));
+        results.push(entry);
+      }
+      return Response.json({ self_test: true, results });
+    }
+
+    const user = await base44.auth.me();
+    if (!user) return Response.json({ error: 'Unauthorized' }, { status: 401 });
+
+    const question = String(body.question || '').trim().slice(0, MAX_QUESTION_CHARS);
+    if (!question) return Response.json({ error: 'Question is required' }, { status: 400 });
+
+    const { kind, answer, usedSources, followUps, articleCount } = await answerQuestion(
+      base44,
+      base44.integrations.Core,
+      question,
+      cleanHistory(body.history),
+    );
+
     let logId = null;
     try {
       const log = await base44.entities.AssistantQuestion.create({
@@ -320,7 +366,7 @@ Deno.serve(async (req) => {
       sources: usedSources,
       follow_ups: followUps,
       log_id: logId,
-      knowledge_articles: index.articleCount,
+      knowledge_articles: articleCount,
     });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
