@@ -307,16 +307,12 @@ async function answerQuestion(base44: any, llm: any, question: string, history: 
 Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
-    const rawText = await req.text().catch(() => '');
-    let body: any = {};
-    try { body = JSON.parse(rawText || '{}'); } catch (_e) { body = {}; }
-    console.log('DEBUGREQ ' + JSON.stringify({ method: req.method, search: new URL(req.url).search.slice(0, 300), raw: rawText.slice(0, 400), ct: req.headers.get('content-type') }));
+    const body = await req.json().catch(() => ({}));
 
     // Maintenance self-test: runs a batch of questions through the exact same
     // pipeline and writes the results to the function log. Only works with the
     // ASSISTANT_SELF_TEST_KEY secret; nothing is saved to AssistantQuestion.
     const selfTestKey = Deno.env.get('ASSISTANT_SELF_TEST_KEY') || '';
-    console.log('DEBUGKEYS ' + JSON.stringify({ keys: Object.keys(body || {}), hasEnv: !!selfTestKey, nested: Object.keys(body?.payload || body?.data || {}) }));
     if (selfTestKey && typeof body.self_test_key === 'string' && body.self_test_key === selfTestKey) {
       const questions = (Array.isArray(body.questions) ? body.questions : []).slice(0, 12);
       const results: any[] = [];
