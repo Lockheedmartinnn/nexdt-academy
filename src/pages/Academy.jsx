@@ -3,7 +3,9 @@ import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { ChevronRight, Award, ArrowRight, Lock, CheckCircle2 } from 'lucide-react';
+import { ChevronRight, Award, ArrowRight, Lock, CheckCircle2, LogIn } from 'lucide-react';
+import { useAuth } from '@/lib/AuthContext';
+import { toast } from 'sonner';
 import { PATHS, MODULES, getModulesForPath, getVisiblePaths } from '@/components/lms/lmsData';
 import { CONFLUENCE_DOCS } from '@/components/lms/lmsDocs';
 import UserSidePanel from '@/components/lms/UserSidePanel';
@@ -107,6 +109,7 @@ function PathCard({ path, progress, completedSections, onSelect, unlocked }) {
 
 export default function Academy() {
   const queryClient = useQueryClient();
+  const { isAuthenticated, navigateToLogin } = useAuth();
   const [sidePanelOpen, setSidePanelOpen] = useState(false);
 
   useEffect(() => {
@@ -117,7 +120,7 @@ export default function Academy() {
     return () => { try { document.head.removeChild(link); } catch (e) {} };
   }, []);
 
-  const { data: user } = useQuery({ queryKey: ['user'], queryFn: () => base44.auth.me() });
+  const { data: user } = useQuery({ queryKey: ['user'], queryFn: () => base44.auth.me(), enabled: isAuthenticated });
 
   const { data: progressData } = useQuery({
     queryKey: ['progress', user?.email],
@@ -143,7 +146,16 @@ export default function Academy() {
       return base44.entities.CourseProgress.create({ track_id: pathId, completed_lessons: [] });
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['progress'] }),
+    onError: (err) => toast.error(err?.message || 'Could not select that path. Please try again.'),
   });
+
+  const handleSelectPath = (pathId) => {
+    if (!isAuthenticated) {
+      navigateToLogin();
+      return;
+    }
+    selectPathMutation.mutate(pathId);
+  };
 
   const selectedPath = selectedPathId ? PATHS[selectedPathId] : null;
   const selectedModules = selectedPathId ? getModulesForPath(selectedPathId).filter(m => m.id !== INTRO_MODULE_ID) : [];
@@ -173,6 +185,16 @@ export default function Academy() {
             />
             <span className="text-sm font-semibold" style={{ color: '#94A3B8' }}>NexDT Academy</span>
           </div>
+          {!isAuthenticated && (
+            <button
+              onClick={navigateToLogin}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold transition-all"
+              style={{ background: '#3B82F6', color: '#fff' }}
+            >
+              <LogIn className="w-4 h-4" />
+              Sign in
+            </button>
+          )}
           {user && (
             <div className="flex items-center gap-2">
               <Link to={createPageUrl('StudentDashboard')}>
@@ -300,6 +322,7 @@ export default function Academy() {
           <span className="text-sm font-semibold" style={{ color: pathsUnlocked ? '#F9FAFB' : '#4B5563' }}>
             Select Your Role
             {!pathsUnlocked && <span className="text-xs font-normal ml-2" style={{ color: '#374151' }}>— complete the intro to unlock</span>}
+            {pathsUnlocked && !isAuthenticated && <span className="text-xs font-normal ml-2" style={{ color: '#6B7280' }}>— sign in to save your progress</span>}
           </span>
         </div>
 
@@ -310,7 +333,7 @@ export default function Academy() {
               path={path}
               progress={progress}
               completedSections={completedSections}
-              onSelect={(id) => selectPathMutation.mutate(id)}
+              onSelect={handleSelectPath}
               unlocked={pathsUnlocked}
             />
           ))}
