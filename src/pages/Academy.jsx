@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { ChevronRight, Award, ArrowRight, Lock, CheckCircle2, LogIn } from 'lucide-react';
 import { useAuth } from '@/lib/AuthContext';
-import { toast } from 'sonner';
+import { toast } from '@/components/ui/use-toast';
 import { PATHS, MODULES, getModulesForPath, getVisiblePaths } from '@/components/lms/lmsData';
 import { CONFLUENCE_DOCS } from '@/components/lms/lmsDocs';
 import UserSidePanel from '@/components/lms/UserSidePanel';
@@ -146,7 +146,7 @@ export default function Academy() {
       return base44.entities.CourseProgress.create({ track_id: pathId, completed_lessons: [] });
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['progress'] }),
-    onError: (err) => toast.error(err?.message || 'Could not select that path. Please try again.'),
+    onError: (err) => toast({ title: 'Could not select that path', description: err?.message || 'Please try again.', variant: 'destructive' }),
   });
 
   const handleSelectPath = (pathId) => {
