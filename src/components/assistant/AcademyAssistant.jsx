@@ -3,6 +3,9 @@ import ReactMarkdown from 'react-markdown';
 import { MessageCircle, X, Send, Loader2, ThumbsUp, ThumbsDown, ExternalLink, Sparkles } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import { useAuth } from '@/lib/AuthContext';
+import { useLocation } from 'react-router-dom';
+
+const AUTH_PATHS = ['/login', '/register', '/forgot-password', '/reset-password', '/oauth-consent'];
 
 const STARTERS = [
   'How do I do a rip and replace as a Colo User?',
@@ -32,6 +35,7 @@ const markdownComponents = {
 
 export default function AcademyAssistant() {
   const { isAuthenticated, navigateToLogin } = useAuth();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -46,6 +50,8 @@ export default function AcademyAssistant() {
   useEffect(() => {
     if (open && inputRef.current) inputRef.current.focus();
   }, [open]);
+
+  const onAuthPage = AUTH_PATHS.includes(location.pathname.toLowerCase());
 
   const send = async (text) => {
     const question = (text || '').trim();
@@ -100,6 +106,8 @@ export default function AcademyAssistant() {
     e.preventDefault();
     send(input);
   };
+
+  if (onAuthPage) return null;
 
   return (
     <>
