@@ -8,6 +8,11 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import StudentDashboard from './pages/StudentDashboard';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
+import OAuthConsent from './pages/OAuthConsent';
 import AcademyAssistant from '@/components/assistant/AcademyAssistant';
 
 const { Pages, Layout, mainPage } = pagesConfig;
@@ -45,6 +50,12 @@ const AuthenticatedApp = () => {
   return (
     <>
     <Routes>
+      {/* Auth pages (custom auth) — no Layout, reachable signed out */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/oauth-consent" element={<OAuthConsent />} />
       <Route path="/" element={
         <LayoutWrapper currentPageName={mainPageKey}>
           <MainPage />
