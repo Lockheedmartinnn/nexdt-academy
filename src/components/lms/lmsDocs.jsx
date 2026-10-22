@@ -9,25 +9,29 @@ import { SHOTS } from './lmsShots';
 // Downloadable PDF exports of each page are also available.
 // ─────────────────────────────────────────────────────────────
 
-const WIKI = 'https://sitesee.atlassian.net/wiki/spaces/CSE/pages';
+// Customer-facing links: the CSE pages as published in the SiteSee Customer
+// Support help centre (portal 2). Customers sign in with their portal account;
+// raw wiki/spaces links need a Confluence licence customers don't have.
+const PORTAL = 'https://sitesee.atlassian.net/servicedesk/customer/portal/2';
+const ARTICLE = `${PORTAL}/article`;
 
 export const CONFLUENCE = {
-  platformFolder: 'https://sitesee.atlassian.net/wiki/spaces/CSE/folder/3024289800/Platform+-+NexDT',
-  overview:       `${WIKI}/3327131649/NexDT+Documentation+Resources+and+Training`,
-  supportAdmin:   `${WIKI}/3536125955/NexDT+-+Loading+and+Viewing+Sites+-+Support+Admin+Role+Essentials+Package+Guide`,
-  multipleRoles:  `${WIKI}/3579052034/NexDT+Setting+Up+Multiple+Roles`,
-  videoLinks:     `${WIKI}/3024420870/NexDT+Training+and+Demo+-+Video+Links`,
-  permissionMatrix: `${WIKI}/3530653697/NexDT+Role+Permission+Matrix`,
-  coloUser:       `${WIKI}/3327000579/Colo+User+Role`,
-  engineer:       `${WIKI}/3327033352/Engineer+User+Role`,
-  bimAdmin:       `${WIKI}/3326541832/Bim+Admin+Role`,
-  consoleAdmin:   `${WIKI}/3327328259/NexDT+Console+Administrator+Role`,
-  legacyStart:    `${WIKI}/3132424197/SiteSee+Web+Portal+Legacy+-+Getting+Started`,
-  legacyUpload:   `${WIKI}/3132686379/SiteSee+Web+Portal+Legacy+-+Upload+images`,
-  legacyJobs:     `${WIKI}/3132293508/SiteSee+Web+Portal+Legacy+-+Loading+and+viewing+jobs`,
-  legacyUsers:    `${WIKI}/3132358727/SiteSee+Web+Portal+Legacy+-+User+and+Permission+Management`,
-  legacyActivate: `${WIKI}/3132620809/SiteSee+Web+Portal+Legacy+-+User+account+activation`,
-  legacySupport:  `${WIKI}/3132686419/SiteSee+Web+Portal+Legacy+-+Getting+Support`,
+  platformFolder: PORTAL,
+  overview:       `${ARTICLE}/3327131649`,
+  supportAdmin:   `${ARTICLE}/3536125955`,
+  multipleRoles:  `${ARTICLE}/3579052034`,
+  videoLinks:     `${ARTICLE}/3024420870`,
+  permissionMatrix: `${ARTICLE}/3530653697`,
+  coloUser:       `${ARTICLE}/3327000579`,
+  engineer:       `${ARTICLE}/3327033352`,
+  bimAdmin:       `${ARTICLE}/3326541832`,
+  consoleAdmin:   `${ARTICLE}/3327328259`,
+  legacyStart:    `${ARTICLE}/3132424197`,
+  legacyUpload:   `${ARTICLE}/3132686379`,
+  legacyJobs:     `${ARTICLE}/3132293508`,
+  legacyUsers:    `${ARTICLE}/3132358727`,
+  legacyActivate: `${ARTICLE}/3132620809`,
+  legacySupport:  `${ARTICLE}/3132686419`,
 };
 
 // Documentation hub shown on the Academy landing page
@@ -42,7 +46,7 @@ export const CONFLUENCE_DOCS = [
     { title: 'BIM Admin Role — Tooling & CAD Spec', url: CONFLUENCE.bimAdmin },
     { title: 'Console Administrator Role', url: CONFLUENCE.consoleAdmin },
     { title: 'Training & Demo — Video Links', url: CONFLUENCE.videoLinks },
-    { title: 'All NexDT platform documents (Confluence folder)', url: CONFLUENCE.platformFolder },
+    { title: 'All NexDT documentation (SiteSee Customer Support help centre)', url: CONFLUENCE.platformFolder },
   ]},
   { group: 'Base Functions (Legacy reference)', items: [
     { title: 'Getting Started', url: CONFLUENCE.legacyStart },
