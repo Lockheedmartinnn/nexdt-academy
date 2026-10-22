@@ -261,12 +261,16 @@ async function fetchConfluence(base44: any): Promise<{ articles: Article[]; miss
         errors.push(`Page ${id}: no readable text (${content.length} chars) - kept the previous copy`);
         continue;
       }
+      const spaceKey = (String(webui).match(/\/spaces\/([^/]+)\//) || [])[1] || 'CSE';
+      // Customers only ever get help-centre links: CSE pages open as portal
+      // articles; internal-space pages point to the portal home, never the wiki.
+      const portal = `https://${SITE_HOST}/servicedesk/customer/portal/2`;
       articles.push({
         page_id: id,
         title,
         content,
-        url: `https://${SITE_HOST}/wiki${webui || `/spaces/CSE/pages/${id}`}`,
-        space_key: (String(webui).match(/\/spaces\/([^/]+)\//) || [])[1] || 'CSE',
+        url: spaceKey === 'CSE' ? `${portal}/article/${id}` : portal,
+        space_key: spaceKey,
         source_updated: updated,
       });
     } catch (e) {
