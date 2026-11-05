@@ -336,29 +336,32 @@ Deno.serve(async (req) => {
       return Response.json({ self_test: true, results });
     }
 
-    const user = await base44.auth.me();
-    if (!user) return Response.json({ error: 'Unauthorized' }, { status: 401 });
+    // Open to visitors: the assistant is a public documentation lookup, so a
+    // signed-out visitor gets answers too (used only to attribute feedback).
+    const user = await base44.auth.me().catch((e: any) => (e?.status === 401 ? null : Promise.reject(e)));
 
     const question = String(body.question || '').trim().slice(0, MAX_QUESTION_CHARS);
     if (!question) return Response.json({ error: 'Question is required' }, { status: 400 });
 
     const { kind, answer, usedSources, followUps, articleCount } = await answerQuestion(
       base44,
-      base44.integrations.Core,
+      base44.asServiceRole.integrations.Core,
       question,
       cleanHistory(body.history),
     );
 
     let logId = null;
     try {
-      const log = await base44.entities.AssistantQuestion.create({
+      const client = user ? base44.entities : base44.asServiceRole.entities;
+      const log = await client.AssistantQuestion.create({
         question,
         answer,
         answered: kind === 'answer',
         sources: usedSources,
         page: String(body.page || '').slice(0, 200),
       });
-      logId = log?.id || null;
+      // Only a signed-in asker can send feedback on the logged question.
+      logId = user ? (log?.id || null) : null;
     } catch (_e) {
       // Logging must never block an answer.
     }

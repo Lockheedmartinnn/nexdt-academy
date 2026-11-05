@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { MessageCircle, X, Send, Loader2, ThumbsUp, ThumbsDown, ExternalLink, Sparkles } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
-import { useAuth } from '@/lib/AuthContext';
 import { useLocation } from 'react-router-dom';
 
 const AUTH_PATHS = ['/login', '/register', '/forgot-password', '/reset-password', '/oauth-consent'];
@@ -34,7 +33,6 @@ const markdownComponents = {
 };
 
 export default function AcademyAssistant() {
-  const { isAuthenticated, navigateToLogin } = useAuth();
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -147,20 +145,7 @@ export default function AcademyAssistant() {
           </div>
 
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-4 text-sm">
-            {!isAuthenticated && (
-              <div className="flex flex-col items-center justify-center text-center h-full gap-3">
-                <p style={{ color: '#94A3B8' }}>Sign in to ask the NexDT Assistant questions about the platform.</p>
-                <button
-                  onClick={navigateToLogin}
-                  className="px-4 py-2 rounded-xl text-sm font-semibold"
-                  style={{ background: '#3B82F6', color: '#fff' }}
-                >
-                  Sign in
-                </button>
-              </div>
-            )}
-
-            {isAuthenticated && messages.length === 0 && (
+            {messages.length === 0 && (
               <div>
                 <p className="mb-3" style={{ color: '#94A3B8' }}>
                   Ask about the NexDT platform: applications, equipment, IEA/EME, roles and admin. Every answer links
@@ -271,7 +256,6 @@ export default function AcademyAssistant() {
             )}
           </div>
 
-          {isAuthenticated && (
           <form
             onSubmit={onSubmit}
             className="px-3 py-3"
@@ -304,7 +288,6 @@ export default function AcademyAssistant() {
               Answers come from NexDT documentation. Open the linked source for critical steps.
             </p>
           </form>
-          )}
         </div>
       )}
 
